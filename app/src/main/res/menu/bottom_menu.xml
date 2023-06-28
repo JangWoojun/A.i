@@ -19,7 +19,7 @@
         app:cnb_iconColor="#63B4FF"
         app:showAsAction="withText" />
 
-    <item android:title="계정"
+    <item android:title="내 정보"
         android:icon="@drawable/user"
         android:id="@+id/myInfo"
         app:cnb_iconColor="#63B4FF"
