@@ -18,6 +18,7 @@
         app:layout_constraintBottom_toTopOf="@id/bottom_navigation"/>
 
     <com.ismaeldivita.chipnavigation.ChipNavigationBar
+        android:elevation="10dp"
         android:id="@+id/bottom_navigation"
         app:cnb_unselectedColor="#8696BB"
         app:menu="@menu/bottom_menu"
