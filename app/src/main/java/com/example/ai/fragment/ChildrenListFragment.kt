@@ -196,6 +196,58 @@ class ChildrenListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.apply {
+            buttonScrollView.post {
+                val scrollWidth = buttonScrollView.getChildAt(0).width
+                val viewWidth = buttonScrollView.width
+                val middle = (scrollWidth - viewWidth) / 2
+                buttonScrollView.smoothScrollTo(middle, 0)
+            }
+
+            newChildrenButton.setOnClickListener {
+                buttonScrollView.post {
+                    val animator = ValueAnimator.ofInt(buttonScrollView.scrollX, 0)
+                    animator.duration = 300
+
+                    animator.addUpdateListener { animation ->
+                        val animatedValue = animation.animatedValue as Int
+                        buttonScrollView.scrollTo(animatedValue, 0)
+                    }
+
+                    animator.start()
+                }
+            }
+
+            allChildrenButton.setOnClickListener {
+                val scrollWidth = buttonScrollView.getChildAt(0).width
+                val viewWidth = buttonScrollView.width
+                val middle = (scrollWidth - viewWidth) / 2
+
+                val animator = ValueAnimator.ofInt(buttonScrollView.scrollX, middle)
+                animator.duration = 300
+
+                animator.addUpdateListener { animation ->
+                    val animatedValue = animation.animatedValue as Int
+                    buttonScrollView.scrollTo(animatedValue, 0)
+                }
+
+                animator.start()
+
+            }
+
+            longChildrenButton.setOnClickListener {
+                buttonScrollView.post {
+                    val maxScrollAmount = buttonScrollView.getChildAt(0).width - buttonScrollView.width
+                    val animator = ValueAnimator.ofInt(buttonScrollView.scrollX, maxScrollAmount)
+                    animator.duration = 300
+
+                    animator.addUpdateListener { animation ->
+                        val animatedValue = animation.animatedValue as Int
+                        buttonScrollView.scrollTo(animatedValue, 0)
+                    }
+
+                    animator.start()
+                }
+            }
 
             childrenList.layoutManager = LinearLayoutManager(requireContext().applicationContext)
             childrenList.adapter = ChildrenInfoAdapter(list, ChildInfoType.DEFAULT)
