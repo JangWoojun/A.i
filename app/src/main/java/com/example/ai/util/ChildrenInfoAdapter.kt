@@ -4,12 +4,12 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ai.R
-import com.example.ai.databinding.ChildrenInfoItemBinding
+import com.example.ai.databinding.NewChildrenInfoItemBinding
 
 class ChildrenInfoAdapter(private val children: ArrayList<ChildInfo>): RecyclerView.Adapter<ChildrenInfoAdapter.ChildrenInfoViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChildrenInfoViewHolder {
-        val binding = ChildrenInfoItemBinding.inflate(
+        val binding = NewChildrenInfoItemBinding.inflate(
             LayoutInflater.from(parent.context),
             parent, false
         )
@@ -28,7 +28,7 @@ class ChildrenInfoAdapter(private val children: ArrayList<ChildInfo>): RecyclerV
         holder.bind(children[position])
     }
 
-    class ChildrenInfoViewHolder(private val binding: ChildrenInfoItemBinding) :
+    class ChildrenInfoViewHolder(private val binding: NewChildrenInfoItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(childrenInfo: ChildInfo) {
