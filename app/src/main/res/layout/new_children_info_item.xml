@@ -7,6 +7,7 @@
     app:cardCornerRadius="14dp"
     android:layout_marginHorizontal="26dp"
     android:outlineProvider="none"
+    android:id="@+id/new_children_info_item"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:ignore="MissingDefaultResource">
 
@@ -85,7 +86,7 @@
                 <TextView
                     android:id="@+id/location"
                     android:layout_marginStart="8dp"
-                    android:textSize="16sp"
+                    android:textSize="14sp"
                     android:text="은평구"
                     android:textColor="#8696bb"
                     android:layout_width="wrap_content"
