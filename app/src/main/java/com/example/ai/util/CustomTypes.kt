@@ -16,3 +16,7 @@ data class ChildInfo(
     val hairType: String,
     val dress: String,
 )
+
+enum class ChildInfoType {
+    NEW, DEFAULT
+}
