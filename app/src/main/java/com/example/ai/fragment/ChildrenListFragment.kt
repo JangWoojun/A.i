@@ -1,16 +1,21 @@
 package com.example.ai.fragment
 
 import android.animation.ValueAnimator
+import android.content.res.ColorStateList
+import android.graphics.Color
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
+import android.widget.RelativeLayout
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.ai.databinding.FragmentChildrenListBinding
 import com.example.ai.util.ChildInfo
 import com.example.ai.util.ChildInfoType
 import com.example.ai.util.ChildrenInfoAdapter
+
 
 class ChildrenListFragment : Fragment() {
 
@@ -204,6 +209,16 @@ class ChildrenListFragment : Fragment() {
             }
 
             newChildrenButton.setOnClickListener {
+
+                newChildrenText.setTextColor(Color.parseColor("#4894fe"))
+                newChildrenButton.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#EBF5FF"))
+
+                allChildrenText.setTextColor(Color.parseColor("#8696BB"))
+                allChildrenButton.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#FAFAFA"))
+
+                longChildrenText.setTextColor(Color.parseColor("#8696BB"))
+                longChildrenButton.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#FAFAFA"))
+
                 buttonScrollView.post {
                     val animator = ValueAnimator.ofInt(buttonScrollView.scrollX, 0)
                     animator.duration = 300
@@ -218,6 +233,16 @@ class ChildrenListFragment : Fragment() {
             }
 
             allChildrenButton.setOnClickListener {
+
+                newChildrenText.setTextColor(Color.parseColor("#8696BB"))
+                newChildrenButton.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#FAFAFA"))
+
+                allChildrenText.setTextColor(Color.parseColor("#4894fe"))
+                allChildrenButton.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#EBF5FF"))
+
+                longChildrenText.setTextColor(Color.parseColor("#8696BB"))
+                longChildrenButton.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#FAFAFA"))
+
                 val scrollWidth = buttonScrollView.getChildAt(0).width
                 val viewWidth = buttonScrollView.width
                 val middle = (scrollWidth - viewWidth) / 2
@@ -235,6 +260,17 @@ class ChildrenListFragment : Fragment() {
             }
 
             longChildrenButton.setOnClickListener {
+
+                newChildrenText.setTextColor(Color.parseColor("#8696BB"))
+                newChildrenButton.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#FAFAFA"))
+
+                allChildrenText.setTextColor(Color.parseColor("#8696BB"))
+                allChildrenButton.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#FAFAFA"))
+
+                longChildrenText.setTextColor(Color.parseColor("#4894fe"))
+                longChildrenButton.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#EBF5FF"))
+
+
                 buttonScrollView.post {
                     val maxScrollAmount = buttonScrollView.getChildAt(0).width - buttonScrollView.width
                     val animator = ValueAnimator.ofInt(buttonScrollView.scrollX, maxScrollAmount)
