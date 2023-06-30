@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.ai.databinding.FragmentHomeBinding
 import com.example.ai.util.ChildInfo
+import com.example.ai.util.ChildInfoType
 import com.example.ai.util.ChildrenInfoAdapter
 
 class HomeFragment : Fragment() {
@@ -195,7 +196,7 @@ class HomeFragment : Fragment() {
 
         binding.apply {
             childrenList.layoutManager = LinearLayoutManager(requireContext().applicationContext)
-            childrenList.adapter = ChildrenInfoAdapter(list)
+            childrenList.adapter = ChildrenInfoAdapter(list, ChildInfoType.NEW)
         }
     }
 
