@@ -17,6 +17,7 @@
             android:id="@+id/button_scroll_view"
             android:contentDescription="HorizontalScrollView"
             android:scrollbars="none"
+            android:overScrollMode="never"
             android:layout_width="match_parent"
             android:layout_height="96dp">
 
