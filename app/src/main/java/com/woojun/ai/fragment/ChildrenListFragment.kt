@@ -1,4 +1,4 @@
-package com.example.ai.fragment
+package com.woojun.ai.fragment
 
 import android.animation.ValueAnimator
 import android.content.res.ColorStateList
@@ -7,14 +7,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
-import android.widget.RelativeLayout
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.ai.databinding.FragmentChildrenListBinding
-import com.example.ai.util.ChildInfo
-import com.example.ai.util.ChildInfoType
-import com.example.ai.util.ChildrenInfoAdapter
+import com.woojun.ai.util.ChildInfo
+import com.woojun.ai.util.ChildInfoType
+import com.woojun.ai.util.ChildrenInfoAdapter
 
 
 class ChildrenListFragment : Fragment() {

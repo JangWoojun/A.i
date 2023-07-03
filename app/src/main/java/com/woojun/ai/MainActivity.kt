@@ -1,10 +1,11 @@
-package com.example.ai
+package com.woojun.ai
 
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.navigation.findNavController
+import com.example.ai.R
 import com.example.ai.databinding.ActivityMainBinding
 
 

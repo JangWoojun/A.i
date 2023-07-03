@@ -7,7 +7,7 @@
     android:scrollbars="none"
     android:overScrollMode="never"
     android:backgroundTint="@color/white"
-    tools:context=".fragment.HomeFragment">
+    tools:context="com.woojun.ai.fragment.HomeFragment">
 
     <LinearLayout
         android:layout_marginTop="20dp"

@@ -1,4 +1,4 @@
-package com.example.ai.util
+package com.woojun.ai.util
 
 data class ChildInfo(
     val name: String,

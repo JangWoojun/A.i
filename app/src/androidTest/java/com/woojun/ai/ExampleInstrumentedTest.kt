@@ -1,4 +1,4 @@
-package com.example.ai
+package com.woojun.ai
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

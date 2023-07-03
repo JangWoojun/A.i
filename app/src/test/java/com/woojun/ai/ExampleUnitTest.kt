@@ -1,4 +1,4 @@
-package com.example.ai
+package com.woojun.ai
 
 import org.junit.Test
 

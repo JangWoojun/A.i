@@ -1,4 +1,4 @@
-package com.example.ai.fragment
+package com.woojun.ai.fragment
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,9 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.ai.databinding.FragmentHomeBinding
-import com.example.ai.util.ChildInfo
-import com.example.ai.util.ChildInfoType
-import com.example.ai.util.ChildrenInfoAdapter
+import com.woojun.ai.util.ChildInfo
+import com.woojun.ai.util.ChildInfoType
+import com.woojun.ai.util.ChildrenInfoAdapter
 
 class HomeFragment : Fragment() {
 

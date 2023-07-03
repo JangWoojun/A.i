@@ -1,4 +1,4 @@
-package com.example.ai.fragment
+package com.woojun.ai.fragment
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
