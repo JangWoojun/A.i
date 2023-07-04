@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.ai.databinding.FragmentHomeBinding
+import com.woojun.ai.databinding.FragmentHomeBinding
 import com.woojun.ai.util.ChildInfo
 import com.woojun.ai.util.ChildInfoType
 import com.woojun.ai.util.ChildrenInfoAdapter

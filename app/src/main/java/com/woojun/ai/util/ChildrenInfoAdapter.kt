@@ -3,9 +3,9 @@ package com.woojun.ai.util
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.ai.R
-import com.example.ai.databinding.ChildrenInfoItemBinding
-import com.example.ai.databinding.NewChildrenInfoItemBinding
+import com.woojun.ai.R
+import com.woojun.ai.databinding.ChildrenInfoItemBinding
+import com.woojun.ai.databinding.NewChildrenInfoItemBinding
 
 class ChildrenInfoAdapter(private val children: ArrayList<ChildInfo>, private val type: ChildInfoType): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {

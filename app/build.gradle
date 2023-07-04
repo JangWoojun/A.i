@@ -5,11 +5,11 @@ plugins {
 }
 
 android {
-    namespace 'com.example.ai'
+    namespace 'com.woojun.ai'
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.example.ai"
+        applicationId "com.woojun.ai"
         minSdk 24
         targetSdk 33
         versionCode 1

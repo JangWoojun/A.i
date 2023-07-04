@@ -2,7 +2,6 @@ package com.woojun.ai
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.ai.R
 
 class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
