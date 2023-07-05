@@ -13,13 +13,16 @@
         android:theme="@style/Theme.Ai"
         tools:targetApi="31">
         <activity
-            android:name="com.woojun.ai.SignUpActivity"
+            android:name=".AgreementActivity"
             android:exported="false" />
         <activity
-            android:name="com.woojun.ai.LoginActivity"
+            android:name=".SignUpActivity"
             android:exported="false" />
         <activity
-            android:name="com.woojun.ai.SplashActivity"
+            android:name=".LoginActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -28,7 +31,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.woojun.ai.MainActivity"
+            android:name=".MainActivity"
             android:exported="true" />
     </application>
 
