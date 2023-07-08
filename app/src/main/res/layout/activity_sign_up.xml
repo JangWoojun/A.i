@@ -203,6 +203,7 @@
                     android:layout_height="wrap_content"/>
 
                 <LinearLayout
+                    android:id="@+id/move_login_in_button"
                     android:gravity="center"
                     android:layout_width="wrap_content"
                     android:layout_height="50dp">
