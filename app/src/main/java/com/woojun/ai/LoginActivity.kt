@@ -1,5 +1,6 @@
 package com.woojun.ai
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.woojun.ai.databinding.ActivityLoginBinding
@@ -13,7 +14,9 @@ class LoginActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.apply {
-
+            moveSignInButton.setOnClickListener {
+                startActivity(Intent(this@LoginActivity, SignUpActivity::class.java))
+            }
         }
     }
 }
