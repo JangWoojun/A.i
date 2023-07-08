@@ -37,6 +37,7 @@
                     android:textSize="18sp" />
 
                 <TextView
+                    android:id="@+id/hello_user_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="반갑습니다 장우준님"
@@ -55,6 +56,7 @@
                 app:layout_constraintTop_toTopOf="parent" >
 
                 <ImageView
+                    android:id="@+id/profile"
                     android:src="@drawable/profile"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"/>
@@ -64,6 +66,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/main_children_info_button"
             android:layout_marginHorizontal="26dp"
             android:layout_marginTop="22dp"
             app:cardCornerRadius="20dp"
@@ -186,6 +189,7 @@
                                 android:layout_height="wrap_content"/>
 
                             <TextView
+                                android:id="@+id/last_identity_date"
                                 android:textSize="14sp"
                                 android:textColor="@color/white"
                                 android:text="2023. 06. 22"
@@ -222,6 +226,7 @@
                                 android:layout_height="wrap_content"/>
 
                             <TextView
+                                android:id="@+id/next_identity_date"
                                 android:textSize="14sp"
                                 android:textColor="@color/white"
                                 android:text="2023. 12. 22"
@@ -251,6 +256,7 @@
             android:layout_height="62dp">
 
             <LinearLayout
+                android:id="@+id/search_button"
                 android:layout_marginHorizontal="26dp"
                 android:backgroundTint="@color/black"
                 android:layout_width="match_parent"
@@ -284,6 +290,7 @@
             android:layout_height="138dp">
 
             <LinearLayout
+                android:id="@+id/children_info_button"
                 android:orientation="vertical"
                 android:layout_weight="1"
                 android:layout_width="0dp"
@@ -319,6 +326,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/children_list_button"
                 android:orientation="vertical"
                 android:layout_weight="1"
                 android:layout_width="0dp"
@@ -354,6 +362,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/report_children_button"
                 android:orientation="vertical"
                 android:layout_weight="1"
                 android:layout_width="0dp"
@@ -389,6 +398,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/my_info_button"
                 android:orientation="vertical"
                 android:layout_weight="1"
                 android:layout_width="0dp"
