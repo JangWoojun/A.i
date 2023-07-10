@@ -3,6 +3,7 @@ package com.woojun.ai
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import com.woojun.ai.databinding.ActivityAgreementBinding
 
 class AgreementActivity : AppCompatActivity() {
@@ -15,8 +16,30 @@ class AgreementActivity : AppCompatActivity() {
 
         binding.apply {
             startButton.setOnClickListener {
-                startActivity(Intent(this@AgreementActivity, SignUpActivity::class.java))
-                finishAffinity()
+                if (allCheckBox.isChecked) {
+                    startActivity(Intent(this@AgreementActivity, SignUpActivity::class.java))
+                    finishAffinity()
+                } else {
+                    Toast.makeText(this@AgreementActivity, "필수 약관들을 모두 동의해주세요", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            allCheckBox.setOnClickListener {
+                if (allCheckBox.isChecked) {
+                    consentCheckBox1.isChecked = true
+                    consentCheckBox2.isChecked = true
+                } else {
+                    consentCheckBox1.isChecked = false
+                    consentCheckBox2.isChecked = false
+                }
+            }
+
+            consentCheckBox1.setOnCheckedChangeListener { _, isChecked ->
+                allCheckBox.isChecked = isChecked && consentCheckBox2.isChecked
+            }
+
+            consentCheckBox2.setOnCheckedChangeListener { _, isChecked ->
+                allCheckBox.isChecked = isChecked && consentCheckBox1.isChecked
             }
         }
     }
