@@ -34,12 +34,12 @@ class AgreementActivity : AppCompatActivity() {
                 }
             }
 
-            consentCheckBox1.setOnCheckedChangeListener { _, isChecked ->
-                allCheckBox.isChecked = isChecked && consentCheckBox2.isChecked
+            consentCheckBox1.setOnClickListener {
+                allCheckBox.isChecked = consentCheckBox1.isChecked && consentCheckBox2.isChecked
             }
 
-            consentCheckBox2.setOnCheckedChangeListener { _, isChecked ->
-                allCheckBox.isChecked = isChecked && consentCheckBox1.isChecked
+            consentCheckBox2.setOnClickListener {
+                allCheckBox.isChecked = consentCheckBox2.isChecked && consentCheckBox1.isChecked
             }
         }
     }
