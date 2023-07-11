@@ -1,8 +1,11 @@
 package com.woojun.ai
 
 import android.content.Intent
+import android.content.res.ColorStateList
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.CalendarContract.Colors
 import android.widget.Toast
 import com.woojun.ai.databinding.ActivityAgreementBinding
 
@@ -15,6 +18,11 @@ class AgreementActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.apply {
+
+            allCheckBox.buttonTintList = ColorStateList.valueOf(Color.parseColor("#4894fe"))
+            consentCheckBox1.buttonTintList = ColorStateList.valueOf(Color.parseColor("#4894fe"))
+            consentCheckBox2.buttonTintList = ColorStateList.valueOf(Color.parseColor("#4894fe"))
+
             startButton.setOnClickListener {
                 if (allCheckBox.isChecked) {
                     startActivity(Intent(this@AgreementActivity, SignUpActivity::class.java))
