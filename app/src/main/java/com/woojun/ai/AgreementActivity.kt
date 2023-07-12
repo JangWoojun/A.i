@@ -19,9 +19,29 @@ class AgreementActivity : AppCompatActivity() {
 
         binding.apply {
 
-            allCheckBox.buttonTintList = ColorStateList.valueOf(Color.parseColor("#4894fe"))
-            consentCheckBox1.buttonTintList = ColorStateList.valueOf(Color.parseColor("#4894fe"))
-            consentCheckBox2.buttonTintList = ColorStateList.valueOf(Color.parseColor("#4894fe"))
+            allCheckBox.setOnCheckedChangeListener { _, isChecked ->
+                if (isChecked) {
+                    allCheckBox.buttonTintList = ColorStateList.valueOf(Color.parseColor("#4894fe"))
+                } else {
+                    allCheckBox.buttonTintList = ColorStateList.valueOf(Color.parseColor("#000000"))
+                }
+            }
+
+            consentCheckBox1.setOnCheckedChangeListener { _, isChecked ->
+                if (isChecked) {
+                    consentCheckBox1.buttonTintList = ColorStateList.valueOf(Color.parseColor("#4894fe"))
+                } else {
+                    consentCheckBox1.buttonTintList = ColorStateList.valueOf(Color.parseColor("#000000"))
+                }
+            }
+
+            consentCheckBox2.setOnCheckedChangeListener { _, isChecked ->
+                if (isChecked) {
+                    consentCheckBox2.buttonTintList = ColorStateList.valueOf(Color.parseColor("#4894fe"))
+                } else {
+                    consentCheckBox2.buttonTintList = ColorStateList.valueOf(Color.parseColor("#000000"))
+                }
+            }
 
             startButton.setOnClickListener {
                 if (allCheckBox.isChecked) {
