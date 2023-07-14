@@ -21,6 +21,8 @@ class SignUpActivity : AppCompatActivity() {
 
         binding.apply {
 
+            textInputLayoutPaddingSetting()
+
             moveLoginInButton.setOnClickListener {
                 startActivity(Intent(this@SignUpActivity, LoginActivity::class.java))
             }
@@ -68,6 +70,63 @@ class SignUpActivity : AppCompatActivity() {
             }
 
             return true
+        }
+    }
+
+    private fun textInputLayoutPaddingSetting() {
+        binding.apply {
+
+            nameInputLayout.apply {
+                viewTreeObserver.addOnGlobalLayoutListener {
+                    if (childCount > 1) {
+                        getChildAt(1)?.setPadding(
+                            8,
+                            20,
+                            0,
+                            0
+                        )
+                    }
+                }
+            }
+
+            emailInputLayout.apply {
+                viewTreeObserver.addOnGlobalLayoutListener {
+                    if (childCount > 1) {
+                        getChildAt(1)?.setPadding(
+                            8,
+                            20,
+                            0,
+                            0
+                        )
+                    }
+                }
+            }
+
+            passwordInputLayout.apply {
+                viewTreeObserver.addOnGlobalLayoutListener {
+                    if (childCount > 1) {
+                        getChildAt(1)?.setPadding(
+                            8,
+                            20,
+                            0,
+                            0
+                        )
+                    }
+                }
+            }
+
+            phoneNumberInputLayout.apply {
+                viewTreeObserver.addOnGlobalLayoutListener {
+                    if (childCount > 1) {
+                        getChildAt(1)?.setPadding(
+                            8,
+                            20,
+                            0,
+                            0
+                        )
+                    }
+                }
+            }
         }
     }
 
