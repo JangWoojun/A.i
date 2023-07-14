@@ -28,6 +28,11 @@ class SignUpActivity : AppCompatActivity() {
             }
 
             signButton.setOnClickListener {
+                nameInputLayout.isErrorEnabled = false
+                emailInputLayout.isErrorEnabled = false
+                phoneNumberInputLayout.isErrorEnabled = false
+                passwordInputLayout.isErrorEnabled = false
+
                 validationCheck(
                     nameArea.text.toString(),
                     emailArea.text.toString(),
@@ -40,6 +45,7 @@ class SignUpActivity : AppCompatActivity() {
 
     private fun validationCheck(name: String, email: String, phoneNumber: String, password: String): Boolean {
         binding.apply {
+
             if (name.isEmpty()) {
                 nameInputLayout.error = "이름을 입력해주세요"
                 return false
@@ -57,7 +63,7 @@ class SignUpActivity : AppCompatActivity() {
                 phoneNumberInputLayout.error = "전화번호를 입력해주세요"
                 return false
             } else if (!isPhoneNumberValid(phoneNumber)) {
-                phoneNumberInputLayout.error = "-을 제외한 숫자로만 입력해주세요"
+                phoneNumberInputLayout.error = "-을 제외한 숫자로만 전체 번호를 입력해주세요"
                 return false
             }
 
@@ -68,6 +74,11 @@ class SignUpActivity : AppCompatActivity() {
                 passwordInputLayout.error = "영문, 숫자, 특수문자 조합으로 8자 이상이 필요합니다"
                 return false
             }
+
+            nameInputLayout.error = ""
+            emailInputLayout.error = ""
+            phoneNumberInputLayout.error = ""
+            passwordInputLayout.error = ""
 
             return true
         }
