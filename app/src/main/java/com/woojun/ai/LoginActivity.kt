@@ -13,6 +13,8 @@ class LoginActivity : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        textInputLayoutPaddingSetting()
+
         binding.apply {
             moveSignInButton.setOnClickListener {
                 startActivity(Intent(this@LoginActivity, SignUpActivity::class.java))
@@ -49,6 +51,39 @@ class LoginActivity : AppCompatActivity() {
             return true
         }
     }
+
+    private fun textInputLayoutPaddingSetting() {
+        binding.apply {
+
+            emailInputLayout.apply {
+                viewTreeObserver.addOnGlobalLayoutListener {
+                    if (childCount > 1) {
+                        getChildAt(1)?.setPadding(
+                            8,
+                            20,
+                            0,
+                            0
+                        )
+                    }
+                }
+            }
+
+            passwordInputLayout.apply {
+                viewTreeObserver.addOnGlobalLayoutListener {
+                    if (childCount > 1) {
+                        getChildAt(1)?.setPadding(
+                            8,
+                            20,
+                            0,
+                            0
+                        )
+                    }
+                }
+            }
+
+        }
+    }
+
 
     private fun isEmailValid(email: String): Boolean {
         val emailRegex = Regex("""^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$""")
