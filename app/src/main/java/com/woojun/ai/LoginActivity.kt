@@ -21,6 +21,9 @@ class LoginActivity : AppCompatActivity() {
             }
 
             loginButton.setOnClickListener {
+                emailInputLayout.isErrorEnabled = false
+                passwordInputLayout.isErrorEnabled = false
+
                 validationCheck(emailArea.text.toString(), passwordArea.text.toString())
             }
         }
