@@ -2,8 +2,10 @@ package com.woojun.ai
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseAuthUserCollisionException
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.woojun.ai.databinding.ActivitySignUpBinding
@@ -33,12 +35,17 @@ class SignUpActivity : AppCompatActivity() {
                 phoneNumberInputLayout.isErrorEnabled = false
                 passwordInputLayout.isErrorEnabled = false
 
-                validationCheck(
+                val signCheck = validationCheck(
                     nameArea.text.toString(),
                     emailArea.text.toString(),
                     phoneArea.text.toString(),
                     passwordArea.text.toString()
                 )
+
+                if (signCheck) {
+                    signUpUser(emailArea.text.toString(), passwordArea.text.toString())
+                }
+
             }
         }
     }
@@ -156,4 +163,22 @@ class SignUpActivity : AppCompatActivity() {
         return phoneNumberRegex.matches(phoneNumber)
     }
 
+    private fun signUpUser(email: String, password: String) {
+        auth.createUserWithEmailAndPassword(email, password)
+            .addOnCompleteListener(this) { task ->
+                if (task.isSuccessful) {
+                    Toast.makeText(this@SignUpActivity, "회원가입을 성공하셨습니다", Toast.LENGTH_SHORT).show()
+                    startActivity(Intent(this@SignUpActivity, MainActivity::class.java))
+                    finishAffinity()
+                } else {
+                    try {
+                        throw task.exception!!
+                    } catch (e: FirebaseAuthUserCollisionException) {
+                        binding.emailInputLayout.error = "이미 등록된 이메일 주소입니다"
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                    }
+                }
+            }
+    }
 }
