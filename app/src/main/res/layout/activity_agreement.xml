@@ -191,6 +191,7 @@
     </LinearLayout>
 
     <LinearLayout
+        android:foreground="?android:attr/selectableItemBackground"
         android:id="@+id/start_button"
         android:gravity="center"
         android:layout_width="match_parent"
