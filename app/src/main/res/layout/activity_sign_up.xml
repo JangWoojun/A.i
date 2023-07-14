@@ -33,6 +33,7 @@
                 android:layout_height="wrap_content">
 
                 <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/nameInputLayout"
                     app:boxStrokeColor="#4894fe"
                     app:hintEnabled="true"
                     android:hint="이름"
@@ -49,7 +50,7 @@
                         android:textCursorDrawable="@drawable/custom_cursor"
                         android:fontFamily="@font/poppins_reqular"
                         android:id="@+id/name_area"
-                        android:inputType="textEmailAddress"
+                        android:inputType="text"
                         android:textSize="14sp"
                         android:textColor="@color/black"
                         android:layout_width="match_parent"
@@ -58,6 +59,7 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/emailInputLayout"
                     app:boxStrokeColor="#4894fe"
                     app:hintEnabled="true"
                     android:hint="이메일"
@@ -83,6 +85,7 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/phoneNumberInputLayout"
                     app:boxStrokeColor="#4894fe"
                     app:hintEnabled="true"
                     android:hint="전화번호"
@@ -99,7 +102,7 @@
                         android:textCursorDrawable="@drawable/custom_cursor"
                         android:fontFamily="@font/poppins_reqular"
                         android:id="@+id/phone_area"
-                        android:inputType="textEmailAddress"
+                        android:inputType="phone"
                         android:textSize="14sp"
                         android:textColor="@color/black"
                         android:layout_width="match_parent"
@@ -108,6 +111,7 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/passwordInputLayout"
                     app:boxStrokeColor="#4894fe"
                     app:hintEnabled="true"
                     android:hint="비밀번호"
@@ -138,9 +142,10 @@
             </LinearLayout>
 
             <androidx.cardview.widget.CardView
+                android:foreground="?android:attr/selectableItemBackground"
                 android:layout_marginTop="34dp"
                 app:cardCornerRadius="5dp"
-                android:id="@+id/login_button"
+                android:id="@+id/sign_button"
                 android:layout_marginHorizontal="22dp"
                 android:layout_gravity="center"
                 android:backgroundTint="#4894fe"
