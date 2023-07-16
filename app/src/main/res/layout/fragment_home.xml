@@ -72,7 +72,7 @@
             app:cardCornerRadius="20dp"
             android:backgroundTint="#4894fe"
             android:layout_width="match_parent"
-            android:layout_height="170dp">
+            android:layout_height="wrap_content">
 
             <LinearLayout
                 android:orientation="vertical"
@@ -160,6 +160,7 @@
 
                 <LinearLayout
                     android:layout_marginTop="18dp"
+                    android:layout_marginBottom="18.5dp"
                     android:layout_width="match_parent"
                     android:layout_height="40dp">
 
