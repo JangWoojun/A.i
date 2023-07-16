@@ -112,6 +112,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun loginUser(email: String, password: String) {
+        binding.loginButton.isEnabled = false
         auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
@@ -125,6 +126,7 @@ class LoginActivity : AppCompatActivity() {
                         binding.emailInputLayout.error = "해당 이메일 또는 비밀번호가 유효하지 않습니다"
                     }
                 }
+                binding.loginButton.isEnabled = true
             }
     }
 }
