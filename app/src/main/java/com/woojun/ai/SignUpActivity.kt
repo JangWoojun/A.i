@@ -164,6 +164,7 @@ class SignUpActivity : AppCompatActivity() {
     }
 
     private fun signUpUser(email: String, password: String) {
+        binding.signButton.isEnabled = false
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
@@ -179,6 +180,7 @@ class SignUpActivity : AppCompatActivity() {
                         e.printStackTrace()
                     }
                 }
+                binding.signButton.isEnabled = true
             }
     }
 }
