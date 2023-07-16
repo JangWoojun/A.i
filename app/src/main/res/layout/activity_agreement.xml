@@ -84,6 +84,7 @@
             app:cardCornerRadius="10dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/consent_button_1"
                 android:layout_width="match_parent"
                 android:layout_height="50dp">
 
@@ -109,7 +110,6 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <LinearLayout
-                    android:id="@+id/consent_button_1"
                     android:layout_width="50dp"
                     android:layout_height="match_parent"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -129,6 +129,7 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/consent_button_2"
                 android:layout_marginTop="50dp"
                 android:layout_width="match_parent"
                 android:layout_height="50dp">
@@ -155,7 +156,6 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <LinearLayout
-                    android:id="@+id/consent_button_2"
                     android:layout_width="50dp"
                     android:layout_height="match_parent"
                     app:layout_constraintBottom_toBottomOf="parent"
