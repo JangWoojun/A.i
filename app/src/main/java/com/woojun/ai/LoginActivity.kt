@@ -39,6 +39,10 @@ class LoginActivity : AppCompatActivity() {
                     loginUser(emailArea.text.toString(), passwordArea.text.toString())
                 }
             }
+
+            forgotPasswordButton.setOnClickListener {
+                startActivity(Intent(this@LoginActivity, ForgotPasswordActivity::class.java))
+            }
         }
     }
 
