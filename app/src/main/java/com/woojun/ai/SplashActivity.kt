@@ -15,10 +15,11 @@ class SplashActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
         auth = Firebase.auth
+        auth.signOut()
 
         Handler().postDelayed({
             if (auth.currentUser == null) {
-                startActivity(Intent(this, AgreementActivity::class.java))
+                startActivity(Intent(this, IntroActivity::class.java))
                 finishAffinity()
             } else {
                 startActivity(Intent(this, MainActivity::class.java))
