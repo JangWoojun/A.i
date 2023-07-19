@@ -7,22 +7,22 @@
 
     <fragment
         android:id="@+id/home"
-        android:name="com.woojun.ai.fragment.HomeFragment"
+        android:name="com.woojun.ai.fragment.main.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" />
     <fragment
         android:id="@+id/myInfo"
-        android:name="com.woojun.ai.fragment.MyInfoFragment"
+        android:name="com.woojun.ai.fragment.main.MyInfoFragment"
         android:label="fragment_my_info"
         tools:layout="@layout/fragment_my_info" />
     <fragment
         android:id="@+id/childrenInfo"
-        android:name="com.woojun.ai.fragment.ChildrenInfoFragment"
+        android:name="com.woojun.ai.fragment.main.ChildrenInfoFragment"
         android:label="fragment_children_info"
         tools:layout="@layout/fragment_children_info" />
     <fragment
         android:id="@+id/childrenList"
-        android:name="com.woojun.ai.fragment.ChildrenListFragment"
+        android:name="com.woojun.ai.fragment.main.ChildrenListFragment"
         android:label="fragment_children_list"
         tools:layout="@layout/fragment_children_list" />
 </navigation>

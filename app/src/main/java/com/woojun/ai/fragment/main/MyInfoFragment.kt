@@ -1,15 +1,15 @@
-package com.woojun.ai.fragment
+package com.woojun.ai.fragment.main
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.woojun.ai.databinding.FragmentChildrenInfoBinding
+import com.woojun.ai.databinding.FragmentMyInfoBinding
 
-class ChildrenInfoFragment : Fragment() {
+class MyInfoFragment : Fragment() {
 
-    private var _binding: FragmentChildrenInfoBinding? = null
+    private var _binding: FragmentMyInfoBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,7 +20,7 @@ class ChildrenInfoFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentChildrenInfoBinding.inflate(inflater, container, false)
+        _binding = FragmentMyInfoBinding.inflate(inflater, container, false)
         return binding.root
     }
 
