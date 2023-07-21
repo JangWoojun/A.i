@@ -42,10 +42,13 @@ class LoginFragment : Fragment() {
                 emailInputLayout.isErrorEnabled = false
                 passwordInputLayout.isErrorEnabled = false
 
-                val loginCheck = validationCheck(emailArea.text.toString(), passwordArea.text.toString())
+                val loginCheck = validationCheck(
+                    emailArea.text.toString().trim(),
+                    passwordArea.text.toString().trim()
+                )
 
                 if (loginCheck) {
-                    loginUser(emailArea.text.toString(), passwordArea.text.toString())
+                    loginUser(emailArea.text.toString().trim(), passwordArea.text.toString().trim())
                 }
             }
 
