@@ -49,14 +49,14 @@ class SignUpFragment : Fragment() {
                 passwordInputLayout.isErrorEnabled = false
 
                 val signCheck = validationCheck(
-                    nameArea.text.toString(),
-                    emailArea.text.toString(),
-                    phoneArea.text.toString(),
-                    passwordArea.text.toString()
+                    nameArea.text.toString().trim(),
+                    emailArea.text.toString().trim(),
+                    phoneArea.text.toString().trim(),
+                    passwordArea.text.toString().trim()
                 )
 
                 if (signCheck) {
-                    signUpUser(emailArea.text.toString(), passwordArea.text.toString())
+                    signUpUser(emailArea.text.toString().trim(), passwordArea.text.toString().trim())
                 }
 
             }
