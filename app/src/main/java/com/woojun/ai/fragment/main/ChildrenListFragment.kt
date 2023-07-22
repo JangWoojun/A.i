@@ -21,7 +21,8 @@ class ChildrenListFragment : Fragment() {
         ChildInfo(
             name = "이동진",
             image = null,
-            age = "8세",
+            age1 = "8세",
+            age2 = "8세",
             birthday = "2015년 11월 12일",
             sex = "남자",
             date = "2023년 6월 28일",
@@ -37,7 +38,8 @@ class ChildrenListFragment : Fragment() {
         ChildInfo(
             name = "김지현",
             image = null,
-            age = "3세",
+            age1 = "3세",
+            age2 = "3세",
             birthday = "2020년 1월 1일",
             sex = "여자",
             date = "2023년 6월 28일",
@@ -53,7 +55,8 @@ class ChildrenListFragment : Fragment() {
         ChildInfo(
             name = "김준호",
             image = null,
-            age = "4세",
+            age1 = "4세",
+            age2 = "4세",
             birthday = "2019년 3월 15일",
             sex = "남자",
             date = "2023년 6월 28일",
@@ -69,7 +72,8 @@ class ChildrenListFragment : Fragment() {
         ChildInfo(
             name = "최준영",
             image = null,
-            age = "7세",
+            age1 = "7세",
+            age2 = "7세",
             birthday = "2016년 7월 17일",
             sex = "남자",
             date = "2023년 6월 28일",
@@ -85,7 +89,8 @@ class ChildrenListFragment : Fragment() {
         ChildInfo(
             name = "이서연",
             image = null,
-            age = "7세",
+            age1 = "7세",
+            age2 = "7세",
             birthday = "2016년 2월 7일",
             sex = "여자",
             date = "2023년 6월 28일",
@@ -101,7 +106,8 @@ class ChildrenListFragment : Fragment() {
         ChildInfo(
             name = "정성민",
             image = null,
-            age = "6세",
+            age1 = "6세",
+            age2 = "6세",
             birthday = "2017년 12월 20일",
             sex = "남자",
             date = "2023년 6월 28일",
@@ -117,7 +123,8 @@ class ChildrenListFragment : Fragment() {
         ChildInfo(
             name = "정민지",
             image = null,
-            age = "4세",
+            age1 = "4세",
+            age2 = "4세",
             birthday = "2019년 8월 3일",
             sex = "여자",
             date = "2023년 6월 28일",
@@ -133,7 +140,8 @@ class ChildrenListFragment : Fragment() {
         ChildInfo(
             name = "박현우",
             image = null,
-            age = "6세",
+            age1 = "6세",
+            age2 = "6세",
             birthday = "2017년 9월 25일",
             sex = "남자",
             date = "2023년 6월 28일",
@@ -149,7 +157,8 @@ class ChildrenListFragment : Fragment() {
         ChildInfo(
             name = "박가온",
             image = null,
-            age = "5세",
+            age1 = "5세",
+            age2 = "5세",
             birthday = "2018년 6월 10일",
             sex = "여자",
             date = "2023년 6월 28일",
@@ -165,7 +174,8 @@ class ChildrenListFragment : Fragment() {
         ChildInfo(
             name = "최지은",
             image = null,
-            age = "5세",
+            age1 = "5세",
+            age2 = "5세",
             birthday = "2018년 4월 5일",
             sex = "여자",
             date = "2023년 6월 28일",
