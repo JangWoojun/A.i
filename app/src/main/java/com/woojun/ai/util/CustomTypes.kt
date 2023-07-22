@@ -3,7 +3,8 @@ package com.woojun.ai.util
 data class ChildInfo(
     val name: String,
     val image: String?,
-    val age: String,
+    val age1: String,
+    val age2: String,
     val birthday: String,
     val sex: String,
     val date: String,
