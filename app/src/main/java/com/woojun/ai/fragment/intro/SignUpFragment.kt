@@ -10,13 +10,18 @@ import android.widget.Toast
 import androidx.navigation.findNavController
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthUserCollisionException
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
 import com.woojun.ai.MainActivity
 import com.woojun.ai.R
 import com.woojun.ai.databinding.FragmentSignUpBinding
+import com.woojun.ai.util.UserInfo
 
 class SignUpFragment : Fragment() {
 
     private var _binding: FragmentSignUpBinding? = null
+    private lateinit var database: DatabaseReference
     private val binding get() = _binding!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -48,15 +53,16 @@ class SignUpFragment : Fragment() {
                 phoneNumberInputLayout.isErrorEnabled = false
                 passwordInputLayout.isErrorEnabled = false
 
-                val signCheck = validationCheck(
+                val userInfo = UserInfo(
                     nameArea.text.toString().trim(),
                     emailArea.text.toString().trim(),
                     phoneArea.text.toString().trim(),
-                    passwordArea.text.toString().trim()
                 )
 
+                val signCheck = validationCheck(userInfo, passwordArea.text.toString().trim())
+
                 if (signCheck) {
-                    signUpUser(emailArea.text.toString().trim(), passwordArea.text.toString().trim())
+                    signUpUser(userInfo, passwordArea.text.toString().trim())
                 }
 
             }
@@ -69,26 +75,26 @@ class SignUpFragment : Fragment() {
         _binding = null
     }
 
-    private fun validationCheck(name: String, email: String, phoneNumber: String, password: String): Boolean {
+    private fun validationCheck(userInfo: UserInfo, password: String): Boolean {
         binding.apply {
 
-            if (name.isEmpty()) {
+            if (userInfo.name.isEmpty()) {
                 nameInputLayout.error = "이름을 입력해주세요"
                 return false
             }
 
-            if (email.isEmpty()) {
+            if (userInfo.email.isEmpty()) {
                 emailInputLayout.error = "이메일을 입력해주세요"
                 return false
-            } else if (!isEmailValid(email)) {
+            } else if (!isEmailValid(userInfo.email)) {
                 emailInputLayout.error = "유효한 이메일 형식이 아닙니다"
                 return false
             }
 
-            if (phoneNumber.isEmpty()) {
+            if (userInfo.phoneNumber.isEmpty()) {
                 phoneNumberInputLayout.error = "전화번호를 입력해주세요"
                 return false
-            } else if (!isPhoneNumberValid(phoneNumber)) {
+            } else if (!isPhoneNumberValid(userInfo.phoneNumber)) {
                 phoneNumberInputLayout.error = "-을 제외한 숫자로만 전체 번호를 입력해주세요"
                 return false
             }
@@ -181,13 +187,15 @@ class SignUpFragment : Fragment() {
         return phoneNumberRegex.matches(phoneNumber)
     }
 
-    private fun signUpUser(email: String, password: String) {
+    private fun signUpUser(userInfo: UserInfo, password: String) {
         binding.signButton.isEnabled = false
         val auth = FirebaseAuth.getInstance()
+        database = Firebase.database.reference
 
-        auth.createUserWithEmailAndPassword(email, password)
+        auth.createUserWithEmailAndPassword(userInfo.email, password)
             .addOnCompleteListener(requireActivity()) { task ->
                 if (task.isSuccessful) {
+                    database.child("users").child("${auth.uid}").setValue(userInfo)
                     Toast.makeText(requireContext(), "회원가입을 성공하셨습니다", Toast.LENGTH_SHORT).show()
                     startActivity(Intent(requireContext(), MainActivity::class.java))
                     requireActivity().finishAffinity()
