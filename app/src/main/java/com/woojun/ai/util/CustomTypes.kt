@@ -17,6 +17,12 @@ data class ChildInfo(
     val dress: String,
 )
 
+data class UserInfo(
+    val name: String,
+    val email: String,
+    val phoneNumber: String,
+)
+
 enum class ChildInfoType {
     NEW, DEFAULT
 }
