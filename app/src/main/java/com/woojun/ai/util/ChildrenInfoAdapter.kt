@@ -72,8 +72,8 @@ class ChildrenInfoAdapter(private val children: ArrayList<ChildInfo>, private va
                 image.setImageResource(R.drawable.profile)
                 sexBirthday.text = "${childrenInfo.sex} · ${childrenInfo.birthday.substringBefore("년")}년생"
                 location.text = childrenInfo.location
-                date.text = "${childrenInfo.date.substringAfter("년 ")} 실종"
-                age.text = "실종 나이 : ${childrenInfo.age}"
+                date.text = "일시: ${formatDate(childrenInfo.date)}"
+                age.text = "나이: ${childrenInfo.age1}(${childrenInfo.age2})"
             }
         }
     }
@@ -84,11 +84,26 @@ class ChildrenInfoAdapter(private val children: ArrayList<ChildInfo>, private va
             binding.apply {
                 name.text = childrenInfo.name
                 image.setImageResource(R.drawable.profile)
-                sexBirthday.text = "${childrenInfo.sex} · ${childrenInfo.birthday.substringBefore("년")}년생"
+                sexBirthday.text =
+                    "${childrenInfo.sex} · ${childrenInfo.birthday.substringBefore("년")}년생"
                 location.text = childrenInfo.location
-                date.text = "${childrenInfo.date.substringAfter("년 ")} 실종"
-                age.text = "실종 나이 : ${childrenInfo.age}"
+                date.text = "일시: ${formatDate(childrenInfo.date)}"
+                age.text = "나이: ${childrenInfo.age1}(${childrenInfo.age2})"
             }
         }
+    }
+}
+
+fun formatDate(inputDateStr: String): String {
+    val regex = Regex("""(\d{4})년 (\d{1,2})월 (\d{1,2})일""")
+    val matchResult = regex.find(inputDateStr)
+
+    return if (matchResult != null) {
+        val year = matchResult.groupValues[1]
+        val month = matchResult.groupValues[2].padStart(2, '0')
+        val day = matchResult.groupValues[3].padStart(2, '0')
+        "$year. $month. $day"
+    } else {
+        "오류"
     }
 }
