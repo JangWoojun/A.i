@@ -229,7 +229,7 @@ class ChildrenListFragment : Fragment() {
 
                 buttonScrollView.post {
                     val animator = ValueAnimator.ofInt(buttonScrollView.scrollX, 0)
-                    animator.duration = 300
+                    animator.duration = 500
 
                     animator.addUpdateListener { animation ->
                         val animatedValue = animation.animatedValue as Int
@@ -256,7 +256,7 @@ class ChildrenListFragment : Fragment() {
                 val middle = (scrollWidth - viewWidth) / 2
 
                 val animator = ValueAnimator.ofInt(buttonScrollView.scrollX, middle)
-                animator.duration = 300
+                animator.duration = 500
 
                 animator.addUpdateListener { animation ->
                     val animatedValue = animation.animatedValue as Int
@@ -282,7 +282,7 @@ class ChildrenListFragment : Fragment() {
                 buttonScrollView.post {
                     val maxScrollAmount = buttonScrollView.getChildAt(0).width - buttonScrollView.width
                     val animator = ValueAnimator.ofInt(buttonScrollView.scrollX, maxScrollAmount)
-                    animator.duration = 300
+                    animator.duration = 500
 
                     animator.addUpdateListener { animation ->
                         val animatedValue = animation.animatedValue as Int
