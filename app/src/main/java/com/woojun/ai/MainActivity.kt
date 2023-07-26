@@ -61,6 +61,10 @@ class MainActivity : AppCompatActivity() {
                     R.id.myInfo -> navController.navigate(R.id.myInfo)
                 }
             }
+
+            navController.addOnDestinationChangedListener { _, destination, _ ->
+                bottomNavigation.setItemSelected(destination.id)
+            }
         }
 
 
