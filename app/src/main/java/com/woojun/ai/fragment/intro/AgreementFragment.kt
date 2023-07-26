@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import android.webkit.WebView
 import android.widget.CheckBox
 import android.widget.Toast
+import androidx.navigation.NavOptions
 import androidx.navigation.findNavController
 import com.woojun.ai.R
 import com.woojun.ai.databinding.FragmentAgreementBinding
@@ -119,7 +120,15 @@ class AgreementFragment : Fragment() {
 
             startButton.setOnClickListener {
                 if (allCheckBox.isChecked) {
-                    view.findNavController().navigate(R.id.action_agreementFragment_to_signUpFragment)
+                    val navOptions = NavOptions.Builder()
+                        .setPopUpTo(R.id.agreementFragment, true)
+                        .build()
+
+                    view.findNavController().navigate(
+                        R.id.action_agreementFragment_to_signUpFragment,
+                        null,
+                        navOptions
+                    )
                 } else {
                     Toast.makeText(requireContext().applicationContext, "필수 약관들을 모두 동의해주세요", Toast.LENGTH_SHORT).show()
                 }
