@@ -1,6 +1,7 @@
 package com.woojun.ai.fragment.intro
 
 import android.content.Intent
+import android.graphics.Paint
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -34,7 +35,8 @@ class LoginFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.apply {
-            moveSignInButton.setOnClickListener {
+            moveSignUpText.paintFlags = Paint.UNDERLINE_TEXT_FLAG
+            moveSignUpButton.setOnClickListener {
                 view.findNavController().navigate(R.id.action_loginFragment_to_signUpFragment)
             }
 
