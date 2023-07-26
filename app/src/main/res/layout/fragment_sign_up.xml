@@ -215,7 +215,7 @@
 
                     <TextView
                         android:fontFamily="@font/poppins_bold"
-                        android:id="@+id/move_sign_in_text"
+                        android:id="@+id/move_login_text"
                         android:layout_marginStart="5dp"
                         android:textColor="#4894fe"
                         android:text="Log In"
