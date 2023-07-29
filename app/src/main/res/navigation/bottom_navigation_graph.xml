@@ -17,9 +17,9 @@
         tools:layout="@layout/fragment_my_info" />
     <fragment
         android:id="@+id/childrenInfo"
-        android:name="com.woojun.ai.fragment.main.ChildrenInfoFragment"
+        android:name="com.woojun.ai.fragment.main.MyChildInfoFragment"
         android:label="fragment_children_info"
-        tools:layout="@layout/fragment_children_info" />
+        tools:layout="@layout/fragment_my_child_info" />
     <fragment
         android:id="@+id/childrenList"
         android:name="com.woojun.ai.fragment.main.ChildrenListFragment"
