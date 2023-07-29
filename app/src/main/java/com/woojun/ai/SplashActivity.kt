@@ -15,7 +15,6 @@ class SplashActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
         auth = Firebase.auth
-        auth.signOut()
 
         Handler().postDelayed({
             if (auth.currentUser == null) {
