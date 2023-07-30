@@ -1,15 +1,23 @@
 package com.woojun.ai.fragment.intro
 
+import android.app.Dialog
 import android.content.Intent
 import android.graphics.Paint
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
+import android.widget.EditText
 import android.widget.Toast
+import androidx.cardview.widget.CardView
 import androidx.navigation.findNavController
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseAuthInvalidUserException
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import com.woojun.ai.MainActivity
 import com.woojun.ai.R
 import com.woojun.ai.databinding.FragmentLoginBinding
@@ -18,6 +26,8 @@ class LoginFragment : Fragment() {
 
     private var _binding: FragmentLoginBinding? = null
     private val binding get() = _binding!!
+
+    private lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,7 +44,37 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        auth = Firebase.auth
+
         binding.apply {
+
+            forgotPasswordButton.setOnClickListener {
+                val dialog = Dialog(requireContext())
+                dialog.setContentView(R.layout.password_forget_dialog)
+                val windowWidth = resources.displayMetrics.widthPixels * 0.95
+                val windowHeight = resources.displayMetrics.heightPixels * 0.35
+                dialog.window?.setBackgroundDrawableResource(R.drawable.dialog_background)
+                dialog.window?.setLayout(windowWidth.toInt(), windowHeight.toInt())
+
+                dialog.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE)
+
+                val editText = dialog.findViewById<EditText>(R.id.email_area)
+                val okButton = dialog.findViewById<CardView>(R.id.ok_button)
+                val cancelButton = dialog.findViewById<CardView>(R.id.cancel_button)
+
+                okButton.setOnClickListener {
+                    val enteredText = editText.text.toString()
+                    sendPasswordResetEmail(enteredText)
+                    dialog.dismiss()
+                }
+
+                cancelButton.setOnClickListener {
+                    dialog.dismiss()
+                }
+
+                dialog.show()
+            }
+
             moveSignUpText.paintFlags = Paint.UNDERLINE_TEXT_FLAG
             moveSignUpButton.setOnClickListener {
                 view.findNavController().navigate(R.id.action_loginFragment_to_signUpFragment)
@@ -54,9 +94,6 @@ class LoginFragment : Fragment() {
                 }
             }
 
-            forgotPasswordButton.setOnClickListener {
-                view.findNavController().navigate(R.id.action_loginFragment_to_forgotPasswordFragment)
-            }
         }
 
     }
@@ -153,6 +190,22 @@ class LoginFragment : Fragment() {
                     }
                 }
                 binding.loginButton.isEnabled = true
+            }
+    }
+
+    private fun sendPasswordResetEmail(email: String) {
+        auth.sendPasswordResetEmail(email)
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    Toast.makeText(requireContext(), "비밀번호 재설정 이메일이 성공적으로 보내졌습니다", Toast.LENGTH_SHORT).show()
+                } else {
+                    val exception = task.exception
+                    if (exception is FirebaseAuthInvalidUserException) {
+                        Toast.makeText(requireContext(), "이메일이 등록되지 않은 사용자입니다", Toast.LENGTH_SHORT).show()
+                    } else {
+                        Log.d("확인", "에러")
+                    }
+                }
             }
     }
 }
