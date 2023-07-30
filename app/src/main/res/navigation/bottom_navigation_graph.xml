@@ -25,4 +25,9 @@
         android:name="com.woojun.ai.fragment.main.ChildrenListFragment"
         android:label="fragment_children_list"
         tools:layout="@layout/fragment_children_list" />
+    <fragment
+        android:id="@+id/childrenInfoInternalFragment"
+        android:name="com.woojun.ai.fragment.main.ChildrenInfoInternalFragment"
+        android:label="fragment_children_info_internal"
+        tools:layout="@layout/fragment_children_info_internal" />
 </navigation>
