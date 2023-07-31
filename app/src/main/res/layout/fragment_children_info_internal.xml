@@ -8,77 +8,103 @@
     tools:context=".fragment.main.ChildrenInfoInternalFragment">
 
 
-
     <TextView
+        android:id="@+id/name"
         android:text="이름: "
         android:textSize="22sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
     <TextView
+        android:id="@+id/age1"
         android:text="실종 나이: "
         android:textSize="22sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
     <TextView
-        android:text="현재 나이"
+        android:id="@+id/age2"
+        android:text="현재 나이: "
         android:textSize="22sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
     <TextView
+        android:id="@+id/birthday"
         android:text="생일: "
         android:textSize="22sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
     <TextView
+        android:id="@+id/sex"
+        android:text="성별: "
+        android:textSize="22sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/date"
+        android:text="날짜: "
+        android:textSize="22sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/location"
         android:text="지역: "
         android:textSize="22sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
     <TextView
+        android:id="@+id/height"
         android:text="키: "
         android:textSize="22sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
     <TextView
+        android:id="@+id/weight"
         android:text="몸무게: "
         android:textSize="22sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
     <TextView
+        android:id="@+id/frame"
         android:text="체격: "
         android:textSize="22sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
     <TextView
+        android:id="@+id/faceType"
         android:text="얼굴 특징: "
         android:textSize="22sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
     <TextView
+        android:id="@+id/hairColor"
         android:text="머리 색: "
         android:textSize="22sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
     <TextView
+        android:id="@+id/hairType"
         android:text="머리 특징: "
         android:textSize="22sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
     <TextView
+        android:id="@+id/dress"
         android:text="실종 당시 복장: "
         android:textSize="22sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
+
 
 </LinearLayout>
