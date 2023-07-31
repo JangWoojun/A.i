@@ -9,7 +9,11 @@
         android:id="@+id/home"
         android:name="com.woojun.ai.fragment.main.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_home_to_childrenInfoInternalFragment2"
+            app:destination="@id/childrenInfoInternalFragment" />
+    </fragment>
     <fragment
         android:id="@+id/myInfo"
         android:name="com.woojun.ai.fragment.main.MyInfoFragment"
@@ -24,7 +28,11 @@
         android:id="@+id/childrenList"
         android:name="com.woojun.ai.fragment.main.ChildrenListFragment"
         android:label="fragment_children_list"
-        tools:layout="@layout/fragment_children_list" />
+        tools:layout="@layout/fragment_children_list" >
+        <action
+            android:id="@+id/action_childrenList_to_childrenInfoInternalFragment2"
+            app:destination="@id/childrenInfoInternalFragment" />
+    </fragment>
     <fragment
         android:id="@+id/childrenInfoInternalFragment"
         android:name="com.woojun.ai.fragment.main.ChildrenInfoInternalFragment"
