@@ -1,5 +1,7 @@
 package com.woojun.ai.util
 
+import java.io.Serializable
+
 data class ChildInfo(
     val name: String,
     val image: String?,
@@ -16,7 +18,7 @@ data class ChildInfo(
     val hairColor: String,
     val hairType: String,
     val dress: String,
-)
+): Serializable
 
 data class UserInfo(
     val name: String,
