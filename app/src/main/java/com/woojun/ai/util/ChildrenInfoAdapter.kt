@@ -1,7 +1,9 @@
 package com.woojun.ai.util
 
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.woojun.ai.R
 import com.woojun.ai.databinding.ChildrenInfoItemBinding
@@ -13,10 +15,14 @@ class ChildrenInfoAdapter(private val children: ArrayList<ChildInfo>, private va
         return when (viewType) {
             ChildInfoType.NEW.ordinal -> {
                 val binding = NewChildrenInfoItemBinding.inflate(inflater, parent, false)
-                NewChildrenInfoViewHolder(binding).also {
+                NewChildrenInfoViewHolder(binding).also { handler ->
                     binding.apply {
                         newChildrenInfoItem.setOnClickListener {
+                            val bundle = Bundle()
+                            val item = children[handler.position]
+                            bundle.putSerializable("child info", item)
 
+                            parent.findNavController().navigate(R.id.action_home_to_childrenInfoInternalFragment2, bundle)
                         }
                     }
                 }
@@ -70,9 +76,9 @@ class ChildrenInfoAdapter(private val children: ArrayList<ChildInfo>, private va
             binding.apply {
                 name.text = childrenInfo.name
                 image.setImageResource(R.drawable.profile)
-                sexBirthday.text = "${childrenInfo.sex} · ${childrenInfo.birthday.substringBefore("년")}년생"
+                sexBirthday.text = "${childrenInfo.sex} · ${childrenInfo.birthday?.substringBefore("년")}년생"
                 location.text = childrenInfo.location
-                date.text = "일시: ${formatDate(childrenInfo.date)}"
+                date.text = "일시: ${childrenInfo.date?.let { formatDate(it) }}"
                 age.text = "나이: ${childrenInfo.age1}(${childrenInfo.age2})"
             }
         }
@@ -85,9 +91,9 @@ class ChildrenInfoAdapter(private val children: ArrayList<ChildInfo>, private va
                 name.text = childrenInfo.name
                 image.setImageResource(R.drawable.profile)
                 sexBirthday.text =
-                    "${childrenInfo.sex} · ${childrenInfo.birthday.substringBefore("년")}년생"
+                    "${childrenInfo.sex} · ${childrenInfo.birthday?.substringBefore("년")}년생"
                 location.text = childrenInfo.location
-                date.text = "일시: ${formatDate(childrenInfo.date)}"
+                date.text = "일시: ${childrenInfo.date?.let { formatDate(it) }}"
                 age.text = "나이: ${childrenInfo.age1}(${childrenInfo.age2})"
             }
         }
