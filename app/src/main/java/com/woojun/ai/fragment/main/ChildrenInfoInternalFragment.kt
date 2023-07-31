@@ -5,7 +5,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.woojun.ai.MainActivity
 import com.woojun.ai.databinding.FragmentChildrenInfoInternalBinding
+import com.woojun.ai.util.ChildInfo
 
 class ChildrenInfoInternalFragment : Fragment() {
 
@@ -27,9 +29,9 @@ class ChildrenInfoInternalFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.apply {
+        val mainActivity = activity as MainActivity
+        mainActivity.hideBottomNavi(true)
 
-        }
     }
 
     override fun onDestroyView() {
