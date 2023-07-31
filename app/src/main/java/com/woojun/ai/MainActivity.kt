@@ -4,6 +4,7 @@ import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.navigation.findNavController
@@ -68,6 +69,11 @@ class MainActivity : AppCompatActivity() {
         }
 
 
+    }
+
+    fun hideBottomNavi(state: Boolean) {
+        if (state) binding.bottomNavigation.visibility =
+            View.GONE else binding.bottomNavigation.visibility = View.VISIBLE
     }
 
     override fun onBackPressed() {
