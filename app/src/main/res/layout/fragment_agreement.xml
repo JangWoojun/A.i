@@ -47,7 +47,7 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="50dp">
+                android:layout_height="60dp">
 
                 <CheckBox
                     android:id="@+id/all_check_box"
@@ -65,7 +65,7 @@
                     android:layout_marginStart="0dp"
                     android:fontFamily="@font/poppins_semibold"
                     android:text="A·아이 이용약관 전체 동의"
-                    android:textSize="18sp"
+                    android:textSize="20sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/all_check_box"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -86,7 +86,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/consent_button_1"
                 android:layout_width="match_parent"
-                android:layout_height="50dp">
+                android:layout_height="60dp">
 
                 <CheckBox
                     android:id="@+id/consent_check_box1"
@@ -130,9 +130,9 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/consent_button_2"
-                android:layout_marginTop="50dp"
+                android:layout_marginTop="60dp"
                 android:layout_width="match_parent"
-                android:layout_height="50dp">
+                android:layout_height="60dp">
 
                 <CheckBox
                     android:id="@+id/consent_check_box2"
@@ -195,14 +195,14 @@
         android:id="@+id/start_button"
         android:gravity="center"
         android:layout_width="match_parent"
-        android:layout_height="70dp"
+        android:layout_height="80dp"
         android:background="#4894fe"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
         <TextView
-            android:textSize="18sp"
+            android:textSize="20sp"
             android:fontFamily="@font/poppins_semibold"
             android:textColor="@color/white"
             android:text="A·아이 시작하기"
