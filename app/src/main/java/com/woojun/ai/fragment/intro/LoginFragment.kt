@@ -10,7 +10,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
+import android.view.inputmethod.EditorInfo
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.cardview.widget.CardView
 import androidx.navigation.findNavController
@@ -49,6 +51,8 @@ class LoginFragment : Fragment() {
         binding.apply {
 
             textInputLayoutPaddingSetting()
+
+            passwordArea.setOnEditorActionListener(getEditorActionListener(loginButton))
 
             forgotPasswordButton.setOnClickListener {
                 val dialog = Dialog(requireContext())
@@ -103,6 +107,15 @@ class LoginFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun getEditorActionListener(view: View): TextView.OnEditorActionListener {
+        return TextView.OnEditorActionListener { textView, actionId, keyEvent ->
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                view.callOnClick()
+            }
+            false
+        }
     }
 
     private fun validationCheck(email: String, password: String): Boolean {
