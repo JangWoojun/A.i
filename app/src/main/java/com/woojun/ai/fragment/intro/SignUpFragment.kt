@@ -7,6 +7,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
+import android.widget.TextView
 import android.widget.Toast
 import androidx.navigation.findNavController
 import com.google.firebase.auth.FirebaseAuth
@@ -44,6 +46,8 @@ class SignUpFragment : Fragment() {
 
             textInputLayoutPaddingSetting()
 
+            passwordArea.setOnEditorActionListener(getEditorActionListener(signButton))
+
             moveLoginText.paintFlags = Paint.UNDERLINE_TEXT_FLAG
             moveLoginInButton.setOnClickListener {
                 view.findNavController().navigate(R.id.action_signUpFragment_to_loginFragment)
@@ -75,6 +79,15 @@ class SignUpFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun getEditorActionListener(view: View): TextView.OnEditorActionListener {
+        return TextView.OnEditorActionListener { textView, actionId, keyEvent ->
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                view.callOnClick()
+            }
+            false
+        }
     }
 
     private fun validationCheck(userInfo: UserInfo, password: String): Boolean {
