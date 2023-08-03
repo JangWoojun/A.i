@@ -48,6 +48,8 @@ class LoginFragment : Fragment() {
 
         binding.apply {
 
+            textInputLayoutPaddingSetting()
+
             forgotPasswordButton.setOnClickListener {
                 val dialog = Dialog(requireContext())
                 dialog.setContentView(R.layout.password_forget_dialog)
