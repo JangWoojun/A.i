@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val retrofitAPI = RetrofitClient.getInstance().create(RetrofitAPI::class.java)
-        val call: Call<AiResultList> = retrofitAPI.getAiResult()
+        val call: Call<AiResultList> = retrofitAPI.getAiResult(BuildConfig.ESNTLID, BuildConfig.AUTHKEY, 1, null, null, null)
 
         call.enqueue(object : Callback<AiResultList> {
             override fun onResponse(call: Call<AiResultList>, response: Response<AiResultList>) {
