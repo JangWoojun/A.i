@@ -4,6 +4,9 @@ plugins {
     id 'com.google.gms.google-services'
 }
 
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
+
 android {
     namespace 'com.woojun.ai'
     compileSdk 34
@@ -16,8 +19,14 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField "String", "ESNTLID", properties['esntlId']
+        buildConfigField "String", "AUTHKEY", properties['authKey']
+        buildConfigField "String", "BASEURL", properties['baseUrl']
+
     }
     buildFeatures {
+        buildConfig true
         viewBinding = true
     }
     buildTypes {
