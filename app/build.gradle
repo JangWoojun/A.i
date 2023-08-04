@@ -23,6 +23,7 @@ android {
         buildConfigField "String", "ESNTLID", properties['esntlId']
         buildConfigField "String", "AUTHKEY", properties['authKey']
         buildConfigField "String", "BASEURL", properties['baseUrl']
+        buildConfigField "String", "GETURL", properties['getUrl']
 
     }
     buildFeatures {
