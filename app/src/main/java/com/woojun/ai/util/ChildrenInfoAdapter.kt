@@ -29,10 +29,14 @@ class ChildrenInfoAdapter(private val children: ArrayList<ChildInfo>, private va
             }
             ChildInfoType.DEFAULT.ordinal -> {
                 val binding = ChildrenInfoItemBinding.inflate(inflater, parent, false)
-                ChildrenInfoViewHolder(binding).also {
+                ChildrenInfoViewHolder(binding).also { handler ->
                     binding.apply {
                         viewDetailsButton.setOnClickListener {
+                            val bundle = Bundle()
+                            val item = children[handler.position]
+                            bundle.putSerializable("child info", item)
 
+                            parent.findNavController().navigate(R.id.action_childrenList_to_childrenInfoInternalFragment2, bundle)
                         }
                     }
                 }
