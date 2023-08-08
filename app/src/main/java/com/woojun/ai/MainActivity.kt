@@ -71,11 +71,6 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    fun hideBottomNavi(state: Boolean) {
-        if (state) binding.bottomNavigation.visibility =
-            View.GONE else binding.bottomNavigation.visibility = View.VISIBLE
-    }
-
     override fun onBackPressed() {
 
         val navController = findNavController(R.id.nav_host_fragment)
