@@ -16,15 +16,5 @@
         app:lottie_loop="true"
         app:lottie_fileName="loading.json" />
 
-    <TextView
-        android:layout_marginTop="60dp"
-        android:gravity="center"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="Loading..."
-        android:textStyle="bold"
-        android:textColor="@android:color/white"
-        android:textSize="26sp" />
 
 </FrameLayout>
