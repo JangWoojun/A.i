@@ -15,7 +15,7 @@ object ProgressUtil {
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setCancelable(false)
         dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        dialog.setContentView(R.layout.activity_splash)
+        dialog.setContentView(R.layout.loading_dialog)
 
         return dialog
     }
