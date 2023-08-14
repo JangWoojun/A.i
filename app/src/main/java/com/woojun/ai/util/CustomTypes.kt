@@ -28,7 +28,7 @@ data class UserInfo(
 
 data class AiResult(
     val age: Int,
-    val ageNow: String,
+    val ageNow: Int,
     val alldressingDscd: String,
     val etcSpfeatr: String,
     val msspsnIdntfccd: Int,
@@ -40,7 +40,7 @@ data class AiResult(
     val tknphotoFile: String,
     val tknphotolength: Int,
     val writngTrgetDscd: String
-)
+): Serializable
 
 data class AiResultList(
     val list: List<AiResult>,
