@@ -20,8 +20,8 @@
 
             <ImageView
                 android:id="@+id/imageView3"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="5dp"
                 android:src="@drawable/search"
@@ -33,8 +33,8 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/api_input_layout"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginStart="50dp"
+                android:layout_height="70dp"
+                android:layout_marginStart="55dp"
                 android:layout_marginEnd="60dp"
                 android:hint="실종아동 이름을 입력해주세요"
                 android:textColorHint="#8696BB"
@@ -51,6 +51,7 @@
                     android:fontFamily="@font/poppins_reqular"
                     android:inputType="text"
                     android:textColorHighlight="#4894fe"
+                    android:maxLength="10"
                     android:textCursorDrawable="@drawable/custom_cursor"
                     android:textSelectHandle="@drawable/select_handler"
                     android:textSelectHandleLeft="@drawable/select_handler"
@@ -63,6 +64,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <LinearLayout
+            android:layout_marginTop="1dp"
             android:background="#4894fe"
             android:layout_width="match_parent"
             android:layout_height="1.5dp"/>
@@ -77,7 +79,8 @@
                 android:id="@+id/textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="12sp"
+                android:textSize="16sp"
+                android:textColor="@color/black"
                 android:fontFamily="@font/poppins_bold"
                 android:text="최근 검색어"
                 app:layout_constraintStart_toStartOf="parent"
@@ -93,8 +96,8 @@
 
                 <ImageView
                     android:layout_marginTop="12dp"
-                    android:layout_width="25dp"
-                    android:layout_height="20dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:src="@drawable/options_icon"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
