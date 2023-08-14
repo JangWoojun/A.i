@@ -1,7 +1,6 @@
 package com.woojun.ai.fragment.intro
 
 import android.app.Dialog
-import android.content.Intent
 import android.graphics.Paint
 import android.os.Bundle
 import android.util.Log
@@ -21,7 +20,6 @@ import com.google.firebase.auth.FirebaseAuthInvalidUserException
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.woojun.ai.IntroActivity
-import com.woojun.ai.MainActivity
 import com.woojun.ai.R
 import com.woojun.ai.databinding.FragmentLoginBinding
 
