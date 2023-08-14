@@ -263,6 +263,7 @@
         <androidx.cardview.widget.CardView
             android:outlineProvider="none"
             android:backgroundTint="#fafafa"
+            android:layout_marginHorizontal="26dp"
             android:layout_marginTop="22dp"
             app:cardCornerRadius="12dp"
             android:layout_width="match_parent"
@@ -270,8 +271,6 @@
 
             <LinearLayout
                 android:id="@+id/search_button"
-                android:layout_marginHorizontal="26dp"
-                android:backgroundTint="@color/black"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
