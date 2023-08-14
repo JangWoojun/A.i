@@ -8,8 +8,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.woojun.ai.R
 import com.woojun.ai.databinding.ChildrenInfoItemBinding
 import com.woojun.ai.databinding.NewChildrenInfoItemBinding
+import java.util.Calendar
 
-class ChildrenInfoAdapter(private val children: ArrayList<ChildInfo>, private val type: ChildInfoType): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class ChildrenInfoAdapter(private val children: List<AiResult>, private val type: ChildInfoType): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         return when (viewType) {
@@ -76,29 +77,30 @@ class ChildrenInfoAdapter(private val children: ArrayList<ChildInfo>, private va
 
     class NewChildrenInfoViewHolder(private val binding: NewChildrenInfoItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(childrenInfo: ChildInfo) {
+        fun bind(childrenInfo: AiResult) {
             binding.apply {
-                name.text = childrenInfo.name
+                name.text = childrenInfo.nm
                 image.setImageResource(R.drawable.profile)
-                sexBirthday.text = "${childrenInfo.sex} · ${childrenInfo.birthday?.substringBefore("년")}년생"
-                location.text = childrenInfo.location
-                date.text = "일시: ${childrenInfo.date?.let { formatDate(it) }}"
-                age.text = "나이: ${childrenInfo.age1}(${childrenInfo.age2})"
+                sexBirthday.text = "${childrenInfo.sexdstnDscd} · ${(Calendar.getInstance().get(
+                    Calendar.YEAR)) - childrenInfo.ageNow}년생"
+                location.text = "${childrenInfo.occrAdres.take(2)}"
+                date.text = "일시: ${childrenInfo.occrde?.let { formatDate(it) }}"
+                age.text = "나이: ${childrenInfo.ageNow}세 (${childrenInfo.age}세)"
             }
         }
     }
 
     class ChildrenInfoViewHolder(private val binding: ChildrenInfoItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(childrenInfo: ChildInfo) {
+        fun bind(childrenInfo: AiResult) {
             binding.apply {
-                name.text = childrenInfo.name
+                name.text = childrenInfo.nm
                 image.setImageResource(R.drawable.profile)
-                sexBirthday.text =
-                    "${childrenInfo.sex} · ${childrenInfo.birthday?.substringBefore("년")}년생"
-                location.text = childrenInfo.location
-                date.text = "일시: ${childrenInfo.date?.let { formatDate(it) }}"
-                age.text = "나이: ${childrenInfo.age1}(${childrenInfo.age2})"
+                sexBirthday.text = "${childrenInfo.sexdstnDscd} · ${(Calendar.getInstance().get(
+                    Calendar.YEAR)) - childrenInfo.ageNow}년생"
+                location.text = "${childrenInfo.occrAdres.take(2)}"
+                date.text = "일시: ${childrenInfo.occrde?.let { formatDate(it) }}"
+                age.text = "나이: ${childrenInfo.ageNow} (${childrenInfo.age})"
             }
         }
     }
