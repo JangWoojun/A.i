@@ -105,13 +105,13 @@ class ChildrenInfoAdapter(private val children: ArrayList<ChildInfo>, private va
 }
 
 fun formatDate(inputDateStr: String): String {
-    val regex = Regex("""(\d{4})년 (\d{1,2})월 (\d{1,2})일""")
+    val regex = Regex("""(\d{4})(\d{2})(\d{2})""")
     val matchResult = regex.find(inputDateStr)
 
     return if (matchResult != null) {
         val year = matchResult.groupValues[1]
-        val month = matchResult.groupValues[2].padStart(2, '0')
-        val day = matchResult.groupValues[3].padStart(2, '0')
+        val month = matchResult.groupValues[2]
+        val day = matchResult.groupValues[3]
         "$year. $month. $day"
     } else {
         "오류"
