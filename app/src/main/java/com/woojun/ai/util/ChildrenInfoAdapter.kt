@@ -21,7 +21,7 @@ class ChildrenInfoAdapter(private val children: List<AiResult>, private val type
                         newChildrenInfoItem.setOnClickListener {
                             val bundle = Bundle()
                             val item = children[handler.position]
-                            bundle.putSerializable("child info", item)
+                            bundle.putParcelable("child info", item)
 
                             parent.findNavController().navigate(R.id.action_home_to_childrenInfoInternalFragment2, bundle)
                         }
@@ -35,7 +35,7 @@ class ChildrenInfoAdapter(private val children: List<AiResult>, private val type
                         viewDetailsButton.setOnClickListener {
                             val bundle = Bundle()
                             val item = children[handler.position]
-                            bundle.putSerializable("child info", item)
+                            bundle.putParcelable("child info", item)
 
                             parent.findNavController().navigate(R.id.action_childrenList_to_childrenInfoInternalFragment2, bundle)
                         }
@@ -82,8 +82,9 @@ class ChildrenInfoAdapter(private val children: List<AiResult>, private val type
                 name.text = childrenInfo.nm
                 image.setImageResource(R.drawable.profile)
                 sexBirthday.text = "${childrenInfo.sexdstnDscd} · ${(Calendar.getInstance().get(
-                    Calendar.YEAR)) - childrenInfo.ageNow}년생"
-                location.text = "${childrenInfo.occrAdres.take(2)}"
+                    Calendar.YEAR)) - childrenInfo.ageNow!!
+                }년생"
+                location.text = "${childrenInfo.occrAdres!!.take(2)}"
                 date.text = "일시: ${childrenInfo.occrde?.let { formatDate(it) }}"
                 age.text = "나이: ${childrenInfo.ageNow}세 (${childrenInfo.age}세)"
             }
@@ -97,8 +98,9 @@ class ChildrenInfoAdapter(private val children: List<AiResult>, private val type
                 name.text = childrenInfo.nm
                 image.setImageResource(R.drawable.profile)
                 sexBirthday.text = "${childrenInfo.sexdstnDscd} · ${(Calendar.getInstance().get(
-                    Calendar.YEAR)) - childrenInfo.ageNow}년생"
-                location.text = "${childrenInfo.occrAdres.take(2)}"
+                    Calendar.YEAR)) - childrenInfo.ageNow!!
+                }년생"
+                location.text = "${childrenInfo.occrAdres!!.take(2)}"
                 date.text = "일시: ${childrenInfo.occrde?.let { formatDate(it) }}"
                 age.text = "나이: ${childrenInfo.ageNow}세 (${childrenInfo.age}세)"
             }
