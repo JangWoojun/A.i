@@ -100,7 +100,7 @@ class ChildrenInfoAdapter(private val children: List<AiResult>, private val type
                     Calendar.YEAR)) - childrenInfo.ageNow}년생"
                 location.text = "${childrenInfo.occrAdres.take(2)}"
                 date.text = "일시: ${childrenInfo.occrde?.let { formatDate(it) }}"
-                age.text = "나이: ${childrenInfo.ageNow} (${childrenInfo.age})"
+                age.text = "나이: ${childrenInfo.ageNow}세 (${childrenInfo.age}세)"
             }
         }
     }
