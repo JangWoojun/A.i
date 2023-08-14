@@ -20,4 +20,24 @@ class IntroActivity : AppCompatActivity() {
         binding = ActivityIntroBinding.inflate(layoutInflater)
         setContentView(binding.root)
     }
+
+    fun loginMove() {
+        Toast.makeText(this, "로그인을 성공하셨습니다", Toast.LENGTH_SHORT).show()
+        val intent1 = Intent(this, MainActivity::class.java)
+        intent1.putExtra("item", intent.getStringExtra("item"))
+        startActivity(intent1)
+        finishAffinity()
+    }
+
+    fun signupMove(userInfo: UserInfo) {
+        val auth = FirebaseAuth.getInstance()
+        database = Firebase.database.reference
+
+        database.child("users").child("${auth.uid}").setValue(userInfo)
+        Toast.makeText(this, "회원가입을 성공하셨습니다", Toast.LENGTH_SHORT).show()
+        val intent2 = Intent(this, MainActivity::class.java)
+        intent2.putExtra("item", intent.getStringExtra("item"))
+        startActivity(intent2)
+        finishAffinity()
+    }
 }
