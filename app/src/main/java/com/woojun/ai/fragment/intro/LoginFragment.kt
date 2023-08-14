@@ -20,6 +20,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthInvalidUserException
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import com.woojun.ai.IntroActivity
 import com.woojun.ai.MainActivity
 import com.woojun.ai.R
 import com.woojun.ai.databinding.FragmentLoginBinding
@@ -194,9 +195,7 @@ class LoginFragment : Fragment() {
         auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener(requireActivity()) { task ->
                 if (task.isSuccessful) {
-                    Toast.makeText(requireContext(), "로그인을 성공하셨습니다", Toast.LENGTH_SHORT).show()
-                    startActivity(Intent(requireContext(), MainActivity::class.java))
-                    requireActivity().finishAffinity()
+                    (activity as IntroActivity).loginMove()
                 } else {
                     try {
                         throw task.exception!!
