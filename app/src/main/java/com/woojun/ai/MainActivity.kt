@@ -35,8 +35,8 @@ class MainActivity : AppCompatActivity() {
             bottomNavigation.setOnItemSelectedListener {
                 when (it) {
                     R.id.home -> navController.navigate(R.id.home, bundle)
-                    R.id.childrenInfo -> navController.navigate(R.id.childrenInfo)
                     R.id.childrenList -> navController.navigate(R.id.childrenList, bundle)
+                    R.id.childrenInfo -> navController.navigate(R.id.childrenInfo)
                     R.id.myInfo -> navController.navigate(R.id.myInfo)
                 }
             }
