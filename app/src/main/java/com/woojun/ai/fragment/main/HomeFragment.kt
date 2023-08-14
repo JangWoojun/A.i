@@ -1,5 +1,7 @@
 package com.woojun.ai.fragment.main
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -7,6 +9,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.gson.Gson
+import com.woojun.ai.MainActivity
+import com.woojun.ai.R
 import com.woojun.ai.databinding.FragmentHomeBinding
 import com.woojun.ai.util.AiResultList
 import com.woojun.ai.util.ChildInfoType
@@ -42,6 +46,33 @@ class HomeFragment : Fragment() {
                 childrenList.adapter = ChildrenInfoAdapter(list.list, ChildInfoType.NEW)
             }
 
+            mainChildrenInfoButton.setOnClickListener {
+                (activity as MainActivity).moveBottomNavigation(R.id.childrenInfo)
+            }
+
+            childrenInfoButton.setOnClickListener {
+                (activity as MainActivity).moveBottomNavigation(R.id.childrenInfo)
+            }
+
+            childrenListButton.setOnClickListener {
+                (activity as MainActivity).moveBottomNavigation(R.id.childrenList)
+            }
+
+            reportChildrenButton.setOnClickListener {
+                startActivity(
+                    Intent(Intent.ACTION_VIEW,
+                        Uri.parse("https://www.safe182.go.kr/cont/homeLogContents.do?contentsNm=report_info_182")
+                    )
+                )
+            }
+
+            myInfoButton.setOnClickListener {
+                (activity as MainActivity).moveBottomNavigation(R.id.myInfo)
+            }
+
+            seeAllButton.setOnClickListener {
+                (activity as MainActivity).moveBottomNavigation(R.id.childrenList)
+            }
         }
     }
 
