@@ -45,11 +45,16 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-
         val navController = findNavController(R.id.nav_host_fragment)
+        val currentDestinationId = navController.currentDestination?.id
+        val previousDestinationId = navController.previousBackStackEntry?.destination?.id
 
-        if (navController.currentDestination?.id != R.id.home) {
-            navController.popBackStack(R.id.home, false)
+        if (currentDestinationId != R.id.home) {
+            if (previousDestinationId == R.id.childrenList) {
+                navController.popBackStack(R.id.childrenList, false)
+            } else {
+                navController.popBackStack(R.id.home, false)
+            }
         } else {
             if (System.currentTimeMillis() - backPressedTime >= 2000) {
                 backPressedTime = System.currentTimeMillis()
