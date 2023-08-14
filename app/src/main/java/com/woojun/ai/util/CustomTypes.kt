@@ -1,24 +1,7 @@
 package com.woojun.ai.util
 
-import java.io.Serializable
-
-data class ChildInfo(
-    val name: String,
-    val image: String?,
-    val age1: String,
-    val age2: String,
-    val birthday: String,
-    val sex: String,
-    val date: String,
-    val location: String,
-    val height: Int,
-    val weight: Int,
-    val frame: String,
-    val faceType: String,
-    val hairColor: String,
-    val hairType: String,
-    val dress: String,
-): Serializable
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
 
 data class UserInfo(
     val name: String,
