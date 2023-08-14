@@ -9,21 +9,22 @@ data class UserInfo(
     val phoneNumber: String,
 )
 
+@Parcelize
 data class AiResult(
-    val age: Int,
-    val ageNow: Int,
-    val alldressingDscd: String,
-    val etcSpfeatr: String,
-    val msspsnIdntfccd: Int,
-    val nm: String,
-    val occrAdres: String,
-    val occrde: String,
-    val rnum: Int,
-    val sexdstnDscd: String,
-    val tknphotoFile: String,
-    val tknphotolength: Int,
-    val writngTrgetDscd: String
-): Serializable
+    val age: Int?,
+    val ageNow: Int?,
+    val alldressingDscd: String?,
+    val etcSpfeatr: String?,
+    val msspsnIdntfccd: Int?,
+    val nm: String?,
+    val occrAdres: String?,
+    val occrde: String?,
+    val rnum: Int?,
+    val sexdstnDscd: String?,
+    val tknphotoFile: String?,
+    val tknphotolength: Int?,
+    val writngTrgetDscd: String?
+): Parcelable
 
 data class AiResultList(
     val list: List<AiResult>,
