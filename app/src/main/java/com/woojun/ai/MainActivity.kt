@@ -33,12 +33,7 @@ class MainActivity : AppCompatActivity() {
         binding.apply {
             bottomNavigation.setItemSelected(R.id.home)
             bottomNavigation.setOnItemSelectedListener {
-                when (it) {
-                    R.id.home -> navController.navigate(R.id.home, bundle)
-                    R.id.childrenList -> navController.navigate(R.id.childrenList, bundle)
-                    R.id.childrenInfo -> navController.navigate(R.id.childrenInfo)
-                    R.id.myInfo -> navController.navigate(R.id.myInfo)
-                }
+                moveBottomNavigation(it)
             }
 
             navController.addOnDestinationChangedListener { _, destination, _ ->
@@ -61,6 +56,23 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(this, "한 번 더 누르면 종료됩니다.", Toast.LENGTH_SHORT).show()
             } else {
                 finish()
+            }
+        }
+    }
+
+    fun moveBottomNavigation(it: Int) {
+        binding.apply {
+            val navController = findNavController(R.id.nav_host_fragment)
+
+            val bundle = Bundle()
+            val item = intent.getStringExtra("item")
+            bundle.putString("item", item)
+
+            when (it) {
+                R.id.home -> navController.navigate(R.id.home, bundle)
+                R.id.childrenList -> navController.navigate(R.id.childrenList, bundle)
+                R.id.childrenInfo -> navController.navigate(R.id.childrenInfo)
+                R.id.myInfo -> navController.navigate(R.id.myInfo)
             }
         }
     }
