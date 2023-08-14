@@ -28,7 +28,13 @@ class SearchFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.apply {
-
+            apiArea.setOnFocusChangeListener { _, hasFocus ->
+                if (hasFocus) {
+                    apiInputLayout.hint = null
+                } else {
+                    apiInputLayout.hint = "실종아동 이름을 입력해주세요"
+                }
+            }
         }
     }
 
