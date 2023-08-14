@@ -9,14 +9,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.widget.TextView
-import android.widget.Toast
 import androidx.navigation.findNavController
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthUserCollisionException
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
-import com.woojun.ai.MainActivity
+import com.woojun.ai.IntroActivity
 import com.woojun.ai.R
 import com.woojun.ai.databinding.FragmentSignUpBinding
 import com.woojun.ai.util.UserInfo
@@ -210,10 +209,7 @@ class SignUpFragment : Fragment() {
         auth.createUserWithEmailAndPassword(userInfo.email, password)
             .addOnCompleteListener(requireActivity()) { task ->
                 if (task.isSuccessful) {
-                    database.child("users").child("${auth.uid}").setValue(userInfo)
-                    Toast.makeText(requireContext(), "회원가입을 성공하셨습니다", Toast.LENGTH_SHORT).show()
-                    startActivity(Intent(requireContext(), MainActivity::class.java))
-                    requireActivity().finishAffinity()
+                    (activity as IntroActivity).signupMove(userInfo)
                 } else {
                     try {
                         throw task.exception!!
