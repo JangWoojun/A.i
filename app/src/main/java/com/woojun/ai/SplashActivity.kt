@@ -24,7 +24,7 @@ class SplashActivity : AppCompatActivity() {
         auth = Firebase.auth
 
         val retrofitAPI = RetrofitClient.getInstance().create(RetrofitAPI::class.java)
-        val call: Call<AiResultList> = retrofitAPI.getAiResult(BuildConfig.ESNTLID, BuildConfig.AUTHKEY, 3, null, null, null)
+        val call: Call<AiResultList> = retrofitAPI.getAiResult(BuildConfig.ESNTLID, BuildConfig.AUTHKEY, 10, null, null, null)
 
         call.enqueue(object : Callback<AiResultList> {
             override fun onResponse(call: Call<AiResultList>, response: Response<AiResultList>) {
