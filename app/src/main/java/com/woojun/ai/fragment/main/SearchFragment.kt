@@ -96,7 +96,22 @@ class SearchFragment : Fragment(), FragmentInteractionListener {
 
     }
 
+    override fun removeAction(name: String) {
+        binding.apply {
+            val searchTexts = readStringListFromInternalStorage(requireContext(), "search_text")
+            searchTexts.remove(name)
+            writeStringListToInternalStorage(requireContext(), "search_text", searchTexts)
 
+            searchTextList.layoutManager = LinearLayoutManager(requireContext().applicationContext)
+            searchTextList.adapter = SearchAdapter(readStringListFromInternalStorage(requireContext(), "search_text"), this@SearchFragment)
+
+            if (readStringListFromInternalStorage(requireContext(), "search_text")[0] == "") {
+                searchTextList.visibility = View.GONE
+            } else {
+                searchTextList.visibility = View.VISIBLE
+            }
+        }
+    }
 
     fun removeEmptyAndDuplicateStrings(inputList: List<String>): ArrayList<String> {
         val uniqueNonEmptyStrings = HashSet<String>()
