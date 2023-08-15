@@ -52,6 +52,7 @@
                     android:inputType="text"
                     android:textColorHighlight="#4894fe"
                     android:maxLength="10"
+                    android:imeOptions="actionDone"
                     android:textCursorDrawable="@drawable/custom_cursor"
                     android:textSelectHandle="@drawable/select_handler"
                     android:textSelectHandleLeft="@drawable/select_handler"
@@ -94,13 +95,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
-                <ImageView
-                    android:layout_marginTop="12dp"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:src="@drawable/options_icon"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
