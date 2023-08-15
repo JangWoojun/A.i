@@ -16,7 +16,9 @@ class SearchAdapter(private val keyword: ArrayList<String>, private val listener
                 keywordBox.setOnClickListener {
                     listener.searchAction(keyword[handler.position])
                 }
-
+                removeButton.setOnClickListener {
+                    listener.removeAction(keyword[handler.position])
+                }
             }
         }
 
