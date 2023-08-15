@@ -13,6 +13,9 @@ class SearchAdapter(private val keyword: ArrayList<String>, private val listener
         )
         return SearchViewHolder(binding).also { handler ->
             binding.apply {
+                keywordBox.setOnClickListener {
+                    listener.searchAction(keyword[handler.position])
+                }
 
             }
         }
