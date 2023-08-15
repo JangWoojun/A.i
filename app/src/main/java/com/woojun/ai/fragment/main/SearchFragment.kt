@@ -24,7 +24,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import java.io.ByteArrayOutputStream
 
-class SearchFragment : Fragment() {
+class SearchFragment : Fragment(), FragmentInteractionListener {
 
     private var _binding: FragmentSearchBinding? = null
     private val binding get() = _binding!!
@@ -58,6 +58,42 @@ class SearchFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    override fun searchAction(name: String) {
+        binding.apply {
+            searchTextList.layoutManager = LinearLayoutManager(requireContext().applicationContext)
+            searchTextList.adapter = SearchAdapter(readStringListFromInternalStorage(requireContext(), "search_text"), this@SearchFragment)
+
+            textView.visibility = View.GONE
+            searchTextList.visibility = View.GONE
+
+            val retrofitAPI = RetrofitClient.getInstance().create(RetrofitAPI::class.java)
+            val call: Call<AiResultList> = retrofitAPI.getAiResult(BuildConfig.ESNTLID, BuildConfig.AUTHKEY, 10, name, null, null)
+
+            call.enqueue(object : Callback<AiResultList> {
+                override fun onResponse(call: Call<AiResultList>, response: Response<AiResultList>) {
+                    if (response.isSuccessful) {
+                        val aiResultList: AiResultList? = response.body()
+                        aiResultList?.let {
+                            val searchTextList = readStringListFromInternalStorage(requireContext(), "search_text")
+                            searchTextList.add(name)
+                            writeStringListToInternalStorage(requireContext(), "search_text", removeEmptyAndDuplicateStrings(searchTextList))
+                            searchList.layoutManager = LinearLayoutManager(requireContext().applicationContext)
+                            searchList.adapter = ChildrenInfoAdapter(aiResultList.list, ChildInfoType.SEARCH)
+                        }
+                    } else {
+                        Log.d("확인1", "에러")
+                    }
+                }
+
+                override fun onFailure(call: Call<AiResultList>, t: Throwable) {
+                    Log.e("확인2", "API call failed: " + t.message);
+                }
+            })
+        }
+
+
     }
 
 
