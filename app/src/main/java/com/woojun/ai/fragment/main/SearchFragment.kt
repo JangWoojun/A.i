@@ -56,6 +56,16 @@ class SearchFragment : Fragment(), FragmentInteractionListener {
             searchTextList.layoutManager = LinearLayoutManager(requireContext().applicationContext)
             searchTextList.adapter = SearchAdapter(readStringListFromInternalStorage(requireContext(), "search_text"), this@SearchFragment)
 
+            apiArea.setOnEditorActionListener { _, actionId, event ->
+                if (actionId == EditorInfo.IME_ACTION_DONE ||
+                    (event.action == KeyEvent.ACTION_DOWN && event.keyCode == KeyEvent.KEYCODE_ENTER)
+                ) {
+                    searchAction(apiArea.text.toString())
+                    true
+                } else {
+                    false
+                }
+            }
 
 
         }
