@@ -67,6 +67,11 @@ class SearchFragment : Fragment(), FragmentInteractionListener {
                 }
             }
 
+            if (readStringListFromInternalStorage(requireContext(), "search_text")[0] == "") {
+                searchTextList.visibility = View.GONE
+            } else {
+                searchTextList.visibility = View.VISIBLE
+            }
 
         }
     }
