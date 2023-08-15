@@ -1,5 +1,6 @@
 package com.woojun.ai
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -35,6 +36,7 @@ class SplashActivity : AppCompatActivity() {
                             val intent = Intent(this@SplashActivity, IntroActivity::class.java)
                             val gson = Gson()
                             intent.putExtra("item", gson.toJson(it))
+                            writeStringListToInternalStorage(baseContext, "search_text", arrayListOf())
                             startActivity(intent)
                             finishAffinity()
                         } else {
@@ -54,5 +56,16 @@ class SplashActivity : AppCompatActivity() {
                 Log.e("확인2", "API call failed: " + t.message);
             }
         })
+    }
+
+    fun writeStringListToInternalStorage(context: Context, filename: String, stringList: ArrayList<String>) {
+        try {
+            val outputStream = context.openFileOutput(filename, Context.MODE_PRIVATE)
+            val fileContent = stringList.joinToString("\n")
+            outputStream.write(fileContent.toByteArray())
+            outputStream.close()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
     }
 }
