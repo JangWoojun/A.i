@@ -53,6 +53,11 @@ class SearchFragment : Fragment(), FragmentInteractionListener {
                 }
             }
 
+            searchTextList.layoutManager = LinearLayoutManager(requireContext().applicationContext)
+            searchTextList.adapter = SearchAdapter(readStringListFromInternalStorage(requireContext(), "search_text"), this@SearchFragment)
+
+
+
         }
     }
 
