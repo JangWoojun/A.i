@@ -42,6 +42,20 @@ class ChildrenInfoAdapter(private val children: List<AiResult>, private val type
                     }
                 }
             }
+            ChildInfoType.SEARCH.ordinal -> {
+                val binding = ChildrenInfoItemBinding.inflate(inflater, parent, false)
+                ChildrenInfoViewHolder(binding).also { handler ->
+                    binding.apply {
+                        viewDetailsButton.setOnClickListener {
+                            val bundle = Bundle()
+                            val item = children[handler.position]
+                            bundle.putParcelable("child info", item)
+
+                            parent.findNavController().navigate(R.id.action_searchFragment_to_childrenInfoInternalFragment, bundle)
+                        }
+                    }
+                }
+            }
             else -> throw IllegalArgumentException("Invalid view type")
         }
 
@@ -53,6 +67,10 @@ class ChildrenInfoAdapter(private val children: List<AiResult>, private val type
             }
 
             ChildInfoType.DEFAULT -> {
+                children.size
+            }
+
+            ChildInfoType.SEARCH -> {
                 children.size
             }
             else -> throw IllegalArgumentException("Invalid view type")
