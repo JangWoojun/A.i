@@ -34,5 +34,5 @@ data class AiResultList(
 )
 
 enum class ChildInfoType {
-    NEW, DEFAULT
+    NEW, DEFAULT, SEARCH
 }
