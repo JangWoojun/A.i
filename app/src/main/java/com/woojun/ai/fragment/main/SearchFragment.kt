@@ -52,7 +52,44 @@ class SearchFragment : Fragment(), FragmentInteractionListener {
                     apiInputLayout.hint = "실종아동 이름을 입력해주세요"
                 }
             }
+
         }
+    }
+
+    fun writeStringListToInternalStorage(context: Context, filename: String, stringList: ArrayList<String>) {
+        try {
+            val outputStream = context.openFileOutput(filename, Context.MODE_PRIVATE)
+            val fileContent = stringList.joinToString("\n")
+            outputStream.write(fileContent.toByteArray())
+            outputStream.close()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
+    fun readStringListFromInternalStorage(context: Context, filename: String): ArrayList<String> {
+        val resultList = ArrayList<String>()
+
+        try {
+            val inputStream = context.openFileInput(filename)
+            val byteStream = ByteArrayOutputStream()
+            val buffer = ByteArray(1024)
+            var bytesRead: Int
+
+            while (inputStream.read(buffer).also { bytesRead = it } != -1) {
+                byteStream.write(buffer, 0, bytesRead)
+            }
+
+            val fileContent = byteStream.toString("UTF-8")
+            inputStream.close()
+
+            resultList.addAll(fileContent.split("\n"))
+
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+
+        return resultList
     }
 
     override fun onDestroyView() {
