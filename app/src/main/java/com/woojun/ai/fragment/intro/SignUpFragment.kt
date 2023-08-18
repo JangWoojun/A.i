@@ -57,11 +57,15 @@ class SignUpFragment : Fragment() {
                 emailInputLayout.isErrorEnabled = false
                 phoneNumberInputLayout.isErrorEnabled = false
                 passwordInputLayout.isErrorEnabled = false
+                checkInputLayout.isErrorEnabled = false
 
                 val userInfo = UserInfo(
                     nameArea.text.toString().trim(),
                     emailArea.text.toString().trim(),
                     phoneArea.text.toString().trim(),
+                    "gs://ai-child-26b85.appspot.com/default_profile.svg",
+                    checkArea.text.toString() == "jR7pK9",
+                    arrayListOf()
                 )
 
                 val signCheck = validationCheck(userInfo, passwordArea.text.toString().trim())
