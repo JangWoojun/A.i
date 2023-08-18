@@ -54,30 +54,7 @@ class LoginFragment : Fragment() {
             passwordArea.setOnEditorActionListener(getEditorActionListener(loginButton))
 
             forgotPasswordButton.setOnClickListener {
-                val dialog = Dialog(requireContext())
-                dialog.setContentView(R.layout.password_forget_dialog)
-                val windowWidth = resources.displayMetrics.widthPixels * 0.95
-                val windowHeight = resources.displayMetrics.heightPixels * 0.35
-                dialog.window?.setBackgroundDrawableResource(R.drawable.dialog_background)
-                dialog.window?.setLayout(windowWidth.toInt(), windowHeight.toInt())
-
-                dialog.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE)
-
-                val editText = dialog.findViewById<EditText>(R.id.email_area)
-                val okButton = dialog.findViewById<CardView>(R.id.ok_button)
-                val cancelButton = dialog.findViewById<CardView>(R.id.cancel_button)
-
-                okButton.setOnClickListener {
-                    val enteredText = editText.text.toString()
-                    sendPasswordResetEmail(enteredText)
-                    dialog.dismiss()
-                }
-
-                cancelButton.setOnClickListener {
-                    dialog.dismiss()
-                }
-
-                dialog.show()
+                view.findNavController().navigate(R.id.action_loginFragment_to_resetPasswordFragment)
             }
 
             moveSignUpText.paintFlags = Paint.UNDERLINE_TEXT_FLAG
