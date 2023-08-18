@@ -139,6 +139,33 @@
 
                 </com.google.android.material.textfield.TextInputLayout>
 
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/check_inputLayout"
+                    app:boxStrokeColor="#4894fe"
+                    app:hintEnabled="true"
+                    android:hint="인증코드 (선택)"
+                    app:hintTextColor="#404B52"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="1dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:textColorHighlight="#4894fe"
+                        android:textSelectHandle="@drawable/select_handler"
+                        android:textSelectHandleLeft="@drawable/select_handler"
+                        android:textSelectHandleRight="@drawable/select_handler"
+                        android:textCursorDrawable="@drawable/custom_cursor"
+                        android:fontFamily="@font/poppins_reqular"
+                        android:id="@+id/check_area"
+                        android:inputType="text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
             </LinearLayout>
 
             <androidx.cardview.widget.CardView
