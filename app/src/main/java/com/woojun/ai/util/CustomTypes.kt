@@ -9,6 +9,14 @@ data class UserInfo(
     val phoneNumber: String,
 )
 
+data class ChildInfo(
+    val id: String,
+    val name: String,
+    val birthDate: String,
+    val sex: String,
+    val characteristics: String,
+    val photo: String
+)
 @Parcelize
 data class AiResult(
     val age: Int?,
