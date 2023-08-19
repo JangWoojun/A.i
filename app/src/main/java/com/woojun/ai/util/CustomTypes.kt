@@ -4,12 +4,12 @@ import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
 data class UserInfo(
-    val name: String,
-    val email: String,
-    val phoneNumber: String,
-    val photo: String,
-    val check: Boolean,
-    val children: ArrayList<ChildInfo>
+    val name: String = "",
+    val email: String = "",
+    val phoneNumber: String = "",
+    val photo: String = "",
+    val check: Boolean = false,
+    val children: ArrayList<ChildInfo> = arrayListOf()
 )
 
 data class ChildInfo(
