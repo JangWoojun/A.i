@@ -63,7 +63,7 @@ class SignUpFragment : Fragment() {
                     nameArea.text.toString().trim(),
                     emailArea.text.toString().trim(),
                     phoneArea.text.toString().trim(),
-                    "gs://ai-child-26b85.appspot.com/default_profile.svg",
+                    "",
                     checkArea.text.toString() == "jR7pK9",
                     arrayListOf()
                 )
