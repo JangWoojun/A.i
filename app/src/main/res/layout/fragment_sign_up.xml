@@ -223,13 +223,14 @@
 
             <LinearLayout
                 android:layout_marginTop="30dp"
+                android:layout_marginBottom="80dp"
                 android:gravity="center"
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
                 <TextView
-                    android:textSize="14sp"
+                    android:textSize="16sp"
                     android:fontFamily="@font/poppins_reqular"
                     android:text="혹시 이미 계정이 있으신가요?"
                     android:layout_width="wrap_content"
@@ -242,7 +243,7 @@
                     android:layout_height="50dp">
 
                     <TextView
-                        android:textSize="14sp"
+                        android:textSize="16sp"
                         android:fontFamily="@font/poppins_bold"
                         android:id="@+id/move_login_text"
                         android:layout_marginStart="5dp"
