@@ -87,6 +87,7 @@
                     android:layout_height="52dp">
 
                     <androidx.cardview.widget.CardView
+                        android:visibility="gone"
                         android:outlineProvider="none"
                         android:id="@+id/cardView"
                         android:layout_width="52dp"
@@ -98,6 +99,7 @@
                         app:layout_constraintTop_toTopOf="parent">
 
                         <ImageView
+                            android:id="@+id/child_profile"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" />
 
