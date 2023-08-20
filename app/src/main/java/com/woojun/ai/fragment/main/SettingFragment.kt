@@ -1,6 +1,7 @@
 package com.woojun.ai.fragment.main
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -61,6 +62,11 @@ class SettingFragment : Fragment() {
                             Toast.makeText(requireContext(), "회원탈퇴를 실패하였습니다", Toast.LENGTH_SHORT).show()
                         }
                     }
+            }
+
+            privacyPolicyButton.setOnClickListener {
+                val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://sch10719.neocities.org/codingvocaprivacypolicy"))
+                startActivity(intent)
             }
         }
     }
