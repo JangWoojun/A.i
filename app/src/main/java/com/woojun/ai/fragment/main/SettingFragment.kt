@@ -5,11 +5,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.woojun.ai.databinding.FragmentMyInfoBinding
+import com.woojun.ai.databinding.FragmentSettingBinding
 
-class MyInfoFragment : Fragment() {
+class SettingFragment : Fragment() {
 
-    private var _binding: FragmentMyInfoBinding? = null
+    private var _binding: FragmentSettingBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,7 +20,7 @@ class MyInfoFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentMyInfoBinding.inflate(inflater, container, false)
+        _binding = FragmentSettingBinding.inflate(inflater, container, false)
         return binding.root
     }
 

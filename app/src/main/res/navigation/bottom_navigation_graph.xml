@@ -19,10 +19,10 @@
             app:destination="@id/searchFragment" />
     </fragment>
     <fragment
-        android:id="@+id/myInfo"
-        android:name="com.woojun.ai.fragment.main.MyInfoFragment"
-        android:label="fragment_my_info"
-        tools:layout="@layout/fragment_my_info" />
+        android:id="@+id/setting"
+        android:name="com.woojun.ai.fragment.main.SettingFragment"
+        android:label="fragment_setting"
+        tools:layout="@layout/fragment_setting" />
     <fragment
         android:id="@+id/childrenInfo"
         android:name="com.woojun.ai.fragment.main.MyChildInfoFragment"

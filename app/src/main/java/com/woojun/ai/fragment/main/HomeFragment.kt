@@ -88,8 +88,8 @@ class HomeFragment : Fragment() {
                 )
             }
 
-            myInfoButton.setOnClickListener {
-                (activity as MainActivity).moveBottomNavigation(R.id.myInfo)
+            settingButton.setOnClickListener {
+                (activity as MainActivity).moveBottomNavigation(R.id.setting)
             }
 
             seeAllButton.setOnClickListener {

@@ -77,7 +77,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.home -> navController.navigate(R.id.home, bundle)
                 R.id.childrenList -> navController.navigate(R.id.childrenList, bundle)
                 R.id.childrenInfo -> navController.navigate(R.id.childrenInfo)
-                R.id.myInfo -> navController.navigate(R.id.myInfo)
+                R.id.setting -> navController.navigate(R.id.setting)
             }
         }
     }
