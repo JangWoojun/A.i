@@ -439,7 +439,7 @@
                     android:layout_marginTop="8dp"
                     android:layout_gravity="center"
                     android:gravity="center"
-                    android:text="내정보\n바로가기"
+                    android:text="내 설정\n바로가기"
                     android:textColor="#8696bb"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
