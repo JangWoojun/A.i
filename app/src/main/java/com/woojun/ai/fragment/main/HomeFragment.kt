@@ -100,7 +100,8 @@ class HomeFragment : Fragment() {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     if (snapshot.exists()) {
                         val value = snapshot.getValue(UserInfo::class.java)
-                        if (value!!.photo == "") {
+                        helloUserText.text = "반갑습니다 ${value!!.name}님"
+                        if (value.photo == "") {
                             Glide.with(requireContext())
                                 .load(R.drawable.profile)
                                 .apply(RequestOptions.formatOf(DecodeFormat.PREFER_ARGB_8888))
@@ -120,7 +121,7 @@ class HomeFragment : Fragment() {
                 }
 
                 override fun onCancelled(error: DatabaseError) {
-                    Log.d("확인", "에러")
+                    Log.d("확인", error.toString())
                 }
             })
 
