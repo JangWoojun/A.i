@@ -22,7 +22,11 @@
         android:id="@+id/setting"
         android:name="com.woojun.ai.fragment.main.SettingFragment"
         android:label="fragment_setting"
-        tools:layout="@layout/fragment_setting" />
+        tools:layout="@layout/fragment_setting" >
+        <action
+            android:id="@+id/action_setting_to_rePersonalInformationFragment"
+            app:destination="@id/rePersonalInformationFragment" />
+    </fragment>
     <fragment
         android:id="@+id/childrenInfo"
         android:name="com.woojun.ai.fragment.main.MyChildInfoFragment"
@@ -51,4 +55,9 @@
             android:id="@+id/action_searchFragment_to_childrenInfoInternalFragment"
             app:destination="@id/childrenInfoInternalFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/rePersonalInformationFragment"
+        android:name="com.woojun.ai.fragment.main.RePersonalInformationFragment"
+        android:label="fragment_re_personal_information"
+        tools:layout="@layout/fragment_re_personal_information" />
 </navigation>
