@@ -9,12 +9,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.app.ActivityCompat.finishAffinity
+import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.woojun.ai.IntroActivity
+import com.woojun.ai.R
 import com.woojun.ai.databinding.FragmentSettingBinding
 
 class SettingFragment : Fragment() {
@@ -62,6 +64,10 @@ class SettingFragment : Fragment() {
                             Toast.makeText(requireContext(), "회원탈퇴를 실패하였습니다", Toast.LENGTH_SHORT).show()
                         }
                     }
+            }
+
+            rePersonalInformationButton.setOnClickListener{
+                findNavController().navigate(R.id.action_home_to_searchFragment)
             }
 
             privacyPolicyButton.setOnClickListener {
