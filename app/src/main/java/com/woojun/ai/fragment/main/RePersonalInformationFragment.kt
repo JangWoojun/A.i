@@ -38,7 +38,9 @@ class RePersonalInformationFragment : Fragment() {
         auth = Firebase.auth
         database = Firebase.database.reference
         binding.apply {
-            dialog()
+
+            val builder = dialog()
+            builder.show()
 
             finishButton.setOnClickListener {
                 when (titleText.text) {
