@@ -67,7 +67,7 @@ class SettingFragment : Fragment() {
             }
 
             rePersonalInformationButton.setOnClickListener{
-                findNavController().navigate(R.id.action_home_to_searchFragment)
+                findNavController().navigate(R.id.action_setting_to_rePersonalInformationFragment)
             }
 
             privacyPolicyButton.setOnClickListener {
