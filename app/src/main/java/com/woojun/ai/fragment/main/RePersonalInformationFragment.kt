@@ -6,14 +6,21 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
 import com.woojun.ai.databinding.FragmentRePersonalInformationBinding
 
 class RePersonalInformationFragment : Fragment() {
 
     private var _binding: FragmentRePersonalInformationBinding? = null
     private val binding get() = _binding!!
-
+    private lateinit var auth: FirebaseAuth
+    private lateinit var database: DatabaseReference
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -28,10 +35,22 @@ class RePersonalInformationFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        auth = Firebase.auth
+        database = Firebase.database.reference
         binding.apply {
             dialog()
-            
+
+            finishButton.setOnClickListener {
+                when (titleText.text) {
+                    "변경하실 이름을 입력하세요" -> {
+                        database.child("users").child(auth.uid.toString()).child("name").setValue(inputArea.text.toString())
+                        Toast.makeText(requireContext(), "이름 변경이 완료되었습니다", Toast.LENGTH_SHORT).show()
+                    }
+
+
+
+                }
+            }
         }
     }
 
