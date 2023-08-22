@@ -30,7 +30,8 @@ class RePersonalInformationFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.apply {
-
+            dialog()
+            
         }
     }
 
