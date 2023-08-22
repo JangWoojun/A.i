@@ -95,28 +95,18 @@ class HomeFragment : Fragment() {
             seeAllButton.setOnClickListener {
                 (activity as MainActivity).moveBottomNavigation(R.id.childrenList)
             }
+
+            Glide.with(requireContext())
+                .load(R.drawable.profile)
+                .apply(RequestOptions.formatOf(DecodeFormat.PREFER_ARGB_8888))
+                .into(profile)
+
             database.child("users").child(auth.uid.toString()).addListenerForSingleValueEvent(object :
                 ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     if (snapshot.exists()) {
                         val value = snapshot.getValue(UserInfo::class.java)
                         helloUserText.text = "반갑습니다 ${value!!.name}님"
-                        if (value.photo == "") {
-                            Glide.with(requireContext())
-                                .load(R.drawable.profile)
-                                .apply(RequestOptions.formatOf(DecodeFormat.PREFER_ARGB_8888))
-                                .into(profile)
-                        } else {
-                            Glide.with(requireContext())
-                                .load(value.photo)
-                                .apply(RequestOptions.formatOf(DecodeFormat.PREFER_ARGB_8888))
-                                .into(profile)
-                        }
-                    } else {
-                        Glide.with(requireContext())
-                            .load(R.drawable.profile)
-                            .apply(RequestOptions.formatOf(DecodeFormat.PREFER_ARGB_8888))
-                            .into(profile)
                     }
                 }
 
