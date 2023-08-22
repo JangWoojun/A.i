@@ -13,6 +13,7 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+import com.woojun.ai.R
 import com.woojun.ai.databinding.FragmentRePersonalInformationBinding
 
 class RePersonalInformationFragment : Fragment() {
@@ -82,7 +83,7 @@ class RePersonalInformationFragment : Fragment() {
     private fun dialog(): AlertDialog.Builder {
         val optionList = arrayOf("이름 재설정", "이메일 재설정", "전화번호 재설정", "비밀번호 재설정")
         val selectItem = 0
-        val builder = AlertDialog.Builder(requireContext())
+        val builder = AlertDialog.Builder(requireContext(), R.style.CustomAlertDialogStyle)
 
         builder.setSingleChoiceItems(optionList, selectItem
             ) { _, p1 ->
