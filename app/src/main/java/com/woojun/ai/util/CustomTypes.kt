@@ -7,7 +7,6 @@ data class UserInfo(
     val name: String = "",
     val email: String = "",
     val phoneNumber: String = "",
-    val photo: String = "",
     val check: Boolean = false,
     val children: ArrayList<ChildInfo> = arrayListOf()
 )
