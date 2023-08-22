@@ -47,6 +47,11 @@ class RePersonalInformationFragment : Fragment() {
                         Toast.makeText(requireContext(), "이름 변경이 완료되었습니다", Toast.LENGTH_SHORT).show()
                     }
 
+                    "변경하실 이메일을 입력하세요" -> {
+                        database.child("users").child(auth.uid.toString()).child("email").setValue(inputArea.text.toString())
+                        Toast.makeText(requireContext(), "이메일 변경이 완료되었습니다", Toast.LENGTH_SHORT).show()
+                    }
+
 
 
                 }
