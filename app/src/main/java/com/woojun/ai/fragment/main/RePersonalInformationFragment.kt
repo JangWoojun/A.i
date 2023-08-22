@@ -57,7 +57,15 @@ class RePersonalInformationFragment : Fragment() {
                         Toast.makeText(requireContext(), "전화번호 변경이 완료되었습니다", Toast.LENGTH_SHORT).show()
                     }
 
-
+                    "이메일을 입력하세요" -> {
+                        auth.sendPasswordResetEmail(inputArea.text.toString()).addOnCompleteListener {
+                            if(it.isSuccessful){
+                                Toast.makeText(requireContext(),"이메일을 보냈습니다.",Toast.LENGTH_LONG).show()
+                            }else{
+                                Toast.makeText(requireContext(),"이메일 발송이 실패했습니다.",Toast.LENGTH_LONG).show()
+                            }
+                        }
+                    }
 
                 }
             }
