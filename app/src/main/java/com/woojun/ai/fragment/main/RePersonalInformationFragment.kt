@@ -90,7 +90,7 @@ class RePersonalInformationFragment : Fragment() {
                     when (p1) {
                         0 -> {
                             titleText.text = "변경하실 이름을 입력하세요"
-                            subText.text = "입력하신 이름으로 계정의 이름을\\n재설정 해드립니다 ex)홍길동"
+                            subText.text = "입력하신 이름으로 계정의 이름을\n재설정 해드립니다 ex)홍길동"
                             inputLayout.hint = "이름"
                             inputArea.inputType = InputType.TYPE_CLASS_TEXT
                             finishButtonText.text = "이름 제출"
@@ -98,7 +98,7 @@ class RePersonalInformationFragment : Fragment() {
 
                         1 -> {
                             titleText.text = "변경하실 이메일을 입력하세요"
-                            subText.text = "입력하신 이메일로 계정의 이메일을\\n재설정 해드립니다 ex)abc@naver.com"
+                            subText.text = "입력하신 이메일로 계정의 이메일을\n재설정 해드립니다 ex)abc@naver.com"
                             inputLayout.hint = "이메일"
                             inputArea.inputType = InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS
                             finishButtonText.text = "이메일 제출"
@@ -106,7 +106,7 @@ class RePersonalInformationFragment : Fragment() {
 
                         2 -> {
                             titleText.text = "변경하실 전화번호를 입력하세요"
-                            subText.text = "입력하신 전화번호로 계정의 전화번호를\\n재설정 해드립니다 ex)01012345678"
+                            subText.text = "입력하신 전화번호로 계정의 전화번호를\n재설정 해드립니다 ex)01012345678"
                             inputLayout.hint = "전화번호"
                             inputArea.inputType = InputType.TYPE_CLASS_PHONE
                             finishButtonText.text = "전화번호 제출"
@@ -114,7 +114,7 @@ class RePersonalInformationFragment : Fragment() {
 
                         3 -> {
                             titleText.text = "이메일을 입력하세요"
-                            subText.text = "입력하신 이메일 주소로 비밀번호\\n재설정 메일을 보내드립니다 ex)abc@naver.com"
+                            subText.text = "입력하신 이메일 주소로 비밀번호\n재설정 메일을 보내드립니다 ex)abc@naver.com"
                             inputLayout.hint = "이메일"
                             inputArea.inputType = InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS
                             finishButtonText.text = "이메일 제출"
