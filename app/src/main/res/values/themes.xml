@@ -9,4 +9,9 @@
     </style>
 
     <style name="Theme.Ai" parent="Base.Theme.Ai" />
+
+    <style name="CustomAlertDialogStyle" parent="Theme.MaterialComponents.Light.Dialog.Alert">
+        <item name="colorControlActivated">#4894fe</item>
+    </style>
+
 </resources>
