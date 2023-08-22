@@ -84,8 +84,7 @@ class RePersonalInformationFragment : Fragment() {
         val selectItem = 0
         val builder = AlertDialog.Builder(requireContext())
 
-        builder.setTitle("재설정 옵션")
-            .setSingleChoiceItems(optionList, selectItem
+        builder.setSingleChoiceItems(optionList, selectItem
             ) { _, p1 ->
                 binding.apply {
                     when (p1) {
