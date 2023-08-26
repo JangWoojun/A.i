@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.woojun.ai.databinding.FragmentChildrenInfoInternalBinding
 import com.woojun.ai.util.AiResult
+import java.text.SimpleDateFormat
 
 class ChildrenInfoInternalFragment : Fragment() {
 
@@ -51,5 +52,15 @@ class ChildrenInfoInternalFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
+
+    private fun formatDate(inputDate: String): String {
+        val inputFormat = SimpleDateFormat("yyyyMMdd")
+        val outputFormat = SimpleDateFormat("yy. MM. dd")
+
+        val date = inputFormat.parse(inputDate)
+        return outputFormat.format(date)
+    }
+
+
 
 }
