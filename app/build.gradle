@@ -27,6 +27,8 @@ android {
         buildConfigField "String", "GETURL", properties['getUrl']
         buildConfigField "String", "KAKAONATIVEKEY", properties['kakaoNativeKey']
 
+        manifestPlaceholders = [KAKAONATIVEKEY: properties['kakaoNativeKey']]
+
     }
     buildFeatures {
         buildConfig true
