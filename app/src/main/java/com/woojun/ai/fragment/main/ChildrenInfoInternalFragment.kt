@@ -119,9 +119,7 @@ class ChildrenInfoInternalFragment : Fragment() {
                 call: Call<ResultSearchKeyword>,
                 response: Response<ResultSearchKeyword>
             ) {
-                Log.d("확인", "키워드: $keyword")
-                Log.d("확인", "Raw: ${response.raw()}")
-                Log.d("확인", "Body: ${response.body()}")
+                response.body()?.let { onResponse(it) }
             }
 
             override fun onFailure(call: Call<ResultSearchKeyword>, t: Throwable) {
