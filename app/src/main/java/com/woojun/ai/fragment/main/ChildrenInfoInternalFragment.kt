@@ -8,10 +8,13 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.woojun.ai.R
 import com.woojun.ai.databinding.FragmentChildrenInfoInternalBinding
 import com.woojun.ai.util.AiResult
 import com.woojun.ai.util.ResultSearchKeyword
 import com.woojun.ai.util.RetrofitAPI
+import net.daum.mf.map.api.MapPOIItem
+import net.daum.mf.map.api.MapPoint
 import net.daum.mf.map.api.MapView
 import retrofit2.Call
 import retrofit2.Callback
@@ -87,7 +90,7 @@ class ChildrenInfoInternalFragment : Fragment() {
         _binding = null
     }
 
-    private fun searchKeyword(keyword: String) {
+    private fun searchKeyword(keyword: String, onResponse: (ResultSearchKeyword) -> Unit) {
         val retrofit = Retrofit.Builder()
             .baseUrl("https://dapi.kakao.com/")
             .addConverterFactory(GsonConverterFactory.create())
@@ -95,7 +98,7 @@ class ChildrenInfoInternalFragment : Fragment() {
         val api = retrofit.create(RetrofitAPI::class.java)
         val call = api.getSearchKeyword(com.woojun.ai.BuildConfig.RESTAPIKEY, keyword)
 
-        call.enqueue(object: Callback<ResultSearchKeyword> {
+        call.enqueue(object : Callback<ResultSearchKeyword> {
             override fun onResponse(
                 call: Call<ResultSearchKeyword>,
                 response: Response<ResultSearchKeyword>
