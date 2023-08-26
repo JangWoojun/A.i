@@ -1,6 +1,8 @@
 package com.woojun.ai.fragment.main
 
+import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
@@ -8,7 +10,14 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.woojun.ai.databinding.FragmentChildrenInfoInternalBinding
 import com.woojun.ai.util.AiResult
+import com.woojun.ai.util.ResultSearchKeyword
+import com.woojun.ai.util.RetrofitAPI
 import net.daum.mf.map.api.MapView
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 import java.text.SimpleDateFormat
 
 
@@ -64,6 +73,8 @@ class ChildrenInfoInternalFragment : Fragment() {
                 dress.text = item.alldressingDscd ?: "불명"
                 type.text = "${item.writngTrgetDscd?.let { getStatusDescription(it) }}"
                 characteristics.text = "${item.etcSpfeatr}"
+
+                searchKeyword(location.text.toString())
             }
         }
 
@@ -72,6 +83,30 @@ class ChildrenInfoInternalFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun searchKeyword(keyword: String) {
+        val retrofit = Retrofit.Builder()
+            .baseUrl("https://dapi.kakao.com/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+        val api = retrofit.create(RetrofitAPI::class.java)
+        val call = api.getSearchKeyword(com.woojun.ai.BuildConfig.RESTAPIKEY, keyword)
+
+        call.enqueue(object: Callback<ResultSearchKeyword> {
+            override fun onResponse(
+                call: Call<ResultSearchKeyword>,
+                response: Response<ResultSearchKeyword>
+            ) {
+                Log.d("확인", "키워드: $keyword")
+                Log.d("확인", "Raw: ${response.raw()}")
+                Log.d("확인", "Body: ${response.body()}")
+            }
+
+            override fun onFailure(call: Call<ResultSearchKeyword>, t: Throwable) {
+                Log.w("확인", "통신 실패: ${t.message}")
+            }
+        })
     }
 
     private fun formatDate(inputDate: String): String {
