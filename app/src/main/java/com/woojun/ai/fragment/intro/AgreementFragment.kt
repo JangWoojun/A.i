@@ -125,7 +125,7 @@ class AgreementFragment : Fragment() {
                         .build()
 
                     view.findNavController().navigate(
-                        R.id.action_agreementFragment_to_signUpFragment,
+                        R.id.action_agreementFragment_to_onboardFragment,
                         null,
                         navOptions
                     )
