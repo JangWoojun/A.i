@@ -1,6 +1,8 @@
 package com.woojun.ai.fragment.main
 
 import android.annotation.SuppressLint
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -97,6 +99,16 @@ class ChildrenInfoInternalFragment : Fragment() {
                 }
 
             }
+
+
+
+
+            phoneButton.setOnClickListener{
+                startActivity(
+                    Intent(Intent.ACTION_DIAL, Uri.parse("tel:112"))
+                )
+            }
+
         }
 
     }
