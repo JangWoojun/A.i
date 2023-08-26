@@ -1,10 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragment.intro.OnboardFragment">
 
 
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/introViewPager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-</FrameLayout>
+    <com.tbuonomo.viewpagerdotsindicator.WormDotsIndicator
+        android:id="@+id/dots_indicator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:dotsColor="#4894FE"
+        app:dotsCornerRadius="20dp"
+        app:dotsSize="20dp"
+        app:dotsSpacing="4dp"
+        android:layout_marginTop="600dp"
+        app:dotsStrokeColor="#EAEAFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/introViewPager" />
+
+    <LinearLayout
+        android:id="@+id/buttonView"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="@+id/introViewPager"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dots_indicator">
+
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/sign_up_button"
+            android:backgroundTint="#4894FE"
+            android:layout_marginEnd="10dp"
+            android:outlineProvider="none"
+            app:cardCornerRadius="20dp"
+            android:layout_width="160dp"
+            android:layout_height="60dp">
+
+            <TextView
+                android:fontFamily="@font/poppins_semibold"
+                android:textSize="16sp"
+                android:layout_gravity="center"
+                android:textColor="@color/white"
+                android:text="Sign Up"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        </androidx.cardview.widget.CardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/login_button"
+            android:layout_marginStart="10dp"
+            app:strokeColor="#4894FE"
+            android:outlineProvider="none"
+            app:cardCornerRadius="20dp"
+            android:layout_width="160dp"
+            android:layout_height="60dp">
+
+            <TextView
+                android:fontFamily="@font/poppins_semibold"
+                android:textSize="16sp"
+                android:layout_gravity="center"
+                android:textColor="#4894FE"
+                android:text="Log in"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        </com.google.android.material.card.MaterialCardView>
+
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
