@@ -79,7 +79,23 @@ class ChildrenInfoInternalFragment : Fragment() {
                 type.text = "${item.writngTrgetDscd?.let { getStatusDescription(it) }}"
                 characteristics.text = "${item.etcSpfeatr}"
 
-                searchKeyword(location.text.toString())
+                searchKeyword(location.text.toString()) {
+                    val mapPoint = MapPoint.mapPointWithGeoCoord(it.documents[0].y.toDouble(), it.documents[0].x.toDouble())
+
+                    mapView.setMapCenterPoint(mapPoint, true)
+                    mapView.setZoomLevel(1, true)
+
+                    val marker = MapPOIItem()
+                    marker.itemName = it.documents[0].address_name
+                    marker.mapPoint = mapPoint
+                    marker.markerType = MapPOIItem.MarkerType.CustomImage
+                    marker.customImageResourceId = R.drawable.marker
+                    marker.selectedMarkerType = MapPOIItem.MarkerType.CustomImage
+                    marker.customSelectedImageResourceId = R.drawable.marker
+
+                    mapView.addPOIItem(marker)
+                }
+
             }
         }
 
