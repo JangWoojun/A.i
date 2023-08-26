@@ -36,6 +36,21 @@ class ChildrenInfoInternalFragment : Fragment() {
             val mapView = MapView(requireContext())
             binding.mapView.addView(mapView)
 
+            mapView.setOnTouchListener { view, motionEvent ->
+                val action = motionEvent.action
+                when (action) {
+                    MotionEvent.ACTION_DOWN -> scrollView.requestDisallowInterceptTouchEvent(
+                        true
+                    )
+
+                    MotionEvent.ACTION_UP -> scrollView.requestDisallowInterceptTouchEvent(true)
+                    MotionEvent.ACTION_MOVE -> scrollView.requestDisallowInterceptTouchEvent(
+                        true
+                    )
+                }
+                false
+            }
+
             val bundle = arguments
             val item = bundle?.getParcelable<AiResult>("child info")
 
