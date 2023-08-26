@@ -3,6 +3,7 @@ package com.woojun.ai.util
 import com.woojun.ai.BuildConfig
 import retrofit2.Call
 import retrofit2.http.GET
+import retrofit2.http.Header
 import retrofit2.http.Query
 
 interface RetrofitAPI {
@@ -16,4 +17,10 @@ interface RetrofitAPI {
         @Query("age2") age2: Int?
     ): Call<AiResultList>
 
+    @GET("v2/local/search/address")
+    fun getSearchKeyword(
+        @Header("Authorization") key: String,
+        @Query("query") query: String
+
+    ): Call<ResultSearchKeyword>
 }
