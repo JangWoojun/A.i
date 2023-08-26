@@ -1,13 +1,16 @@
 package com.woojun.ai.fragment.main
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import com.woojun.ai.databinding.FragmentChildrenInfoInternalBinding
 import com.woojun.ai.util.AiResult
+import net.daum.mf.map.api.MapView
 import java.text.SimpleDateFormat
+
 
 class ChildrenInfoInternalFragment : Fragment() {
 
@@ -30,6 +33,9 @@ class ChildrenInfoInternalFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.apply {
+            val mapView = MapView(requireContext())
+            binding.mapView.addView(mapView)
+
             val bundle = arguments
             val item = bundle?.getParcelable<AiResult>("child info")
 
