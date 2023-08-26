@@ -11,8 +11,8 @@
         android:label="fragment_agreement"
         tools:layout="@layout/fragment_agreement" >
         <action
-            android:id="@+id/action_agreementFragment_to_signUpFragment"
-            app:destination="@id/signUpFragment" />
+            android:id="@+id/action_agreementFragment_to_onboardFragment"
+            app:destination="@id/onboardFragment" />
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
@@ -44,4 +44,16 @@
         android:name="com.woojun.ai.fragment.intro.ResetPasswordFragment"
         android:label="fragment_reset_password"
         tools:layout="@layout/fragment_reset_password" />
+    <fragment
+        android:id="@+id/onboardFragment"
+        android:name="com.woojun.ai.fragment.intro.OnboardFragment"
+        android:label="fragment_onboard"
+        tools:layout="@layout/fragment_onboard" >
+        <action
+            android:id="@+id/action_onboardFragment_to_signUpFragment"
+            app:destination="@id/signUpFragment" />
+        <action
+            android:id="@+id/action_onboardFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
 </navigation>
