@@ -34,15 +34,15 @@ class ChildrenInfoInternalFragment : Fragment() {
             val item = bundle?.getParcelable<AiResult>("child info")
 
             if (item != null) {
-                name.text = "이름: ${item!!.nm}"
-                age1.text = "실종 나이: ${item.age}"
-                age2.text = "현재 나이: ${item.ageNow}"
-                sex.text = "성별: ${item.sexdstnDscd}"
-                date.text = "발생 일시: ${item.occrde}"
-                location.text = "지역: ${item.occrAdres}"
-                dress.text = "실종 당시 복장: ${item.alldressingDscd}"
-                type.text = "타입: ${item.writngTrgetDscd}"
-                characteristics.text = "특징: ${item.etcSpfeatr}"
+                name.text = "${item.nm}"
+                age1.text = "${item.age}세"
+                age2.text = "${item.ageNow}세"
+                sex.text = "${item.sexdstnDscd}"
+                date.text = "${item.occrde?.let { formatDate(it) }}"
+                location.text = "${item.occrAdres}"
+                dress.text = item.alldressingDscd ?: "불명"
+                type.text = "${item.writngTrgetDscd?.let { getStatusDescription(it) }}"
+                characteristics.text = "${item.etcSpfeatr}"
             }
         }
 
