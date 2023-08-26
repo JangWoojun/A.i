@@ -71,6 +71,7 @@ class ChildrenInfoInternalFragment : Fragment() {
                 sex.text = "${item.sexdstnDscd}"
                 date.text = "${item.occrde?.let { formatDate(it) }}"
                 location.text = "${item.occrAdres}"
+                locationShort.text = "${item.occrAdres?.take(2)}"
                 dress.text = item.alldressingDscd ?: "불명"
                 type.text = "${item.writngTrgetDscd?.let { getStatusDescription(it) }}"
                 characteristics.text = "${item.etcSpfeatr}"
