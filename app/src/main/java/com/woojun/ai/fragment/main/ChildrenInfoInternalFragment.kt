@@ -61,6 +61,18 @@ class ChildrenInfoInternalFragment : Fragment() {
         return outputFormat.format(date)
     }
 
-
+    private fun getStatusDescription(code: String): String {
+        return when (code) {
+            "010" -> "정상아동"
+            "020" -> "가출인"
+            "040" -> "시설보호무연고자"
+            "060" -> "지적장애인"
+            "061" -> "아동\n지적장애인"
+            "062" -> "성인\n지적장애인"
+            "070" -> "치매질환자"
+            "080" -> "불상(기타)"
+            else -> "불명"
+        }
+    }
 
 }
