@@ -42,7 +42,7 @@ class AgreementFragment : Fragment() {
                 if (isChecked) {
                     allCheckBox.buttonTintList = ColorStateList.valueOf(Color.parseColor("#4894fe"))
                 } else {
-                    allCheckBox.buttonTintList = ColorStateList.valueOf(Color.parseColor("#000000"))
+                    allCheckBox.buttonTintList = ColorStateList.valueOf(Color.parseColor("#c8c8c8"))
                 }
             }
 
@@ -50,7 +50,7 @@ class AgreementFragment : Fragment() {
                 if (isChecked) {
                     consentCheckBox1.buttonTintList = ColorStateList.valueOf(Color.parseColor("#4894fe"))
                 } else {
-                    consentCheckBox1.buttonTintList = ColorStateList.valueOf(Color.parseColor("#000000"))
+                    consentCheckBox1.buttonTintList = ColorStateList.valueOf(Color.parseColor("#c8c8c8"))
                 }
             }
 
@@ -58,7 +58,7 @@ class AgreementFragment : Fragment() {
                 if (isChecked) {
                     consentCheckBox2.buttonTintList = ColorStateList.valueOf(Color.parseColor("#4894fe"))
                 } else {
-                    consentCheckBox2.buttonTintList = ColorStateList.valueOf(Color.parseColor("#000000"))
+                    consentCheckBox2.buttonTintList = ColorStateList.valueOf(Color.parseColor("#c8c8c8"))
                 }
             }
 
