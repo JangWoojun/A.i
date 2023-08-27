@@ -27,7 +27,7 @@
         android:id="@+id/subject_text"
         android:textSize="16sp"
         android:text=""
-        android:textColor="#a7a6a5"
+        android:textColor="#A1A5AB"
         android:layout_marginTop="22dp"
         android:gravity="center"
         android:layout_width="wrap_content"
