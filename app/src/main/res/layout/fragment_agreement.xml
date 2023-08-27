@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:textColor="@color/black"
-        android:fontFamily="@font/poppins_bold"
+        android:fontFamily="@font/poppins_reqular"
         android:text="약관동의"
         android:textSize="26sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -39,11 +39,12 @@
         app:layout_constraintTop_toBottomOf="@+id/textView2">
 
         <com.google.android.material.card.MaterialCardView
+            app:strokeColor="#c8c8c8"
             android:id="@+id/all_check"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="20dp"
-            app:cardCornerRadius="10dp">
+            app:cardCornerRadius="8dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -63,7 +64,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="20dp"
                     android:layout_marginStart="0dp"
-                    android:fontFamily="@font/poppins_semibold"
+                    android:fontFamily="@font/poppins_medium"
                     android:text="A·아이 이용약관 전체 동의"
                     android:textSize="20sp"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -76,12 +77,13 @@
         </com.google.android.material.card.MaterialCardView>
 
         <com.google.android.material.card.MaterialCardView
+            app:strokeColor="#c8c8c8"
             android:id="@+id/consent_check1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="20dp"
             android:layout_marginTop="13dp"
-            app:cardCornerRadius="10dp">
+            app:cardCornerRadius="8dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/consent_button_1"
