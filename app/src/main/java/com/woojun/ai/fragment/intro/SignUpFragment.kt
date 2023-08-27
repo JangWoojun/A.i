@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.widget.TextView
+import android.widget.Toast
 import androidx.navigation.findNavController
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthUserCollisionException
@@ -74,6 +75,11 @@ class SignUpFragment : Fragment() {
                 }
 
             }
+
+            appleLoginButton.setOnClickListener {
+                Toast.makeText(requireContext(), "다음 업데이트에서 추가 예정입니다", Toast.LENGTH_SHORT).show()
+            }
+
         }
 
     }
