@@ -47,7 +47,7 @@
             android:backgroundTint="#4894FE"
             android:layout_marginEnd="10dp"
             android:outlineProvider="none"
-            app:cardCornerRadius="20dp"
+            app:cardCornerRadius="5dp"
             android:layout_width="160dp"
             android:layout_height="60dp">
 
@@ -56,7 +56,7 @@
                 android:textSize="16sp"
                 android:layout_gravity="center"
                 android:textColor="@color/white"
-                android:text="Sign Up"
+                android:text="회원가입"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
 
@@ -67,7 +67,7 @@
             android:layout_marginStart="10dp"
             app:strokeColor="#4894FE"
             android:outlineProvider="none"
-            app:cardCornerRadius="20dp"
+            app:cardCornerRadius="5dp"
             android:layout_width="160dp"
             android:layout_height="60dp">
 
@@ -76,7 +76,7 @@
                 android:textSize="16sp"
                 android:layout_gravity="center"
                 android:textColor="#4894FE"
-                android:text="Log in"
+                android:text="로그인"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
 

@@ -16,7 +16,7 @@
             android:textSize="28sp"
             android:textColor="#0A0615"
             android:fontFamily="@font/poppins_semibold"
-            android:text="Log In"
+            android:text="로그인"
             android:layout_marginTop="150dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
