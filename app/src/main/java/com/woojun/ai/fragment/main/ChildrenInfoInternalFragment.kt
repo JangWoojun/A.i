@@ -101,7 +101,11 @@ class ChildrenInfoInternalFragment : Fragment() {
             }
 
 
-
+            chatButton.setOnClickListener{
+                val intent = Intent(Intent.ACTION_SENDTO, Uri.parse("smsto:182"))
+                intent.putExtra("sms_body", "실종 아동 ${item?.nm}으로 의심되는 사람을 발견하였습니다 위치는 (입력)쪽 입니다")
+                startActivity(intent)
+            }
 
             phoneButton.setOnClickListener{
                 startActivity(
