@@ -54,12 +54,7 @@ data class AiResult(
     val writngTrgetDscd: String?
 ): Parcelable
 
-data class AiResultList(
-    val list: List<AiResult>,
-    val msg: String,
-    val result: String,
-    val totalCount: Int
-)
+class AiResultList: ArrayList<AiResult>()
 
 enum class ChildInfoType {
     NEW, DEFAULT, SEARCH
