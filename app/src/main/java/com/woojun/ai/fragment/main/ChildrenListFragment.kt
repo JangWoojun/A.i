@@ -125,7 +125,7 @@ class ChildrenListFragment : Fragment() {
                 val gson = Gson()
                 val list = gson.fromJson(aiResultsList, AiResultList::class.java)
                 childrenList.layoutManager = LinearLayoutManager(requireContext().applicationContext)
-                childrenList.adapter = ChildrenInfoAdapter(list.list, ChildInfoType.DEFAULT)
+                childrenList.adapter = ChildrenInfoAdapter(list, ChildInfoType.DEFAULT)
             }
         }
     }

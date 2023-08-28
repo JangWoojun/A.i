@@ -61,7 +61,7 @@ class HomeFragment : Fragment() {
                 val gson = Gson()
                 val list = gson.fromJson(aiResultsList, AiResultList::class.java)
                 childrenList.layoutManager = LinearLayoutManager(requireContext().applicationContext)
-                childrenList.adapter = ChildrenInfoAdapter(list.list, ChildInfoType.NEW)
+                childrenList.adapter = ChildrenInfoAdapter(list, ChildInfoType.NEW)
             }
 
             mainChildrenInfoButton.setOnClickListener {

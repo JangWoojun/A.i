@@ -137,7 +137,7 @@ class SearchFragment : Fragment(), FragmentInteractionListener {
                             searchTextList.add(name)
                             writeStringListToInternalStorage(requireContext(), "search_text", removeEmptyAndDuplicateStrings(searchTextList))
                             searchList.layoutManager = LinearLayoutManager(requireContext().applicationContext)
-                            searchList.adapter = ChildrenInfoAdapter(aiResultList.list, ChildInfoType.SEARCH)
+                            searchList.adapter = ChildrenInfoAdapter(aiResultList, ChildInfoType.SEARCH)
                         }
                     } else {
                         Log.d("확인1", "에러")
