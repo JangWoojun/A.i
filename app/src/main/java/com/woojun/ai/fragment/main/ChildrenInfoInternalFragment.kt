@@ -2,14 +2,20 @@ package com.woojun.ai.fragment.main
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
+import android.util.Base64
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.DecodeFormat
+import com.bumptech.glide.request.RequestOptions
 import com.woojun.ai.R
 import com.woojun.ai.databinding.FragmentChildrenInfoInternalBinding
 import com.woojun.ai.util.AiResult
@@ -79,6 +85,12 @@ class ChildrenInfoInternalFragment : Fragment() {
                 dress.text = item.alldressingDscd ?: "불명"
                 type.text = "${item.writngTrgetDscd?.let { getStatusDescription(it) }}"
                 characteristics.text = "${item.etcSpfeatr}"
+                Glide.with(requireContext())
+                    .load(item.tknphotoFile?.let { decodeBase64AndSetImage(it) })
+                    .error(R.drawable.child)
+                    .apply(RequestOptions.circleCropTransform())
+                    .apply(RequestOptions.formatOf(DecodeFormat.PREFER_ARGB_8888))
+                    .into(profile)
 
                 searchKeyword(location.text.toString()) {
                     val mapPoint = MapPoint.mapPointWithGeoCoord(it.documents[0].y.toDouble(), it.documents[0].x.toDouble())
@@ -163,6 +175,12 @@ class ChildrenInfoInternalFragment : Fragment() {
             "080" -> "불상(기타)"
             else -> "불명"
         }
+    }
+
+    private fun decodeBase64AndSetImage(base64String: String): Bitmap {
+        val byteArray = Base64.decode(base64String, Base64.DEFAULT)
+
+        return BitmapFactory.decodeByteArray(byteArray, 0, byteArray.size)
     }
 
 }
