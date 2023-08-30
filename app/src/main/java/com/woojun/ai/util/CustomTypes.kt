@@ -1,7 +1,25 @@
 package com.woojun.ai.util
 
 import android.os.Parcelable
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+import androidx.room.TypeConverter
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import kotlinx.parcelize.Parcelize
+
+class TypeConverter {
+    @TypeConverter
+    fun fromChildInfoList(childInfoList: ArrayList<ChildInfo>): String {
+        return Gson().toJson(childInfoList)
+    }
+
+    @TypeConverter
+    fun toChildInfoList(childInfoListString: String): ArrayList<ChildInfo> {
+        val listType = object : TypeToken<ArrayList<ChildInfo>>() {}.type
+        return Gson().fromJson(childInfoListString, listType)
+    }
+}
 
 data class PagerItem(
     val image: Int,
