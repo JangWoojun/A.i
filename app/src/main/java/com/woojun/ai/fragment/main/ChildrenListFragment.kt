@@ -8,18 +8,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.gson.Gson
 import com.woojun.ai.databinding.FragmentChildrenListBinding
-import com.woojun.ai.util.AiResultList
 import com.woojun.ai.util.ChildInfoType
 import com.woojun.ai.util.ChildrenInfoAdapter
+import com.woojun.ai.util.ViewModel
 
 
 class ChildrenListFragment : Fragment() {
 
     private var _binding: FragmentChildrenListBinding? = null
     private val binding get() = _binding!!
+    private lateinit var viewModel: ViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -120,12 +121,12 @@ class ChildrenListFragment : Fragment() {
                     animator.start()
                 }
             }
-            val aiResultsList = arguments?.getString("item")
-            if (aiResultsList != null) {
-                val gson = Gson()
-                val list = gson.fromJson(aiResultsList, AiResultList::class.java)
+
+            viewModel = ViewModelProvider(requireActivity())[ViewModel::class.java]
+
+            viewModel.getApiData().observe(viewLifecycleOwner) { apiData ->
                 childrenList.layoutManager = LinearLayoutManager(requireContext().applicationContext)
-                childrenList.adapter = ChildrenInfoAdapter(list, ChildInfoType.DEFAULT)
+                childrenList.adapter = ChildrenInfoAdapter(apiData, ChildInfoType.DEFAULT)
             }
         }
     }

@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
@@ -21,22 +22,21 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
-import com.google.gson.Gson
 import com.woojun.ai.MainActivity
 import com.woojun.ai.R
 import com.woojun.ai.databinding.FragmentHomeBinding
-import com.woojun.ai.util.AiResultList
 import com.woojun.ai.util.ChildInfoType
 import com.woojun.ai.util.ChildrenInfoAdapter
 import com.woojun.ai.util.UserInfo
+import com.woojun.ai.util.ViewModel
 
 class HomeFragment : Fragment() {
-
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
     private lateinit var database: DatabaseReference
     private lateinit var auth: FirebaseAuth
+    private lateinit var viewModel: ViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,12 +56,12 @@ class HomeFragment : Fragment() {
         auth = Firebase.auth
 
         binding.apply {
-            val aiResultsList = arguments?.getString("item")
-            if (aiResultsList != null) {
-                val gson = Gson()
-                val list = gson.fromJson(aiResultsList, AiResultList::class.java)
+
+            viewModel = ViewModelProvider(requireActivity())[ViewModel::class.java]
+
+            viewModel.getApiData().observe(viewLifecycleOwner) { apiData ->
                 childrenList.layoutManager = LinearLayoutManager(requireContext().applicationContext)
-                childrenList.adapter = ChildrenInfoAdapter(list, ChildInfoType.NEW)
+                childrenList.adapter = ChildrenInfoAdapter(apiData, ChildInfoType.NEW)
             }
 
             mainChildrenInfoButton.setOnClickListener {

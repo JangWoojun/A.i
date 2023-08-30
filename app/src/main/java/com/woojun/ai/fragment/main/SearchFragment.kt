@@ -2,32 +2,27 @@ package com.woojun.ai.fragment.main
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.KeyEvent
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.woojun.ai.BuildConfig
 import com.woojun.ai.databinding.FragmentSearchBinding
-import com.woojun.ai.util.AiResultList
 import com.woojun.ai.util.ChildInfoType
 import com.woojun.ai.util.ChildrenInfoAdapter
 import com.woojun.ai.util.FragmentInteractionListener
-import com.woojun.ai.util.RetrofitAPI
-import com.woojun.ai.util.RetrofitClient
 import com.woojun.ai.util.SearchAdapter
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import com.woojun.ai.util.ViewModel
 import java.io.ByteArrayOutputStream
 
 class SearchFragment : Fragment(), FragmentInteractionListener {
 
     private var _binding: FragmentSearchBinding? = null
     private val binding get() = _binding!!
+    private lateinit var viewModel: ViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -76,7 +71,7 @@ class SearchFragment : Fragment(), FragmentInteractionListener {
         }
     }
 
-    fun writeStringListToInternalStorage(context: Context, filename: String, stringList: ArrayList<String>) {
+    private fun writeStringListToInternalStorage(context: Context, filename: String, stringList: ArrayList<String>) {
         try {
             val outputStream = context.openFileOutput(filename, Context.MODE_PRIVATE)
             val fileContent = stringList.joinToString("\n")
@@ -87,7 +82,7 @@ class SearchFragment : Fragment(), FragmentInteractionListener {
         }
     }
 
-    fun readStringListFromInternalStorage(context: Context, filename: String): ArrayList<String> {
+    private fun readStringListFromInternalStorage(context: Context, filename: String): ArrayList<String> {
         val resultList = ArrayList<String>()
 
         try {
@@ -125,29 +120,17 @@ class SearchFragment : Fragment(), FragmentInteractionListener {
             textView.visibility = View.GONE
             searchTextList.visibility = View.GONE
 
-            val retrofitAPI = RetrofitClient.getInstance().create(RetrofitAPI::class.java)
-            val call: Call<AiResultList> = retrofitAPI.getAiResult(BuildConfig.ESNTLID, BuildConfig.AUTHKEY, 10, name, null, null)
+            val searchTextList = readStringListFromInternalStorage(requireContext(), "search_text")
+            searchTextList.add(name)
+            writeStringListToInternalStorage(requireContext(), "search_text", removeEmptyAndDuplicateStrings(searchTextList))
 
-            call.enqueue(object : Callback<AiResultList> {
-                override fun onResponse(call: Call<AiResultList>, response: Response<AiResultList>) {
-                    if (response.isSuccessful) {
-                        val aiResultList: AiResultList? = response.body()
-                        aiResultList?.let {
-                            val searchTextList = readStringListFromInternalStorage(requireContext(), "search_text")
-                            searchTextList.add(name)
-                            writeStringListToInternalStorage(requireContext(), "search_text", removeEmptyAndDuplicateStrings(searchTextList))
-                            searchList.layoutManager = LinearLayoutManager(requireContext().applicationContext)
-                            searchList.adapter = ChildrenInfoAdapter(aiResultList, ChildInfoType.SEARCH)
-                        }
-                    } else {
-                        Log.d("확인1", "에러")
-                    }
-                }
+            viewModel = ViewModelProvider(requireActivity())[ViewModel::class.java]
 
-                override fun onFailure(call: Call<AiResultList>, t: Throwable) {
-                    Log.e("확인2", "API call failed: " + t.message);
-                }
-            })
+            viewModel.getApiData().observe(viewLifecycleOwner) { apiData ->
+                searchList.layoutManager = LinearLayoutManager(requireContext().applicationContext)
+                searchList.adapter = ChildrenInfoAdapter(apiData!!, ChildInfoType.SEARCH)
+            }
+
         }
 
 
@@ -170,7 +153,7 @@ class SearchFragment : Fragment(), FragmentInteractionListener {
         }
     }
 
-    fun removeEmptyAndDuplicateStrings(inputList: List<String>): ArrayList<String> {
+    private fun removeEmptyAndDuplicateStrings(inputList: List<String>): ArrayList<String> {
         val uniqueNonEmptyStrings = HashSet<String>()
         val result = arrayListOf<String>()
 
