@@ -145,3 +145,9 @@ fun formatDate(inputDateStr: String): String {
         "오류"
     }
 }
+
+private fun decodeBase64AndSetImage(base64String: String): Bitmap {
+    val byteArray = Base64.decode(base64String, Base64.DEFAULT)
+
+    return BitmapFactory.decodeByteArray(byteArray, 0, byteArray.size)
+}
