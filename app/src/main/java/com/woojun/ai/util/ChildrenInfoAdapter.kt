@@ -10,7 +10,7 @@ import com.woojun.ai.databinding.ChildrenInfoItemBinding
 import com.woojun.ai.databinding.NewChildrenInfoItemBinding
 import java.util.Calendar
 
-class ChildrenInfoAdapter(private val children: List<AiResult>, private val type: ChildInfoType): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class ChildrenInfoAdapter(private val children: AiResultList, private val type: ChildInfoType): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         return when (viewType) {
