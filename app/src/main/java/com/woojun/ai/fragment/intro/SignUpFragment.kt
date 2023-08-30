@@ -61,6 +61,7 @@ class SignUpFragment : Fragment() {
                 checkInputLayout.isErrorEnabled = false
 
                 val userInfo = UserInfo(
+                    "",
                     nameArea.text.toString().trim(),
                     emailArea.text.toString().trim(),
                     phoneArea.text.toString().trim(),
