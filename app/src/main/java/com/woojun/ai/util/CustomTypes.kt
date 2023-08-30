@@ -21,12 +21,15 @@ data class Place(
     var y: String,
 )
 
+@Entity
 data class UserInfo(
-    val name: String = "",
-    val email: String = "",
-    val phoneNumber: String = "",
-    val check: Boolean = false,
-    val children: ArrayList<ChildInfo> = arrayListOf()
+    @PrimaryKey
+    var id: String = "",
+    var name: String = "",
+    var email: String = "",
+    var phoneNumber: String = "",
+    var check: Boolean = false,
+    var children: ArrayList<ChildInfo> = arrayListOf()
 )
 
 data class ChildInfo(
