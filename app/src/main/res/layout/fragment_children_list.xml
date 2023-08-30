@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.woojun.ai.fragment.main.ChildrenListFragment"
+    android:scrollbars="none"
     android:orientation="vertical">
 
     <LinearLayout
