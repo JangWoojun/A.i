@@ -51,9 +51,8 @@ class ChildrenInfoInternalFragment : Fragment() {
             val mapView = MapView(requireContext())
             binding.mapView.addView(mapView)
 
-            mapView.setOnTouchListener { view, motionEvent ->
-                val action = motionEvent.action
-                when (action) {
+            mapView.setOnTouchListener { _, motionEvent ->
+                when (motionEvent.action) {
                     MotionEvent.ACTION_DOWN -> scrollView.requestDisallowInterceptTouchEvent(
                         true
                     )
@@ -146,7 +145,7 @@ class ChildrenInfoInternalFragment : Fragment() {
 
     private fun formatDate(inputDate: String): String {
         val inputFormat = SimpleDateFormat("yyyyMMdd")
-        val outputFormat = SimpleDateFormat("yy. MM. dd")
+        val outputFormat = SimpleDateFormat("yy.MM.dd")
 
         val date = inputFormat.parse(inputDate)
         return outputFormat.format(date)
