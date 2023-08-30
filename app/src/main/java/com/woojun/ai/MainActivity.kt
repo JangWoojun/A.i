@@ -5,30 +5,29 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.woojun.ai.databinding.ActivityMainBinding
+import com.woojun.ai.util.ViewModel
 
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private var backPressedTime: Long = 0
+    private lateinit var viewModel: ViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        viewModel = ViewModelProvider(this)[ViewModel::class.java]
+        viewModel.loadApiData()
 
         window.statusBarColor = Color.TRANSPARENT
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
 
         val navController = findNavController(R.id.nav_host_fragment)
-
-        val bundle = Bundle()
-        val item = intent.getStringExtra("item")
-        bundle.putString("item", item)
-        navController.navigate(R.id.home, bundle)
-
 
         binding.apply {
             bottomNavigation.setItemSelected(R.id.home)
@@ -69,13 +68,9 @@ class MainActivity : AppCompatActivity() {
         binding.apply {
             val navController = findNavController(R.id.nav_host_fragment)
 
-            val bundle = Bundle()
-            val item = intent.getStringExtra("item")
-            bundle.putString("item", item)
-
             when (it) {
-                R.id.home -> navController.navigate(R.id.home, bundle)
-                R.id.childrenList -> navController.navigate(R.id.childrenList, bundle)
+                R.id.home -> navController.navigate(R.id.home)
+                R.id.childrenList -> navController.navigate(R.id.childrenList)
                 R.id.childrenInfo -> navController.navigate(R.id.childrenInfo)
                 R.id.setting -> navController.navigate(R.id.setting)
             }
