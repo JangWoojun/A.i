@@ -104,13 +104,20 @@ class ChildrenInfoAdapter(private val children: MutableList<AiResult>, private v
         fun bind(childrenInfo: AiResult) {
             binding.apply {
                 name.text = childrenInfo.nm
-                image.setImageResource(R.drawable.profile)
                 sexBirthday.text = "${childrenInfo.sexdstnDscd} · ${(Calendar.getInstance().get(
                     Calendar.YEAR)) - childrenInfo.ageNow!!
                 }년생"
                 location.text = "${childrenInfo.occrAdres!!.take(2)}"
                 date.text = "일시: ${childrenInfo.occrde?.let { formatDate(it) }}"
                 age.text = "나이: ${childrenInfo.ageNow}세 (${childrenInfo.age}세)"
+                Glide.with(binding.root.context)
+                    .load(childrenInfo.tknphotoFile?.let { decodeBase64AndSetImage(it) })
+                    .error(R.drawable.child)
+                    .apply(RequestOptions.circleCropTransform())
+                    .apply(RequestOptions.formatOf(DecodeFormat.PREFER_ARGB_8888))
+                    .format(DecodeFormat.PREFER_RGB_565)
+                    .thumbnail(0.5f)
+                    .into(profile)
             }
         }
     }
@@ -120,13 +127,20 @@ class ChildrenInfoAdapter(private val children: MutableList<AiResult>, private v
         fun bind(childrenInfo: AiResult) {
             binding.apply {
                 name.text = childrenInfo.nm
-                image.setImageResource(R.drawable.profile)
                 sexBirthday.text = "${childrenInfo.sexdstnDscd} · ${(Calendar.getInstance().get(
                     Calendar.YEAR)) - childrenInfo.ageNow!!
                 }년생"
                 location.text = "${childrenInfo.occrAdres!!.take(2)}"
                 date.text = "일시: ${childrenInfo.occrde?.let { formatDate(it) }}"
                 age.text = "나이: ${childrenInfo.ageNow}세 (${childrenInfo.age}세)"
+                Glide.with(binding.root.context)
+                    .load(childrenInfo.tknphotoFile?.let { decodeBase64AndSetImage(it) })
+                    .error(R.drawable.child)
+                    .apply(RequestOptions.circleCropTransform())
+                    .apply(RequestOptions.formatOf(DecodeFormat.PREFER_ARGB_8888))
+                    .format(DecodeFormat.PREFER_RGB_565)
+                    .thumbnail(0.5f)
+                    .into(profile)
             }
         }
     }
