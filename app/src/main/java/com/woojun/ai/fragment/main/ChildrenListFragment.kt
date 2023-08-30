@@ -126,7 +126,7 @@ class ChildrenListFragment : Fragment() {
 
             viewModel.getApiData().observe(viewLifecycleOwner) { apiData ->
                 childrenList.layoutManager = LinearLayoutManager(requireContext().applicationContext)
-                childrenList.adapter = ChildrenInfoAdapter(apiData, ChildInfoType.DEFAULT)
+                childrenList.adapter = ChildrenInfoAdapter(apiData.subList(0, 10), ChildInfoType.DEFAULT)
             }
         }
     }

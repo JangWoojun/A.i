@@ -61,7 +61,7 @@ class HomeFragment : Fragment() {
 
             viewModel.getApiData().observe(viewLifecycleOwner) { apiData ->
                 childrenList.layoutManager = LinearLayoutManager(requireContext().applicationContext)
-                childrenList.adapter = ChildrenInfoAdapter(apiData, ChildInfoType.NEW)
+                childrenList.adapter = ChildrenInfoAdapter(apiData.subList(0, 3), ChildInfoType.NEW)
             }
 
             mainChildrenInfoButton.setOnClickListener {
