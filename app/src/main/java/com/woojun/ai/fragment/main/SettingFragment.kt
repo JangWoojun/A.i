@@ -18,6 +18,10 @@ import com.google.firebase.ktx.Firebase
 import com.woojun.ai.IntroActivity
 import com.woojun.ai.R
 import com.woojun.ai.databinding.FragmentSettingBinding
+import com.woojun.ai.util.AppDatabase
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class SettingFragment : Fragment() {
 
@@ -47,6 +51,12 @@ class SettingFragment : Fragment() {
 
             logoutButton.setOnClickListener {
                 auth.signOut()
+                CoroutineScope(Dispatchers.IO).launch {
+                    val db = AppDatabase.getDatabase(requireContext())
+                    val userDao = db!!.userInfoDao()
+
+                    userDao.deleteUser(userDao.getUser())
+                }
                 startActivity(Intent(requireContext(), IntroActivity::class.java))
                 finishAffinity(requireActivity())
             }
@@ -59,6 +69,12 @@ class SettingFragment : Fragment() {
                         if (task.isSuccessful) {
                             database.child("users").child(user.uid).setValue(null)
                             startActivity(Intent(requireContext(), IntroActivity::class.java))
+                            CoroutineScope(Dispatchers.IO).launch {
+                                val db = AppDatabase.getDatabase(requireContext())
+                                val userDao = db!!.userInfoDao()
+
+                                userDao.deleteUser(userDao.getUser())
+                            }
                             finishAffinity(requireActivity())
                         } else {
                             Toast.makeText(requireContext(), "회원탈퇴를 실패하였습니다", Toast.LENGTH_SHORT).show()
