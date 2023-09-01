@@ -186,19 +186,4 @@ class LoginFragment : Fragment() {
             }
     }
 
-    private fun sendPasswordResetEmail(email: String) {
-        auth.sendPasswordResetEmail(email)
-            .addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    Toast.makeText(requireContext(), "비밀번호 재설정 이메일이 성공적으로 보내졌습니다", Toast.LENGTH_SHORT).show()
-                } else {
-                    val exception = task.exception
-                    if (exception is FirebaseAuthInvalidUserException) {
-                        Toast.makeText(requireContext(), "이메일이 등록되지 않은 사용자입니다", Toast.LENGTH_SHORT).show()
-                    } else {
-                        Log.d("확인", "에러")
-                    }
-                }
-            }
-    }
 }
