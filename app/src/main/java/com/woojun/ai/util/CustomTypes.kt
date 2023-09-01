@@ -42,7 +42,6 @@ data class Place(
 @Entity
 data class UserInfo(
     @PrimaryKey
-    var id: String = "",
     var name: String = "",
     var email: String = "",
     var phoneNumber: String = "",
