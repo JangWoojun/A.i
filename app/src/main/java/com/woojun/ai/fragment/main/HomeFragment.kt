@@ -101,21 +101,12 @@ class HomeFragment : Fragment() {
                 .apply(RequestOptions.formatOf(DecodeFormat.PREFER_ARGB_8888))
                 .into(profile)
 
-            database.child("users").child(auth.uid.toString()).addListenerForSingleValueEvent(object :
-                ValueEventListener {
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    if (snapshot.exists()) {
-                        val value = snapshot.getValue(UserInfo::class.java)
-                        helloUserText.text = "반갑습니다 ${value!!.name}님"
-                    }
-                }
+            CoroutineScope(Dispatchers.IO).launch {
+                val db = AppDatabase.getDatabase(requireContext())
+                val user = db!!.userInfoDao().getUser()
 
-                override fun onCancelled(error: DatabaseError) {
-                    Log.d("확인", error.toString())
-                }
-            })
-
-
+                helloUserText.text = "반갑습니다 ${user.name}님"
+            }
 
         }
     }
