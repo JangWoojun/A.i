@@ -15,6 +15,11 @@ import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.woojun.ai.R
 import com.woojun.ai.databinding.FragmentRePersonalInformationBinding
+import com.woojun.ai.util.AppDatabase
+import com.woojun.ai.util.UserInfo
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class RePersonalInformationFragment : Fragment() {
 
@@ -47,16 +52,37 @@ class RePersonalInformationFragment : Fragment() {
                 when (titleText.text) {
                     "변경하실 이름을 입력하세요" -> {
                         database.child("users").child(auth.uid.toString()).child("name").setValue(inputArea.text.toString())
+                        CoroutineScope(Dispatchers.IO).launch {
+                            val db = AppDatabase.getDatabase(requireContext())
+                            val userDao = db!!.userInfoDao()
+                            val user = userDao.getUser()
+
+                            userDao.updateUser(UserInfo(inputArea.text.toString(), user.email, user.phoneNumber, user.check, user.children))
+                        }
                         Toast.makeText(requireContext(), "이름 변경이 완료되었습니다", Toast.LENGTH_SHORT).show()
                     }
 
                     "변경하실 이메일을 입력하세요" -> {
                         database.child("users").child(auth.uid.toString()).child("email").setValue(inputArea.text.toString())
+                        CoroutineScope(Dispatchers.IO).launch {
+                            val db = AppDatabase.getDatabase(requireContext())
+                            val userDao = db!!.userInfoDao()
+                            val user = userDao.getUser()
+
+                            userDao.updateUser(UserInfo(user.name, inputArea.text.toString(), user.phoneNumber, user.check, user.children))
+                        }
                         Toast.makeText(requireContext(), "이메일 변경이 완료되었습니다", Toast.LENGTH_SHORT).show()
                     }
 
                     "변경하실 전화번호를 입력하세요" -> {
                         database.child("users").child(auth.uid.toString()).child("phoneNumber").setValue(inputArea.text.toString())
+                        CoroutineScope(Dispatchers.IO).launch {
+                            val db = AppDatabase.getDatabase(requireContext())
+                            val userDao = db!!.userInfoDao()
+                            val user = userDao.getUser()
+
+                            userDao.updateUser(UserInfo(user.name, user.email, inputArea.text.toString(), user.check, user.children))
+                        }
                         Toast.makeText(requireContext(), "전화번호 변경이 완료되었습니다", Toast.LENGTH_SHORT).show()
                     }
 
