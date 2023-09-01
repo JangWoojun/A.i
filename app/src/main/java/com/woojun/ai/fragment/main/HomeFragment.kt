@@ -3,7 +3,6 @@ package com.woojun.ai.fragment.main
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -16,19 +15,19 @@ import com.bumptech.glide.load.DecodeFormat
 import com.bumptech.glide.request.RequestOptions
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.woojun.ai.MainActivity
 import com.woojun.ai.R
 import com.woojun.ai.databinding.FragmentHomeBinding
+import com.woojun.ai.util.AppDatabase
 import com.woojun.ai.util.ChildInfoType
 import com.woojun.ai.util.ChildrenInfoAdapter
-import com.woojun.ai.util.UserInfo
 import com.woojun.ai.util.ViewModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class HomeFragment : Fragment() {
 
