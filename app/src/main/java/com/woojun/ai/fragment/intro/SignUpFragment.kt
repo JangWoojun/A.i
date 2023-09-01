@@ -1,6 +1,5 @@
 package com.woojun.ai.fragment.intro
 
-import android.content.Intent
 import android.graphics.Paint
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -61,7 +60,6 @@ class SignUpFragment : Fragment() {
                 checkInputLayout.isErrorEnabled = false
 
                 val userInfo = UserInfo(
-                    "",
                     nameArea.text.toString().trim(),
                     emailArea.text.toString().trim(),
                     phoneArea.text.toString().trim(),
