@@ -38,6 +38,14 @@ class ChildrenListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.apply {
+
+            viewModel = ViewModelProvider(requireActivity())[ViewModel::class.java]
+
+            viewModel.getApiData().observe(viewLifecycleOwner) { apiData ->
+                childrenList.layoutManager = LinearLayoutManager(requireContext().applicationContext)
+                childrenList.adapter = ChildrenInfoAdapter(apiData.subList(0, 8), ChildInfoType.DEFAULT)
+            }
+
             buttonScrollView.post {
                 val scrollWidth = buttonScrollView.getChildAt(0).width
                 val viewWidth = buttonScrollView.width
@@ -122,12 +130,6 @@ class ChildrenListFragment : Fragment() {
                 }
             }
 
-            viewModel = ViewModelProvider(requireActivity())[ViewModel::class.java]
-
-            viewModel.getApiData().observe(viewLifecycleOwner) { apiData ->
-                childrenList.layoutManager = LinearLayoutManager(requireContext().applicationContext)
-                childrenList.adapter = ChildrenInfoAdapter(apiData.subList(0, 10), ChildInfoType.DEFAULT)
-            }
         }
     }
 
