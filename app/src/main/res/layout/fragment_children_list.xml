@@ -31,7 +31,7 @@
                     android:id="@+id/new_children_button"
                     android:layout_width="210dp"
                     android:layout_height="46dp"
-                    android:layout_marginHorizontal="28dp"
+                    android:layout_marginHorizontal="32dp"
                     android:backgroundTint="#FAFAFA"
                     app:cardCornerRadius="100dp">
 
@@ -71,7 +71,7 @@
                 <androidx.cardview.widget.CardView
                     android:id="@+id/long_children_button"
                     android:backgroundTint="#FAFAFA"
-                    android:layout_marginHorizontal="28dp"
+                    android:layout_marginHorizontal="32dp"
                     app:cardCornerRadius="100dp"
                     android:layout_width="210dp"
                     android:layout_height="46dp">
@@ -105,7 +105,6 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/childrenList"
-                tools:listitem="@layout/children_info_item"
                 android:nestedScrollingEnabled="false"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>
@@ -136,10 +135,11 @@
             </LinearLayout>
 
             <TextView
+                android:id="@+id/page_number_text"
                 android:textSize="16sp"
                 android:fontFamily="@font/poppins_medium"
                 android:textColor="#8696BB"
-                android:text="1 페이지"
+                android:text="1/10 페이지"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
 
