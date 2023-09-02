@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.woojun.ai.databinding.FragmentSearchBinding
@@ -127,8 +128,12 @@ class SearchFragment : Fragment(), FragmentInteractionListener {
             viewModel = ViewModelProvider(requireActivity())[ViewModel::class.java]
 
             viewModel.getApiData().observe(viewLifecycleOwner) { apiData ->
+                val data = apiData.filter {
+                    it.nm == name
+                }
+
                 searchList.layoutManager = LinearLayoutManager(requireContext().applicationContext)
-                searchList.adapter = ChildrenInfoAdapter(apiData!!, ChildInfoType.SEARCH)
+                searchList.adapter = ChildrenInfoAdapter(data.toMutableList(), ChildInfoType.SEARCH)
             }
 
         }
