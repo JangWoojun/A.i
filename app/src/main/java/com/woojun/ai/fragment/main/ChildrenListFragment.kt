@@ -7,13 +7,19 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.woojun.ai.databinding.FragmentChildrenListBinding
+import com.woojun.ai.util.AiResult
 import com.woojun.ai.util.ChildInfoType
 import com.woojun.ai.util.ChildrenInfoAdapter
 import com.woojun.ai.util.ViewModel
+import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.Date
+import java.util.Locale
 
 
 class ChildrenListFragment : Fragment() {
@@ -21,6 +27,9 @@ class ChildrenListFragment : Fragment() {
     private var _binding: FragmentChildrenListBinding? = null
     private val binding get() = _binding!!
     private lateinit var viewModel: ViewModel
+    private var pageIndex = 0
+    private var pageEndIndex = 0
+    private lateinit var apiList: MutableList<List<AiResult>>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,8 +51,19 @@ class ChildrenListFragment : Fragment() {
             viewModel = ViewModelProvider(requireActivity())[ViewModel::class.java]
 
             viewModel.getApiData().observe(viewLifecycleOwner) { apiData ->
+                apiList = mutableListOf()
+
+                apiData.chunked(5).forEach {
+                    apiList.add(it)
+                }
+
+                pageEndIndex = apiList.size - 1
+                pageIndex = 0
+
+                pageNumberText.text = "${pageIndex+1}/${pageEndIndex+1} 페이지"
+
                 childrenList.layoutManager = LinearLayoutManager(requireContext().applicationContext)
-                childrenList.adapter = ChildrenInfoAdapter(apiData.subList(0, 8), ChildInfoType.DEFAULT)
+                childrenList.adapter = ChildrenInfoAdapter(apiList[pageIndex].toMutableList(), ChildInfoType.DEFAULT)
             }
 
             buttonScrollView.post {
@@ -63,6 +83,23 @@ class ChildrenListFragment : Fragment() {
 
                 longChildrenText.setTextColor(Color.parseColor("#8696BB"))
                 longChildrenButton.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#FAFAFA"))
+
+                viewModel.getApiData().observe(viewLifecycleOwner) { apiData ->
+
+                    apiList = mutableListOf()
+
+                    apiData.filter {
+                        isWithinTwoDaysFromNow(it.occrde!!)
+                    }.chunked(5).forEach {
+                        apiList.add(it)
+                    }
+
+                    pageEndIndex = apiList.size - 1
+                    pageIndex = 0
+
+                    pageNumberText.text = "${pageIndex+1}/${pageEndIndex+1} 페이지"
+                    childrenList.adapter = ChildrenInfoAdapter(apiList[pageIndex].toMutableList(), ChildInfoType.DEFAULT)
+                }
 
                 buttonScrollView.post {
                     val animator = ValueAnimator.ofInt(buttonScrollView.scrollX, 0)
@@ -87,6 +124,21 @@ class ChildrenListFragment : Fragment() {
 
                 longChildrenText.setTextColor(Color.parseColor("#8696BB"))
                 longChildrenButton.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#FAFAFA"))
+
+                viewModel.getApiData().observe(viewLifecycleOwner) { apiData ->
+
+                    apiList = mutableListOf()
+
+                    apiData.chunked(5).forEach {
+                        apiList.add(it)
+                    }
+
+                    pageEndIndex = apiList.size - 1
+                    pageIndex = 0
+
+                    pageNumberText.text = "${pageIndex+1}/${pageEndIndex+1} 페이지"
+                    childrenList.adapter = ChildrenInfoAdapter(apiList[pageIndex].toMutableList(), ChildInfoType.DEFAULT)
+                }
 
                 val scrollWidth = buttonScrollView.getChildAt(0).width
                 val viewWidth = buttonScrollView.width
@@ -115,6 +167,22 @@ class ChildrenListFragment : Fragment() {
                 longChildrenText.setTextColor(Color.parseColor("#4894fe"))
                 longChildrenButton.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#EBF5FF"))
 
+                viewModel.getApiData().observe(viewLifecycleOwner) { apiData ->
+
+                    apiList = mutableListOf()
+
+                    apiData.filter {
+                        isDate365DaysAgo(it.occrde!!)
+                    }.chunked(5).forEach {
+                        apiList.add(it)
+                    }
+
+                    pageEndIndex = apiList.size - 1
+                    pageIndex = 0
+
+                    pageNumberText.text = "${pageIndex+1}/${pageEndIndex+1} 페이지"
+                    childrenList.adapter = ChildrenInfoAdapter(apiList[pageIndex].toMutableList(), ChildInfoType.DEFAULT)
+                }
 
                 buttonScrollView.post {
                     val maxScrollAmount = buttonScrollView.getChildAt(0).width - buttonScrollView.width
@@ -130,12 +198,71 @@ class ChildrenListFragment : Fragment() {
                 }
             }
 
+            beforeButton.setOnClickListener {
+                if (pageIndex - 1 == -1) {
+                    Toast.makeText(requireContext(), "첫 페이지입니다", Toast.LENGTH_SHORT).show()
+                } else {
+                    pageIndex -= 1
+                    childrenList.adapter = ChildrenInfoAdapter(apiList[pageIndex].toMutableList(), ChildInfoType.DEFAULT)
+                    pageNumberText.text = "${pageIndex+1}/${pageEndIndex+1} 페이지"
+                }
+
+            }
+
+            afterButton.setOnClickListener {
+                if (pageIndex + 1 > pageEndIndex) {
+                    Toast.makeText(requireContext(), "마지막 페이지입니다", Toast.LENGTH_SHORT).show()
+                } else {
+                    pageIndex += 1
+                    childrenList.adapter = ChildrenInfoAdapter(apiList[pageIndex].toMutableList(), ChildInfoType.DEFAULT)
+                    pageNumberText.text = "${pageIndex+1}/${pageEndIndex+1} 페이지"
+                }
+            }
+
         }
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+
+    private fun isWithinTwoDaysFromNow(targetDateString: String): Boolean {
+        val dateFormat = SimpleDateFormat("yyyyMMdd", Locale.getDefault())
+
+        try {
+            val currentDate = Calendar.getInstance().time
+
+            val targetDate = dateFormat.parse(targetDateString)
+
+            val twoDaysAgo = Calendar.getInstance()
+            twoDaysAgo.add(Calendar.DATE, -2)
+
+            if (targetDate != null) {
+                return targetDate >= twoDaysAgo.time && targetDate <= currentDate
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+
+        return false
+    }
+
+
+    private fun isDate365DaysAgo(inputDateStr: String): Boolean {
+        return try {
+            val currentDate = Date()
+
+            val dateFormat = SimpleDateFormat("yyyyMMdd")
+            val inputDate = dateFormat.parse(inputDateStr)
+
+            val timeDifference = currentDate.time - inputDate.time
+
+            timeDifference >= (365L * 24 * 60 * 60 * 1000)
+        } catch (e: Exception) {
+            false
+        }
     }
 
 }
