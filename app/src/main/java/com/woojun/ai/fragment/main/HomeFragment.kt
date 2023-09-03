@@ -56,6 +56,18 @@ class HomeFragment : Fragment() {
 
         binding.apply {
 
+            CoroutineScope(Dispatchers.IO).launch {
+                val db = AppDatabase.getDatabase(requireContext())
+                val user = db!!.userInfoDao().getUser()
+
+                if (user.check) {
+                    childrenIdentificationButton.visibility = View.VISIBLE
+                } else {
+                    childrenIdentificationButton.visibility = View.GONE
+                }
+                helloUserText.text = "반갑습니다 ${user.name}님"
+            }
+
             viewModel = ViewModelProvider(requireActivity())[ViewModel::class.java]
 
             viewModel.getApiData().observe(viewLifecycleOwner) { apiData ->
@@ -99,13 +111,6 @@ class HomeFragment : Fragment() {
                 .load(R.drawable.profile)
                 .apply(RequestOptions.formatOf(DecodeFormat.PREFER_ARGB_8888))
                 .into(profile)
-
-            CoroutineScope(Dispatchers.IO).launch {
-                val db = AppDatabase.getDatabase(requireContext())
-                val user = db!!.userInfoDao().getUser()
-
-                helloUserText.text = "반갑습니다 ${user.name}님"
-            }
 
         }
     }
