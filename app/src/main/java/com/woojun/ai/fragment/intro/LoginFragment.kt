@@ -76,10 +76,6 @@ class LoginFragment : Fragment() {
                 }
             }
 
-            appleLoginButton.setOnClickListener {
-                Toast.makeText(requireContext(), "다음 업데이트에서 추가 예정입니다", Toast.LENGTH_SHORT).show()
-            }
-
         }
 
     }
