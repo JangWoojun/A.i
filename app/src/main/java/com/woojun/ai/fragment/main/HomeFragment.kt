@@ -75,7 +75,7 @@ class HomeFragment : Fragment() {
                 childrenList.adapter = ChildrenInfoAdapter(apiData.subList(0, 3), ChildInfoType.NEW)
             }
 
-            mainChildrenInfoButton.setOnClickListener {
+            mainChildrenInfoRegistrationButton.setOnClickListener {
                 (activity as MainActivity).moveBottomNavigation(R.id.childrenInfo)
             }
 
