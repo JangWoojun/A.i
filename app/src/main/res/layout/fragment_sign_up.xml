@@ -192,6 +192,7 @@
 
 
             <ImageView
+                android:visibility="gone"
                 android:layout_marginTop="30dp"
                 android:layout_gravity="center"
                 android:src="@drawable/login_line"
@@ -199,6 +200,7 @@
                 android:layout_height="wrap_content"/>
 
             <LinearLayout
+                android:visibility="gone"
                 android:gravity="center"
                 android:layout_marginTop="22dp"
                 android:orientation="horizontal"
