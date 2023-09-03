@@ -121,7 +121,7 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/main_children_info_button"
+            android:id="@+id/main_children_info_registration_button"
             android:layout_marginHorizontal="26dp"
             android:layout_marginTop="22dp"
             app:cardCornerRadius="10dp"
@@ -546,7 +546,7 @@
             android:layout_height="wrap_content">
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/childrenList"
+                android:id="@+id/children_list"
                 android:nestedScrollingEnabled="false"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>
