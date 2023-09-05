@@ -55,7 +55,8 @@ data class ChildInfo(
     val birthDate: String,
     val sex: String,
     val characteristics: String,
-    val photo: String
+    val photo: String,
+    val lastIdentityDate: String
 )
 @Parcelize
 data class AiResult(
