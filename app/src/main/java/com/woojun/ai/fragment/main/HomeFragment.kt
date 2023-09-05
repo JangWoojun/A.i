@@ -28,6 +28,10 @@ import com.woojun.ai.util.ViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.Date
+import java.util.Locale
 
 class HomeFragment : Fragment() {
 
@@ -66,6 +70,32 @@ class HomeFragment : Fragment() {
                     childrenIdentificationButton.visibility = View.GONE
                 }
                 helloUserText.text = "반갑습니다 ${user.name}님"
+
+                if (user.children.size == 0) {
+                    childProfileBox.visibility = View.GONE
+                    childNameText.visibility = View.GONE
+                    childSexAndBirthText.visibility = View.GONE
+                    childInfoSideBar.visibility = View.GONE
+
+                    childRegistrationText.visibility = View.VISIBLE
+                } else {
+                    childRegistrationText.visibility = View.GONE
+
+                    childProfileBox.visibility = View.VISIBLE
+                    childNameText.visibility = View.VISIBLE
+                    childSexAndBirthText.visibility = View.VISIBLE
+                    childInfoSideBar.visibility = View.VISIBLE
+
+                    Glide.with(requireContext())
+                        .load(R.drawable.child)
+                        .apply(RequestOptions.formatOf(DecodeFormat.PREFER_ARGB_8888))
+                        .into(childProfile)
+
+                    childNameText.text = user.children[0].name
+                    childSexAndBirthText.text = "${user.children[0].sex} · ${user.children[0].birthDate.substring(0 until 4)}년생"
+                    lastIdentityDate.text = formatDate(user.children[0].lastIdentityDate)
+                    nextIdentityDate.text = nextIdentityDateFormat(user.children[0].lastIdentityDate)
+                }
             }
 
             viewModel = ViewModelProvider(requireActivity())[ViewModel::class.java]
@@ -112,6 +142,10 @@ class HomeFragment : Fragment() {
                 .apply(RequestOptions.formatOf(DecodeFormat.PREFER_ARGB_8888))
                 .into(profile)
 
+            mainChildrenInfoRegistrationButton.setOnClickListener {
+                (activity as MainActivity).moveBottomNavigation(R.id.childrenList)
+            }
+
         }
     }
 
@@ -120,4 +154,29 @@ class HomeFragment : Fragment() {
         _binding = null
     }
 
+    private fun formatDate(inputDate: String): String {
+        val inputFormat = SimpleDateFormat("yyyyMMdd")
+        val outputFormat = SimpleDateFormat("yy. MM. dd")
+
+        val date = inputFormat.parse(inputDate)
+        return outputFormat.format(date)
+    }
+
+    fun nextIdentityDateFormat(inputDateStr: String): String {
+        try {
+            val inputDateFormat = SimpleDateFormat("yyyyMMdd", Locale.getDefault())
+            val inputDate: Date = inputDateFormat.parse(inputDateStr) ?: return ""
+
+            val calendar = Calendar.getInstance()
+            calendar.time = inputDate
+            calendar.add(Calendar.MONTH, 6)
+
+            val outputDateFormat = SimpleDateFormat("yy. MM. dd", Locale.getDefault())
+
+            return outputDateFormat.format(calendar.time)
+        } catch (e: Exception) {
+            e.printStackTrace()
+            return ""
+        }
+    }
 }
