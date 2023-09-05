@@ -144,7 +144,7 @@
                     <androidx.cardview.widget.CardView
                         android:visibility="gone"
                         android:outlineProvider="none"
-                        android:id="@+id/cardView"
+                        android:id="@+id/child_profile_box"
                         android:layout_width="52dp"
                         android:layout_height="52dp"
                         android:backgroundTint="@color/white"
@@ -165,9 +165,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:orientation="vertical"
-                        app:layout_constraintStart_toEndOf="@+id/cardView">
+                        app:layout_constraintStart_toEndOf="@+id/child_profile_box">
 
                         <TextView
+                            android:id="@+id/child_registration_text"
                             android:gravity="center"
                             android:fontFamily="@font/poppins_bold"
                             android:text="아이를 등록해주세요"
@@ -178,6 +179,7 @@
 
                         <TextView
                             android:visibility="gone"
+                            android:id="@+id/child_name_text"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/poppins_bold"
@@ -186,6 +188,7 @@
                             android:textSize="18sp" />
 
                         <TextView
+                            android:id="@+id/child_sex_and_birth_text"
                             android:visibility="gone"
                             android:text="남성 · 2005년생"
                             android:textColor="#cbe1ff"
@@ -227,6 +230,7 @@
                     app:layout_constraintBottom_toBottomOf="parent" />
 
                 <LinearLayout
+                    android:id="@+id/child_info_side_bar"
                     android:visibility="gone"
                     android:layout_marginTop="18dp"
                     android:layout_marginBottom="18.5dp"
