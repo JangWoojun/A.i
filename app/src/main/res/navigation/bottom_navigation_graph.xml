@@ -31,7 +31,14 @@
         android:id="@+id/childrenInfo"
         android:name="com.woojun.ai.fragment.main.MyChildInfoFragment"
         android:label="fragment_children_info"
-        tools:layout="@layout/fragment_my_child_info" />
+        tools:layout="@layout/fragment_my_child_info" >
+        <action
+            android:id="@+id/action_childrenInfo_to_myChildInfoRegisterFragment"
+            app:destination="@id/myChildInfoRegisterFragment" />
+        <action
+            android:id="@+id/action_childrenInfo_to_childrenInfoInternalFragment"
+            app:destination="@id/childrenInfoInternalFragment" />
+    </fragment>
     <fragment
         android:id="@+id/childrenList"
         android:name="com.woojun.ai.fragment.main.ChildrenListFragment"
@@ -60,4 +67,18 @@
         android:name="com.woojun.ai.fragment.main.RePersonalInformationFragment"
         android:label="fragment_re_personal_information"
         tools:layout="@layout/fragment_re_personal_information" />
+    <fragment
+        android:id="@+id/myChildInfoRegisterFragment"
+        android:name="com.woojun.ai.fragment.main.MyChildInfoRegisterFragment"
+        android:label="fragment_my_child_info_register"
+        tools:layout="@layout/fragment_my_child_info_register" >
+        <action
+            android:id="@+id/action_myChildInfoRegisterFragment_to_cameraFragment"
+            app:destination="@id/cameraFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/cameraFragment"
+        android:name="com.woojun.ai.fragment.main.CameraFragment"
+        android:label="fragment_camera"
+        tools:layout="@layout/fragment_camera" />
 </navigation>
