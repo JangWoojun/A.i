@@ -118,6 +118,7 @@
                 android:orientation="horizontal">
 
                 <androidx.cardview.widget.CardView
+                    android:id="@+id/select_man_button"
                     android:layout_width="0dp"
                     android:layout_height="100dp"
                     android:layout_marginEnd="8dp"
@@ -131,7 +132,7 @@
                         android:layout_height="match_parent">
 
                         <androidx.cardview.widget.CardView
-                            android:id="@+id/cardView4"
+                            android:id="@+id/man_background"
                             android:layout_width="64dp"
                             android:layout_height="64dp"
                             android:layout_marginStart="12dp"
@@ -143,6 +144,7 @@
                             app:layout_constraintTop_toTopOf="parent">
 
                             <ImageView
+                                android:id="@+id/man_icon"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
@@ -154,6 +156,7 @@
 
 
                         <TextView
+                            android:id="@+id/man_text"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="22dp"
@@ -162,7 +165,7 @@
                             android:textColor="#4894FE"
                             android:textSize="20sp"
                             app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toEndOf="@+id/cardView4"
+                            app:layout_constraintStart_toEndOf="@+id/man_background"
                             app:layout_constraintTop_toTopOf="parent" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -170,6 +173,7 @@
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
+                    android:id="@+id/select_woman_button"
                     android:layout_width="0dp"
                     android:layout_height="100dp"
                     android:layout_marginStart="8dp"
@@ -183,7 +187,7 @@
                         android:layout_height="match_parent">
 
                         <androidx.cardview.widget.CardView
-                            android:id="@+id/cardView5"
+                            android:id="@+id/woman_background"
                             android:layout_width="64dp"
                             android:layout_height="64dp"
                             android:layout_marginStart="12dp"
@@ -195,6 +199,7 @@
                             app:layout_constraintTop_toTopOf="parent">
 
                             <ImageView
+                                android:id="@+id/woman_icon"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
@@ -205,6 +210,7 @@
                         </androidx.cardview.widget.CardView>
 
                         <TextView
+                            android:id="@+id/woman_text"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="22dp"
@@ -213,7 +219,7 @@
                             android:textColor="@color/black"
                             android:textSize="20sp"
                             app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toEndOf="@+id/cardView5"
+                            app:layout_constraintStart_toEndOf="@+id/woman_background"
                             app:layout_constraintTop_toTopOf="parent" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
