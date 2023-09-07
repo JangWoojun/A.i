@@ -3,6 +3,7 @@ package com.woojun.ai
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
@@ -63,6 +64,7 @@ class MainActivity : AppCompatActivity() {
                 finish()
             }
         }
+        hideBottomNavigation(false)
     }
 
     fun moveBottomNavigation(it: Int) {
@@ -79,6 +81,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun hideBottomNavigation(state: Boolean){
-        if(state) binding.bottomNavigation.visibility = View.GONE else binding.bottomNavigation.visibility = View.VISIBLE
+        binding.apply {
+            if (state) {
+                bottomNavigation.visibility = View.GONE
+            } else {
+                bottomNavigation.visibility = View.VISIBLE
+            }
+        }
     }
 }
