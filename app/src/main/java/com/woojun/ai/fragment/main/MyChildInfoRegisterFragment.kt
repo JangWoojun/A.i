@@ -1,5 +1,7 @@
 package com.woojun.ai.fragment.main
 
+import android.content.res.ColorStateList
+import android.graphics.Color
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -14,6 +16,8 @@ class MyChildInfoRegisterFragment : Fragment() {
 
     private var _binding: FragmentMyChildInfoRegisterBinding? = null
     private val binding get() = _binding!!
+
+    private var sex = "남성"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,7 +41,33 @@ class MyChildInfoRegisterFragment : Fragment() {
             cameraButton.setOnClickListener {
                 view.findNavController().navigate(R.id.action_myChildInfoRegisterFragment_to_cameraFragment)
             }
+
+            selectManButton.setOnClickListener {
+                manBackground.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#EFF7FF"))
+                manIcon.imageTintList = ColorStateList.valueOf(Color.parseColor("#FFFFFF"))
+                manText.setTextColor(Color.parseColor("#4894FE"))
+
+                womanBackground.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#FFFFFF"))
+                womanIcon.imageTintList = ColorStateList.valueOf(Color.parseColor("#000000"))
+                womanText.setTextColor(Color.parseColor("#000000"))
+
+                sex = "남성"
+            }
+
+            selectWomanButton.setOnClickListener {
+                manBackground.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#FFFFFF"))
+                manIcon.imageTintList = ColorStateList.valueOf(Color.parseColor("#000000"))
+                manText.setTextColor(Color.parseColor("#000000"))
+
+                womanBackground.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#EFF7FF"))
+                womanIcon.imageTintList = ColorStateList.valueOf(Color.parseColor("#FFFFFF"))
+                womanText.setTextColor(Color.parseColor("#4894FE"))
+
+                sex = "여성"
+            }
         }
+
+
     }
 
     override fun onDestroyView() {
