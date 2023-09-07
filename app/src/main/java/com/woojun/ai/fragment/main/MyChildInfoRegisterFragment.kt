@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.findNavController
+import com.woojun.ai.R
 import com.woojun.ai.databinding.FragmentMyChildInfoRegisterBinding
 
 class MyChildInfoRegisterFragment : Fragment() {
@@ -28,7 +30,9 @@ class MyChildInfoRegisterFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.apply {
-
+            cameraButton.setOnClickListener {
+                view.findNavController().navigate(R.id.action_myChildInfoRegisterFragment_to_cameraFragment)
+            }
         }
     }
 
