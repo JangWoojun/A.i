@@ -5,7 +5,15 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.woojun.ai.R
 import com.woojun.ai.databinding.FragmentMyChildInfoBinding
+import com.woojun.ai.util.AppDatabase
+import com.woojun.ai.util.MyChildInfoAdapter
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class MyChildInfoFragment : Fragment() {
 
@@ -28,7 +36,9 @@ class MyChildInfoFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.apply {
-
+            childrenInfoRegistrationButton.setOnClickListener {
+                view.findNavController().navigate(R.id.action_childrenInfo_to_myChildInfoRegisterFragment)
+            }
         }
     }
 
