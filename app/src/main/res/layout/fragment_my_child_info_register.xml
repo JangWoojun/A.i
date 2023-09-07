@@ -281,8 +281,8 @@
                             android:fontFamily="@font/poppins_reqular"
                             android:id="@+id/year_area"
                             android:layout_width="80dp"
-                            android:layout_height="36dp"
-                            android:background="null" />
+                            android:layout_height="48dp"
+                            android:background="@null" />
 
                     </com.google.android.material.card.MaterialCardView>
 
@@ -318,8 +318,8 @@
                             android:fontFamily="@font/poppins_reqular"
                             android:id="@+id/month_area"
                             android:layout_width="80dp"
-                            android:layout_height="36dp"
-                            android:background="null" />
+                            android:layout_height="48dp"
+                            android:background="@null" />
 
                     </com.google.android.material.card.MaterialCardView>
 
@@ -355,8 +355,8 @@
                             android:fontFamily="@font/poppins_reqular"
                             android:id="@+id/date_area"
                             android:layout_width="80dp"
-                            android:layout_height="36dp"
-                            android:background="null" />
+                            android:layout_height="48dp"
+                            android:background="@null" />
 
                     </com.google.android.material.card.MaterialCardView>
 
@@ -388,6 +388,7 @@
                 android:textSize="18sp" />
 
             <androidx.cardview.widget.CardView
+                android:outlineProvider="none"
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
                 android:layout_marginTop="16dp"
@@ -396,7 +397,7 @@
                 <EditText
                     android:layout_marginTop="10dp"
                     android:hint="특징 및 세부 사항을 작성해주세요"
-                    android:background="null"
+                    android:background="@null"
                     android:id="@+id/characteristics_area"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -431,7 +432,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:fontFamily="@font/poppins_bold"
-                android:text="사진 촬영"
+                android:text="얼굴 등록"
                 android:textColor="@color/white"
                 android:textSize="16sp" />
 
