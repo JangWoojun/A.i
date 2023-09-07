@@ -68,32 +68,6 @@
 
             </LinearLayout>
 
-            <LinearLayout
-                android:gravity="center"
-                android:layout_marginEnd="18dp"
-                android:layout_width="wrap_content"
-                android:layout_height="24dp"
-                android:orientation="horizontal"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <ImageView
-                    android:layout_width="18dp"
-                    android:layout_height="18dp"
-                    android:src="@drawable/location" />
-
-                <TextView
-                    android:id="@+id/location"
-                    android:layout_marginStart="8dp"
-                    android:textSize="16sp"
-                    android:text="은평구"
-                    android:textColor="#8696bb"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-
-
-            </LinearLayout>
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -139,7 +113,7 @@
                         android:id="@+id/date"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="일시 : 2023. 06. 22"
+                        android:text="등록 일시 : 2023. 06. 22"
                         android:textColor="#8696BB"
                         android:textSize="12sp" />
 
