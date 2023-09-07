@@ -39,6 +39,16 @@ class MyChildInfoFragment : Fragment() {
             childrenInfoRegistrationButton.setOnClickListener {
                 view.findNavController().navigate(R.id.action_childrenInfo_to_myChildInfoRegisterFragment)
             }
+
+            CoroutineScope(Dispatchers.IO).launch {
+                val db = AppDatabase.getDatabase(requireContext())
+                val user = db!!.userInfoDao().getUser()
+
+
+                myChildrenList.layoutManager = LinearLayoutManager(requireContext().applicationContext)
+                myChildrenList.adapter = MyChildInfoAdapter(user.children)
+
+            }
         }
     }
 
