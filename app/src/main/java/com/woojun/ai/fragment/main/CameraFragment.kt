@@ -41,6 +41,8 @@ class CameraFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.apply {
+            val mainActivity = activity as MainActivity
+            mainActivity.hideBottomNavigation(true)
 
             camera.setLifecycleOwner(this@CameraFragment)
 
