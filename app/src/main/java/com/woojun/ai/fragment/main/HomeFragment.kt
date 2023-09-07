@@ -143,7 +143,7 @@ class HomeFragment : Fragment() {
                 .into(profile)
 
             mainChildrenInfoRegistrationButton.setOnClickListener {
-                (activity as MainActivity).moveBottomNavigation(R.id.childrenList)
+                (activity as MainActivity).moveBottomNavigation(R.id.childrenInfo)
             }
 
         }
@@ -162,7 +162,7 @@ class HomeFragment : Fragment() {
         return outputFormat.format(date)
     }
 
-    fun nextIdentityDateFormat(inputDateStr: String): String {
+    private fun nextIdentityDateFormat(inputDateStr: String): String {
         try {
             val inputDateFormat = SimpleDateFormat("yyyyMMdd", Locale.getDefault())
             val inputDate: Date = inputDateFormat.parse(inputDateStr) ?: return ""
