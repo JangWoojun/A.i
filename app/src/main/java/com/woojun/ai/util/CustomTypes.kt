@@ -21,6 +21,10 @@ class TypeConverter {
     }
 }
 
+data class SetChildImageResult(
+    val message: String
+)
+
 data class PagerItem(
     val image: Int,
     val title: String,
@@ -49,15 +53,17 @@ data class UserInfo(
     var children: ArrayList<ChildInfo> = arrayListOf()
 )
 
+@Parcelize
 data class ChildInfo(
     val id: String,
     val name: String,
     val birthDate: String,
     val sex: String,
     val characteristics: String,
-    val photo: String,
+    var photo: String,
     val lastIdentityDate: String
-)
+): Parcelable
+
 @Parcelize
 data class AiResult(
     val age: Int?,
