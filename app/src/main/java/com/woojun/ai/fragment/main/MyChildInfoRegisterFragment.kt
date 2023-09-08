@@ -8,14 +8,22 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.findNavController
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import com.woojun.ai.MainActivity
 import com.woojun.ai.R
 import com.woojun.ai.databinding.FragmentMyChildInfoRegisterBinding
+import com.woojun.ai.util.ChildInfo
+import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.Locale
 
 class MyChildInfoRegisterFragment : Fragment() {
 
     private var _binding: FragmentMyChildInfoRegisterBinding? = null
     private val binding get() = _binding!!
+    private lateinit var auth: FirebaseAuth
 
     private var sex = "남성"
 
@@ -35,6 +43,8 @@ class MyChildInfoRegisterFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.apply {
+            auth = Firebase.auth
+
             val mainActivity = activity as MainActivity
             mainActivity.hideBottomNavigation(true)
 
@@ -61,6 +71,23 @@ class MyChildInfoRegisterFragment : Fragment() {
 
                 sex = "여성"
             }
+
+            cameraButton.setOnClickListener {
+                val bundle = Bundle()
+                val item = ChildInfo(
+                    "${auth.uid}${nameArea.text}",
+                    nameArea.text.toString(),
+                    "${yearArea.text}${monthArea.text}${dateArea.text}",
+                    sex,
+                    characteristicsArea.text.toString(),
+                    "null",
+                    getToday()
+                )
+                bundle.putParcelable("child info", item)
+
+                view.findNavController().navigate(R.id.action_myChildInfoRegisterFragment_to_cameraFragment, bundle)
+            }
+
         }
 
 
@@ -71,4 +98,9 @@ class MyChildInfoRegisterFragment : Fragment() {
         _binding = null
     }
 
+    private fun getToday(): String {
+        val currentDate = Calendar.getInstance().time
+        val dateFormat = SimpleDateFormat("yyyyMMdd", Locale.getDefault())
+        return dateFormat.format(currentDate)
+    }
 }
