@@ -38,12 +38,8 @@ class MyChildInfoRegisterFragment : Fragment() {
             val mainActivity = activity as MainActivity
             mainActivity.hideBottomNavigation(true)
 
-            cameraButton.setOnClickListener {
-                view.findNavController().navigate(R.id.action_myChildInfoRegisterFragment_to_cameraFragment)
-            }
-
             selectManButton.setOnClickListener {
-                manBackground.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#EFF7FF"))
+                manBackground.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#4894FE"))
                 manIcon.imageTintList = ColorStateList.valueOf(Color.parseColor("#FFFFFF"))
                 manText.setTextColor(Color.parseColor("#4894FE"))
 
@@ -59,7 +55,7 @@ class MyChildInfoRegisterFragment : Fragment() {
                 manIcon.imageTintList = ColorStateList.valueOf(Color.parseColor("#000000"))
                 manText.setTextColor(Color.parseColor("#000000"))
 
-                womanBackground.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#EFF7FF"))
+                womanBackground.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#4894FE"))
                 womanIcon.imageTintList = ColorStateList.valueOf(Color.parseColor("#FFFFFF"))
                 womanText.setTextColor(Color.parseColor("#4894FE"))
 
