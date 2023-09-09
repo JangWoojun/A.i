@@ -30,7 +30,7 @@ object ProgressUtil {
         return dialog
     }
 
-    fun createDialog(context: Context, dialogType: Boolean, mainText: String, subText: String) {
+    fun createDialog(context: Context, dialogType: Boolean, mainText: String, subText: String, function: () -> Unit) {
         val dialogSource: Int = R.layout.success_and_failure_dialog
 
         val dialogView = LayoutInflater.from(context).inflate(dialogSource, null)
@@ -68,6 +68,7 @@ object ProgressUtil {
 
         dialogOkButton.setOnClickListener {
             dialog.dismiss()
+            function()
         }
     }
 
