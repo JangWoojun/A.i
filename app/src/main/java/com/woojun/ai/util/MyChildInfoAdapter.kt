@@ -42,8 +42,8 @@ class MyChildInfoAdapter(private val childInfo: ArrayList<ChildInfo>): RecyclerV
             binding.apply {
                 name.text = myChildInfo.name
                 sexBirthday.text = "${myChildInfo.sex} · ${myChildInfo.birthDate.substring(0 until 4)}년생"
-                date.text = "일시: ${myChildInfo.lastIdentityDate}"
-                age.text = "나이: ${calculateAge(myChildInfo.birthDate)}"
+                date.text = "등록 일시: ${dateFormat(myChildInfo.lastIdentityDate)}"
+                age.text = "현재 나이: ${calculateAge(myChildInfo.birthDate)}세"
                 Glide.with(binding.root.context)
                     .load(myChildInfo.photo)
                     .error(R.drawable.child)
@@ -57,6 +57,15 @@ class MyChildInfoAdapter(private val childInfo: ArrayList<ChildInfo>): RecyclerV
     }
 
 }
+
+fun dateFormat(inputDate: String): String {
+    val inputFormat = SimpleDateFormat("yyyyMMdd")
+    val outputFormat = SimpleDateFormat("yyyy. MM. dd")
+
+    val date = inputFormat.parse(inputDate)
+    return outputFormat.format(date)
+}
+
 fun calculateAge(birthdateStr: String): Int {
     try {
         val birthdateDateFormat = SimpleDateFormat("yyyyMMdd", Locale.getDefault())
