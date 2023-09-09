@@ -83,3 +83,7 @@ class AiResultList: ArrayList<AiResult>()
 enum class ChildInfoType {
     NEW, DEFAULT, SEARCH
 }
+
+enum class CameraType{
+    ChildRegister, Find
+}
