@@ -21,9 +21,6 @@ class TypeConverter {
     }
 }
 
-data class SetChildImageResult(
-    val message: String
-)
 
 data class PagerItem(
     val image: Int,
