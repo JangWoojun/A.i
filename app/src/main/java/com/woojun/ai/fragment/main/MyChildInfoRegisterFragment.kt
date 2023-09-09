@@ -72,6 +72,22 @@ class MyChildInfoRegisterFragment : Fragment() {
                 sex = "여성"
             }
 
+            yearAreaField.setOnClickListener {
+                yearArea.requestFocus()
+            }
+
+            monthAreaField.setOnClickListener {
+                monthArea.requestFocus()
+            }
+
+            dateAreaField.setOnClickListener {
+                dateArea.requestFocus()
+            }
+
+            characteristicsAreaField.setOnClickListener {
+                characteristicsArea.requestFocus()
+            }
+
             cameraButton.setOnClickListener {
                 val bundle = Bundle()
                 val item = ChildInfo(
