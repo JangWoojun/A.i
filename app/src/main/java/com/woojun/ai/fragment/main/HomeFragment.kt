@@ -156,7 +156,7 @@ class HomeFragment : Fragment() {
 
     private fun formatDate(inputDate: String): String {
         val inputFormat = SimpleDateFormat("yyyyMMdd")
-        val outputFormat = SimpleDateFormat("yy. MM. dd")
+        val outputFormat = SimpleDateFormat("yyyy. MM. dd")
 
         val date = inputFormat.parse(inputDate)
         return outputFormat.format(date)
@@ -171,7 +171,7 @@ class HomeFragment : Fragment() {
             calendar.time = inputDate
             calendar.add(Calendar.MONTH, 6)
 
-            val outputDateFormat = SimpleDateFormat("yy. MM. dd", Locale.getDefault())
+            val outputDateFormat = SimpleDateFormat("yyyy. MM. dd", Locale.getDefault())
 
             return outputDateFormat.format(calendar.time)
         } catch (e: Exception) {
