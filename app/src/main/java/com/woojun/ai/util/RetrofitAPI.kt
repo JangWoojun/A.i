@@ -1,9 +1,13 @@
 package com.woojun.ai.util
 
 import com.woojun.ai.BuildConfig
+import okhttp3.MultipartBody
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Header
+import retrofit2.http.Multipart
+import retrofit2.http.POST
+import retrofit2.http.Part
 import retrofit2.http.Query
 
 interface RetrofitAPI {
@@ -23,4 +27,12 @@ interface RetrofitAPI {
         @Query("query") query: String
 
     ): Call<ResultSearchKeyword>
+
+    @Multipart
+    @POST(BuildConfig.POSTURL1)
+    fun setChildImage(
+        @Part FixImage: MultipartBody.Part,
+        @Part("id") id: String
+    ): Call<String>
+
 }
