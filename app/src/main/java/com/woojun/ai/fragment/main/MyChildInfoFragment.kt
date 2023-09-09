@@ -14,6 +14,7 @@ import com.woojun.ai.util.MyChildInfoAdapter
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class MyChildInfoFragment : Fragment() {
 
@@ -44,10 +45,10 @@ class MyChildInfoFragment : Fragment() {
                 val db = AppDatabase.getDatabase(requireContext())
                 val user = db!!.userInfoDao().getUser()
 
-
-                myChildrenList.layoutManager = LinearLayoutManager(requireContext().applicationContext)
-                myChildrenList.adapter = MyChildInfoAdapter(user.children)
-
+                withContext(Dispatchers.Main) {
+                    myChildrenList.layoutManager = LinearLayoutManager(requireContext().applicationContext)
+                    myChildrenList.adapter = MyChildInfoAdapter(user.children)
+                }
             }
         }
     }
