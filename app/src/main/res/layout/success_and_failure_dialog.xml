@@ -35,7 +35,7 @@
         android:layout_marginTop="16dp"
         android:fontFamily="@font/poppins_light"
         android:gravity="center"
-        android:layout_width="220dp"
+        android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:text="Congradulations, your phone number has been verified. You can start using the app"
         app:layout_constraintEnd_toEndOf="parent"
