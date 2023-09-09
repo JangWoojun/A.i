@@ -259,6 +259,7 @@
 
 
                 <LinearLayout
+                    android:id="@+id/year_area_field"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
@@ -279,6 +280,7 @@
                         android:layout_marginTop="8dp">
 
                         <EditText
+                            android:maxLength="4"
                             android:inputType="number"
                             android:gravity="center"
                             android:layout_gravity="center"
@@ -295,6 +297,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/month_area_field"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
@@ -316,10 +319,11 @@
                         android:layout_marginTop="8dp">
 
                         <EditText
+                            android:maxLength="2"
                             android:inputType="number"
                             android:gravity="center"
                             android:layout_gravity="center"
-                            android:hint="3"
+                            android:hint="03"
                             android:textSize="14sp"
                             android:fontFamily="@font/poppins_reqular"
                             android:id="@+id/month_area"
@@ -332,6 +336,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/date_area_field"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
@@ -353,10 +358,11 @@
                         android:layout_marginTop="8dp">
 
                         <EditText
+                            android:maxLength="2"
                             android:inputType="number"
                             android:gravity="center"
                             android:layout_gravity="center"
-                            android:hint="8"
+                            android:hint="08"
                             android:textSize="14sp"
                             android:fontFamily="@font/poppins_reqular"
                             android:id="@+id/date_area"
@@ -395,18 +401,19 @@
 
             <androidx.cardview.widget.CardView
                 android:outlineProvider="none"
+                android:id="@+id/characteristics_area_field"
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
                 android:layout_marginTop="16dp"
                 app:cardCornerRadius="10dp">
 
                 <EditText
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="5dp"
                     android:hint="특징 및 세부 사항을 작성해주세요"
                     android:background="@null"
                     android:id="@+id/characteristics_area"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="50dp"
                     android:layout_marginHorizontal="10dp"
                     android:fontFamily="@font/poppins_reqular"
                     android:inputType="text"
