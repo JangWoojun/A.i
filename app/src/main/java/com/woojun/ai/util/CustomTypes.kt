@@ -84,6 +84,7 @@ enum class ChildInfoType {
     NEW, DEFAULT, SEARCH
 }
 
-enum class CameraType{
+@Parcelize
+enum class CameraType : Parcelable {
     ChildRegister, Find
 }
