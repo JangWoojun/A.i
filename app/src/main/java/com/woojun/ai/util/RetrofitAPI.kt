@@ -35,4 +35,10 @@ interface RetrofitAPI {
         @Part("id") id: String
     ): Call<String>
 
+    @Multipart
+    @POST(BuildConfig.POSTURL2)
+    fun findChildImage(
+        @Part FixImage: MultipartBody.Part,
+    ): Call<String>
+
 }
