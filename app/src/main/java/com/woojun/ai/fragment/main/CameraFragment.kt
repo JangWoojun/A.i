@@ -202,6 +202,7 @@ class CameraFragment : Fragment() {
 
             userDao.updateUser(user)
             database.child("users").child("${auth.uid}").setValue(user)
+            database.child("children").child(childInfo.id).setValue(childInfo)
         }
 
         createDialog(
