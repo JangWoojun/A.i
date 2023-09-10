@@ -21,11 +21,6 @@ class TypeConverter {
     }
 }
 
-data class CameraFragmentType(
-    val type: CameraType,
-    val childInfo: ChildInfo?
-)
-
 
 data class PagerItem(
     val image: Int,
