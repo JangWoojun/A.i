@@ -16,6 +16,7 @@ import com.woojun.ai.MainActivity
 import com.woojun.ai.R
 import com.woojun.ai.databinding.FragmentMyChildInfoRegisterBinding
 import com.woojun.ai.util.AppDatabase
+import com.woojun.ai.util.CameraType
 import com.woojun.ai.util.ChildInfo
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -112,6 +113,7 @@ class MyChildInfoRegisterFragment : Fragment() {
                     withContext(Dispatchers.Main) {
                         if (validationCheck(childInfo)) {
                             val bundle = Bundle()
+                            bundle.putParcelable("camera type", CameraType.ChildRegister)
                             bundle.putParcelable("child info", childInfo)
 
                             view.findNavController().navigate(R.id.action_myChildInfoRegisterFragment_to_cameraFragment, bundle)
