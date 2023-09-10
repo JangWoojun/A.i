@@ -20,6 +20,7 @@ import com.woojun.ai.MainActivity
 import com.woojun.ai.R
 import com.woojun.ai.databinding.FragmentCameraBinding
 import com.woojun.ai.util.AppDatabase
+import com.woojun.ai.util.CameraType
 import com.woojun.ai.util.ChildInfo
 import com.woojun.ai.util.ProgressUtil.createDialog
 import com.woojun.ai.util.ProgressUtil.createLoadingDialog
@@ -57,7 +58,7 @@ class CameraFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentCameraBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -69,7 +70,8 @@ class CameraFragment : Fragment() {
         binding.apply {
 
             val bundle = arguments
-            val item = bundle?.getParcelable<ChildInfo>("child info")
+            val type = bundle?.getParcelable<CameraType>("camera type")
+            val childInfo = bundle?.getParcelable<ChildInfo>("child info")
 
             camera.setLifecycleOwner(this@CameraFragment)
 
@@ -85,7 +87,7 @@ class CameraFragment : Fragment() {
                                 CoroutineScope(Dispatchers.IO).launch {
                                     val file = File(
                                         context?.filesDir,
-                                        "${item!!.name}.jpg"
+                                        "${childInfo!!.name}.jpg"
                                     )
 
                                     try {
@@ -97,15 +99,14 @@ class CameraFragment : Fragment() {
                                         }
                                         withContext(Dispatchers.Main) {
                                             val storageRef = FirebaseStorage.getInstance().reference
-                                            val imageRef = storageRef.child("child_images/${item.name}.jpg")
+                                            val imageRef = storageRef.child("child_images/${childInfo.name}.jpg")
 
                                             imageRef.putBytes(bitmapToByteArray(bitmap))
                                                 .addOnCompleteListener {
-
                                                     if (it.isSuccessful) {
                                                         imageRef.downloadUrl.addOnSuccessListener { uri ->
 
-                                                            item.photo = uri.toString()
+                                                            childInfo.photo = uri.toString()
 
                                                             val retrofit = RetrofitClient.getInstance()
                                                             val apiService = retrofit.create(RetrofitAPI::class.java)
@@ -113,75 +114,31 @@ class CameraFragment : Fragment() {
                                                             val requestFile = RequestBody.create(MediaType.parse("image/*"), file)
                                                             val multipartBody = MultipartBody.Part.createFormData("FixImage", file.name, requestFile)
 
-                                                            val call = apiService.setChildImage(multipartBody, item.id)
+                                                            val call = apiService.setChildImage(multipartBody, childInfo.id)
 
                                                             call.enqueue(object : Callback<String> {
                                                                 override fun onResponse(call: Call<String>, response: Response<String>) {
                                                                     loadingDialog.dismiss()
                                                                     if (response.isSuccessful) {
-                                                                        updateUserChildInfo(item)
+                                                                        updateUserChildInfo(childInfo)
                                                                     } else {
-                                                                        createDialog(
-                                                                            requireContext(),
-                                                                            false,
-                                                                            "우리 아이 신원등록 실패",
-                                                                            "우리 아이의 신원을 실패했습니다\n" +
-                                                                                    "잠시후 다시 시도해주세요 만약 해결되지 않는다면\n" +
-                                                                                    "오류 제보 부탁드립니다"
-                                                                        ) {
-                                                                            val mainActivity = activity as MainActivity
-                                                                            mainActivity.hideBottomNavigation(false)
-                                                                            view.findNavController()?.navigate(R.id.action_cameraFragment_to_home)
-                                                                        }
+                                                                        showFailDialog(CameraType.ChildRegister)
                                                                     }
                                                                 }
 
                                                                 override fun onFailure(call: Call<String>, t: Throwable) {
                                                                     loadingDialog.dismiss()
-                                                                    createDialog(
-                                                                        requireContext(),
-                                                                        false,
-                                                                        "우리 아이 신원등록 실패",
-                                                                        "우리 아이의 신원을 실패했습니다\n" +
-                                                                                "잠시후 다시 시도해주세요 만약 해결되지 않는다면\n" +
-                                                                                "오류 제보 부탁드립니다"
-                                                                    ) {
-                                                                        val mainActivity = activity as MainActivity
-                                                                        mainActivity.hideBottomNavigation(false)
-                                                                        view.findNavController()?.navigate(R.id.action_cameraFragment_to_home)
-                                                                    }
+                                                                    showFailDialog(CameraType.ChildRegister)
                                                                 }
                                                             })
 
                                                         }.addOnFailureListener {
                                                             loadingDialog.dismiss()
-                                                            createDialog(
-                                                                requireContext(),
-                                                                false,
-                                                                "우리 아이 신원등록 실패",
-                                                                "우리 아이의 신원을 실패했습니다\n" +
-                                                                        "잠시후 다시 시도해주세요 만약 해결되지 않는다면\n" +
-                                                                        "오류 제보 부탁드립니다"
-                                                            ) {
-                                                                val mainActivity = activity as MainActivity
-                                                                mainActivity.hideBottomNavigation(false)
-                                                                view.findNavController().navigate(R.id.action_cameraFragment_to_home)
-                                                            }
+                                                            showFailDialog(CameraType.ChildRegister)
                                                         }
                                                     } else {
                                                         loadingDialog.dismiss()
-                                                        createDialog(
-                                                            requireContext(),
-                                                            false,
-                                                            "우리 아이 신원등록 실패",
-                                                            "우리 아이의 신원을 실패했습니다\n" +
-                                                                    "잠시후 다시 시도해주세요 만약 해결되지 않는다면\n" +
-                                                                    "오류 제보 부탁드립니다"
-                                                        ) {
-                                                            val mainActivity = activity as MainActivity
-                                                            mainActivity.hideBottomNavigation(false)
-                                                            view.findNavController().navigate(R.id.action_cameraFragment_to_home)
-                                                        }
+                                                        showFailDialog(CameraType.ChildRegister)
                                                     }
                                                 }
 
@@ -189,18 +146,7 @@ class CameraFragment : Fragment() {
                                     } catch (e: IOException) {
                                         withContext(Dispatchers.Main) {
                                             loadingDialog.dismiss()
-                                            createDialog(
-                                                requireContext(),
-                                                false,
-                                                "우리 아이 신원등록 실패",
-                                                "우리 아이의 신원을 실패했습니다\n" +
-                                                        "잠시후 다시 시도해주세요 만약 해결되지 않는다면\n" +
-                                                        "오류 제보 부탁드립니다"
-                                            ) {
-                                                val mainActivity = activity as MainActivity
-                                                mainActivity.hideBottomNavigation(false)
-                                                view.findNavController().navigate(R.id.action_cameraFragment_to_home)
-                                            }
+                                            showFailDialog(CameraType.ChildRegister)
                                         }
                                     }
                                 }
@@ -268,6 +214,25 @@ class CameraFragment : Fragment() {
         val stream = ByteArrayOutputStream()
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream)
         return stream.toByteArray()
+    }
+
+    fun showFailDialog(type: CameraType) {
+        if (type == CameraType.Find) {
+
+        } else {
+            createDialog(
+                requireContext(),
+                false,
+                "우리 아이 신원등록 실패",
+                "우리 아이의 신원을 실패했습니다\n" +
+                        "다시 얼굴을 정확히 가이드라인에 맞춰 시도해주세요\n" +
+                        "만약 계속해서 발생한다면 오류 제보 부탁드립니다"
+            ) {
+                val mainActivity = activity as MainActivity
+                mainActivity.hideBottomNavigation(false)
+                view?.findNavController()?.navigate(R.id.action_cameraFragment_to_home)
+            }
+        }
     }
 
 }
