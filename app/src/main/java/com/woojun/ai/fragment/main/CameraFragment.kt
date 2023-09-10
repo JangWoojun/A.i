@@ -119,7 +119,7 @@ class CameraFragment : Fragment() {
                                                             call.enqueue(object : Callback<String> {
                                                                 override fun onResponse(call: Call<String>, response: Response<String>) {
                                                                     loadingDialog.dismiss()
-                                                                    if (response.isSuccessful) {
+                                                                    if (response.isSuccessful && response.body() == "success") {
                                                                         updateUserChildInfo(childInfo)
                                                                     } else {
                                                                         showFailDialog(CameraType.ChildRegister)
