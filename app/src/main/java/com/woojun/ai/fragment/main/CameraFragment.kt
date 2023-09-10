@@ -97,56 +97,65 @@ class CameraFragment : Fragment() {
 
                                             fileOutputStream.close()
                                         }
-                                        withContext(Dispatchers.Main) {
-                                            val storageRef = FirebaseStorage.getInstance().reference
-                                            val imageRef = storageRef.child("child_images/${childInfo.name}.jpg")
 
-                                            imageRef.putBytes(bitmapToByteArray(bitmap))
-                                                .addOnCompleteListener {
-                                                    if (it.isSuccessful) {
-                                                        imageRef.downloadUrl.addOnSuccessListener { uri ->
+                                        if (type == CameraType.ChildRegister) {
+                                            withContext(Dispatchers.Main) {
+                                                val storageRef = FirebaseStorage.getInstance().reference
+                                                val imageRef = storageRef.child("child_images/${childInfo.name}.jpg")
 
-                                                            childInfo.photo = uri.toString()
+                                                imageRef.putBytes(bitmapToByteArray(bitmap))
+                                                    .addOnCompleteListener {
+                                                        if (it.isSuccessful) {
+                                                            imageRef.downloadUrl.addOnSuccessListener { uri ->
 
-                                                            val retrofit = RetrofitClient.getInstance()
-                                                            val apiService = retrofit.create(RetrofitAPI::class.java)
+                                                                childInfo.photo = uri.toString()
 
-                                                            val requestFile = RequestBody.create(MediaType.parse("image/*"), file)
-                                                            val multipartBody = MultipartBody.Part.createFormData("FixImage", file.name, requestFile)
+                                                                val retrofit = RetrofitClient.getInstance()
+                                                                val apiService = retrofit.create(RetrofitAPI::class.java)
 
-                                                            val call = apiService.setChildImage(multipartBody, childInfo.id)
+                                                                val requestFile = RequestBody.create(MediaType.parse("image/*"), file)
+                                                                val multipartBody = MultipartBody.Part.createFormData("FixImage", file.name, requestFile)
 
-                                                            call.enqueue(object : Callback<String> {
-                                                                override fun onResponse(call: Call<String>, response: Response<String>) {
-                                                                    loadingDialog.dismiss()
-                                                                    if (response.isSuccessful && response.body() == "success") {
-                                                                        updateUserChildInfo(childInfo)
-                                                                    } else {
+                                                                val call = apiService.setChildImage(multipartBody, childInfo.id)
+
+                                                                call.enqueue(object : Callback<String> {
+                                                                    override fun onResponse(call: Call<String>, response: Response<String>) {
+                                                                        loadingDialog.dismiss()
+                                                                        if (response.isSuccessful && response.body() == "success") {
+                                                                            updateUserChildInfo(childInfo)
+                                                                        } else {
+                                                                            showFailDialog(CameraType.ChildRegister)
+                                                                        }
+                                                                    }
+
+                                                                    override fun onFailure(call: Call<String>, t: Throwable) {
+                                                                        loadingDialog.dismiss()
                                                                         showFailDialog(CameraType.ChildRegister)
                                                                     }
-                                                                }
+                                                                })
 
-                                                                override fun onFailure(call: Call<String>, t: Throwable) {
-                                                                    loadingDialog.dismiss()
-                                                                    showFailDialog(CameraType.ChildRegister)
-                                                                }
-                                                            })
-
-                                                        }.addOnFailureListener {
+                                                            }.addOnFailureListener {
+                                                                loadingDialog.dismiss()
+                                                                showFailDialog(CameraType.ChildRegister)
+                                                            }
+                                                        } else {
                                                             loadingDialog.dismiss()
                                                             showFailDialog(CameraType.ChildRegister)
                                                         }
-                                                    } else {
-                                                        loadingDialog.dismiss()
-                                                        showFailDialog(CameraType.ChildRegister)
                                                     }
-                                                }
+
+                                            }
+                                        } else {
 
                                         }
                                     } catch (e: IOException) {
                                         withContext(Dispatchers.Main) {
                                             loadingDialog.dismiss()
-                                            showFailDialog(CameraType.ChildRegister)
+                                            if (type == CameraType.ChildRegister) {
+                                                showFailDialog(CameraType.ChildRegister)
+                                            } else {
+
+                                            }
                                         }
                                     }
                                 }
