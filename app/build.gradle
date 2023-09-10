@@ -28,6 +28,7 @@ android {
         buildConfigField "String", "GETURL", properties['getUrl']
         buildConfigField "String", "RESTAPIKEY", properties['restApiKey']
         buildConfigField "String", "POSTURL1", properties['postUrl1']
+        buildConfigField "String", "POSTURL2", properties['postUrl2']
 
         manifestPlaceholders = [KAKAONATIVEKEY: properties['kakaoNativeKey']]
 
