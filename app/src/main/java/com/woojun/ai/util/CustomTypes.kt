@@ -21,6 +21,11 @@ class TypeConverter {
     }
 }
 
+data class FindChildImageResult(
+    val distance_list: List<Double>,
+    val similar_distance_list: List<List<Double>>,
+    val similar_distance_uid: List<List<String>>
+)
 
 data class PagerItem(
     val image: Int,
