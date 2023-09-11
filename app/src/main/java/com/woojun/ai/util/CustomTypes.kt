@@ -59,12 +59,13 @@ data class UserInfo(
 @Parcelize
 data class ChildInfo(
     val id: String = "",
-    val name: String = "",
-    val birthDate: String = "",
-    val sex: String = "",
-    val characteristics: String = "",
+    var name: String = "",
+    var birthDate: String = "",
+    var sex: String = "",
+    var characteristics: String = "",
     var photo: String = "",
-    val lastIdentityDate: String = ""
+    var lastIdentityDate: String = "",
+    var parentPhoneNumber: String = ""
 ): Parcelable
 
 @Parcelize
@@ -93,4 +94,9 @@ enum class ChildInfoType {
 @Parcelize
 enum class CameraType : Parcelable {
     ChildRegister, Find
+}
+
+@Parcelize
+enum class MyChildAdapterType : Parcelable {
+    DEFAULT, Find
 }
