@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
@@ -22,6 +23,7 @@ import com.woojun.ai.MainActivity
 import com.woojun.ai.R
 import com.woojun.ai.databinding.FragmentHomeBinding
 import com.woojun.ai.util.AppDatabase
+import com.woojun.ai.util.CameraType
 import com.woojun.ai.util.ChildInfoType
 import com.woojun.ai.util.ChildrenInfoAdapter
 import com.woojun.ai.util.ViewModel
@@ -151,6 +153,13 @@ class HomeFragment : Fragment() {
 
             mainChildrenInfoRegistrationButton.setOnClickListener {
                 (activity as MainActivity).moveBottomNavigation(R.id.childrenInfo)
+            }
+
+            childrenIdentificationButton.setOnClickListener {
+                val bundle = Bundle()
+                bundle.putParcelable("camera type", CameraType.Find)
+
+                view.findNavController().navigate(R.id.action_home_to_cameraFragment, bundle)
             }
 
         }
