@@ -1,7 +1,9 @@
 package com.woojun.ai.util
 
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DecodeFormat
@@ -21,7 +23,13 @@ class MyChildInfoAdapter(private val childInfo: ArrayList<ChildInfo>): RecyclerV
         )
         return MyChildInfoViewHolder(binding).also { handler ->
             binding.apply {
+                viewDetailsButton.setOnClickListener {
+                    val bundle = Bundle()
+                    val item = childInfo[handler.position]
+                    bundle.putParcelable("child info", item)
 
+                    parent.findNavController().navigate(R.id.action_childrenInfo_to_myChildrenInfoInternalFragment, bundle)
+                }
             }
         }
 
@@ -81,6 +89,6 @@ fun calculateAge(birthdateStr: String): Int {
         return currentCalendar.get(Calendar.YEAR) - birthdateCalendar.get(Calendar.YEAR)
     } catch (e: Exception) {
         e.printStackTrace()
-        return -1 // 오류 발생 시 -1을 반환합니다.
+        return -1
     }
 }
