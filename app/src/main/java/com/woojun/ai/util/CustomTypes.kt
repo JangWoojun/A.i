@@ -21,11 +21,12 @@ class TypeConverter {
     }
 }
 
+@Parcelize
 data class FindChildImageResult(
     val distance_list: List<Double>,
     val similar_distance_list: List<List<Double>>,
     val similar_distance_uid: List<List<String>>
-)
+): Parcelable
 
 data class PagerItem(
     val image: Int,
