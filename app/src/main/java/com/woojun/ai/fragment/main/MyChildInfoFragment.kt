@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.woojun.ai.R
 import com.woojun.ai.databinding.FragmentMyChildInfoBinding
 import com.woojun.ai.util.AppDatabase
+import com.woojun.ai.util.MyChildAdapterType
 import com.woojun.ai.util.MyChildInfoAdapter
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -47,7 +48,7 @@ class MyChildInfoFragment : Fragment() {
 
                 withContext(Dispatchers.Main) {
                     myChildrenList.layoutManager = LinearLayoutManager(requireContext().applicationContext)
-                    myChildrenList.adapter = MyChildInfoAdapter(user.children)
+                    myChildrenList.adapter = MyChildInfoAdapter(user.children, MyChildAdapterType.DEFAULT)
                 }
             }
         }
