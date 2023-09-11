@@ -41,6 +41,9 @@
         <action
             android:id="@+id/action_childrenInfo_to_childrenInfoInternalFragment"
             app:destination="@id/childrenInfoInternalFragment" />
+        <action
+            android:id="@+id/action_childrenInfo_to_myChildrenInfoInternalFragment"
+            app:destination="@id/myChildrenInfoInternalFragment" />
     </fragment>
     <fragment
         android:id="@+id/childrenList"
