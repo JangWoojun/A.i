@@ -147,7 +147,34 @@ class CameraFragment : Fragment() {
 
                                             }
                                         } else {
+                                            withContext(Dispatchers.Main) {
+                                                val retrofit = RetrofitClient.getInstance()
+                                                val apiService = retrofit.create(RetrofitAPI::class.java)
 
+                                                val requestFile = RequestBody.create(MediaType.parse("image/*"), file)
+                                                val multipartBody = MultipartBody.Part.createFormData("FixImage", file.name, requestFile)
+
+                                                val call = apiService.findChildImage(multipartBody)
+
+                                                call.enqueue(object : Callback<FindChildImageResult> {
+                                                    override fun onResponse(call: Call<FindChildImageResult>, response: Response<FindChildImageResult>) {
+                                                        loadingDialog.dismiss()
+                                                        if (response.isSuccessful) {
+                                                            val item = Bundle()
+                                                            item.putParcelable("children info", response.body())
+
+                                                            view.findNavController().navigate(R.id.action_cameraFragment_to_findChildrenListFragment, bundle)
+                                                        } else {
+                                                            showFailDialog(CameraType.Find)
+                                                        }
+                                                    }
+
+                                                    override fun onFailure(call: Call<FindChildImageResult>, t: Throwable) {
+                                                        loadingDialog.dismiss()
+                                                        showFailDialog(CameraType.Find)
+                                                    }
+                                                })
+                                            }
                                         }
                                     } catch (e: IOException) {
                                         withContext(Dispatchers.Main) {
@@ -155,7 +182,7 @@ class CameraFragment : Fragment() {
                                             if (type == CameraType.ChildRegister) {
                                                 showFailDialog(CameraType.ChildRegister)
                                             } else {
-
+                                                showFailDialog(CameraType.Find)
                                             }
                                         }
                                     }
