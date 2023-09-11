@@ -58,13 +58,13 @@ data class UserInfo(
 
 @Parcelize
 data class ChildInfo(
-    val id: String,
-    val name: String,
-    val birthDate: String,
-    val sex: String,
-    val characteristics: String,
-    var photo: String,
-    val lastIdentityDate: String
+    val id: String = "",
+    val name: String = "",
+    val birthDate: String = "",
+    val sex: String = "",
+    val characteristics: String = "",
+    var photo: String = "",
+    val lastIdentityDate: String = ""
 ): Parcelable
 
 @Parcelize
