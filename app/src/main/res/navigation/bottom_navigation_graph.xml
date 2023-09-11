@@ -87,5 +87,22 @@
         <action
             android:id="@+id/action_cameraFragment_to_home"
             app:destination="@id/home" />
+        <action
+            android:id="@+id/action_cameraFragment_to_findChildrenListFragment"
+            app:destination="@id/findChildrenListFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/findChildrenListFragment"
+        android:name="com.woojun.ai.fragment.main.FindChildrenListFragment"
+        android:label="fragment_find_children_list"
+        tools:layout="@layout/fragment_find_children_list" >
+        <action
+            android:id="@+id/action_findChildrenListFragment_to_myChildrenInfoInternalFragment"
+            app:destination="@id/myChildrenInfoInternalFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/myChildrenInfoInternalFragment"
+        android:name="com.woojun.ai.fragment.main.MyChildrenInfoInternalFragment"
+        android:label="fragment_my_children_info_internal"
+        tools:layout="@layout/fragment_my_children_info_internal" />
 </navigation>
