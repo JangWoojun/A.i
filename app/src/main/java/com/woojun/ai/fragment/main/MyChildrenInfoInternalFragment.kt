@@ -13,6 +13,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.woojun.ai.R
 import com.woojun.ai.databinding.FragmentMyChildrenInfoInternalBinding
 import com.woojun.ai.util.ChildInfo
+import com.woojun.ai.util.MyChildAdapterType
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date
@@ -40,7 +41,8 @@ class MyChildrenInfoInternalFragment : Fragment() {
 
         binding.apply {
             val bundle = arguments
-            val childInfo = bundle?.getParcelable<ChildInfo>("child info")
+            val childInfo = bundle!!.getParcelable<ChildInfo>("child info")
+            val childInfoType = bundle.getParcelable<MyChildAdapterType>("child info type")
 
             name.text = childInfo!!.name
             age.text = "${calculateAge(childInfo.birthDate)}"
@@ -58,19 +60,35 @@ class MyChildrenInfoInternalFragment : Fragment() {
                 .into(profile)
 
             chatButton.setOnClickListener {
-                val intent = Intent(Intent.ACTION_SENDTO, Uri.parse("smsto:182"))
-                intent.putExtra(
-                    "sms_body",
-                    "제 자녀 ${childInfo.name}이 (위치 입력)쪽에서 실종 되었습니다 " +
-                            "실종시각은 (시간 입력)이고 실종 당시 복장은 (복장 입력), 특이사항으로는 (입력)이 있습니다"
-                )
-                startActivity(intent)
+                if (childInfoType == MyChildAdapterType.DEFAULT) {
+                    val intent = Intent(Intent.ACTION_SENDTO, Uri.parse("smsto:182"))
+                    intent.putExtra(
+                        "sms_body",
+                        "제 자녀 ${childInfo.name}이 (입력)쪽에서 실종 되었습니다 " +
+                                "실종 시각은 (입력)이고 실종 당시 복장은 (입력), 특이사항으로는 (입력)이 있습니다"
+                    )
+                    startActivity(intent)
+                } else {
+                    val intent = Intent(Intent.ACTION_SENDTO, Uri.parse("smsto:${childInfo.parentPhoneNumber}"))
+                    intent.putExtra(
+                        "sms_body",
+                        "${childInfo.name}로 의심되는 학생이 (입력)쪽에서 발견 되었습니다 " +
+                                "목격 시각은 (입력)이고 복장은 (입력)이었으며 특이사항으로는 (입력)이 있습니다"
+                    )
+                    startActivity(intent)
+                }
             }
 
             phoneButton.setOnClickListener {
-                startActivity(
-                    Intent(Intent.ACTION_DIAL, Uri.parse("tel:112"))
-                )
+                if (childInfoType == MyChildAdapterType.DEFAULT) {
+                    startActivity(
+                        Intent(Intent.ACTION_DIAL, Uri.parse("tel:112"))
+                    )
+                } else {
+                    startActivity(
+                        Intent(Intent.ACTION_DIAL, Uri.parse("tel:${childInfo.parentPhoneNumber}"))
+                    )
+                }
             }
 
         }
