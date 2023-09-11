@@ -15,7 +15,7 @@ import java.util.Calendar
 import java.util.Date
 import java.util.Locale
 
-class MyChildInfoAdapter(private val childInfo: ArrayList<ChildInfo>): RecyclerView.Adapter<MyChildInfoAdapter.MyChildInfoViewHolder>()  {
+class MyChildInfoAdapter(private val childInfo: ArrayList<ChildInfo>, private val type: MyChildAdapterType): RecyclerView.Adapter<MyChildInfoAdapter.MyChildInfoViewHolder>()  {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyChildInfoViewHolder {
         val binding = MyChildrenInfoItemBinding.inflate(
             LayoutInflater.from(parent.context),
