@@ -22,6 +22,7 @@ import com.woojun.ai.databinding.FragmentCameraBinding
 import com.woojun.ai.util.AppDatabase
 import com.woojun.ai.util.CameraType
 import com.woojun.ai.util.ChildInfo
+import com.woojun.ai.util.FindChildImageResult
 import com.woojun.ai.util.ProgressUtil.createDialog
 import com.woojun.ai.util.ProgressUtil.createLoadingDialog
 import com.woojun.ai.util.RetrofitAPI
@@ -234,9 +235,9 @@ class CameraFragment : Fragment() {
                 requireContext(),
                 false,
                 "우리 아이 신원등록 실패",
-                "우리 아이의 신원을 실패했습니다\n" +
+                "우리 아이의 신원등록을 실패했습니다\n" +
                         "다시 얼굴을 정확히 가이드라인에 맞춰 시도해주세요\n" +
-                        "만약 계속해서 발생한다면 오류 제보 부탁드립니다"
+                        "만약 계속해서 오류가 발생한다면 제보 부탁드립니다"
             ) {
                 val mainActivity = activity as MainActivity
                 mainActivity.hideBottomNavigation(false)
