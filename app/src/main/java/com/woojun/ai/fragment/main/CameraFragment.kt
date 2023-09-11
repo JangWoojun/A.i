@@ -229,7 +229,18 @@ class CameraFragment : Fragment() {
 
     fun showFailDialog(type: CameraType) {
         if (type == CameraType.Find) {
-
+            createDialog(
+                requireContext(),
+                false,
+                "실종아동 신원조회 실패",
+                "실종아동 신원조회를 실패했습니다\n" +
+                        "다시 얼굴을 정확히 가이드라인에 맞춰 시도해주세요\n" +
+                        "만약 계속해서 오류가 발생한다면 제보 부탁드립니다"
+            ) {
+                val mainActivity = activity as MainActivity
+                mainActivity.hideBottomNavigation(false)
+                view?.findNavController()?.navigate(R.id.action_cameraFragment_to_home)
+            }
         } else {
             createDialog(
                 requireContext(),
