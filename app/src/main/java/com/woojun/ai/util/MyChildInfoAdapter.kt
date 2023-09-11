@@ -2,6 +2,7 @@ package com.woojun.ai.util
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
@@ -37,7 +38,11 @@ class MyChildInfoAdapter(private val childInfo: ArrayList<ChildInfo>, private va
     }
 
     override fun onBindViewHolder(holder: MyChildInfoViewHolder, position: Int) {
-        holder.bind(childInfo[position])
+        if (type == MyChildAdapterType.DEFAULT) {
+            holder.bind(childInfo[position], false)
+        } else {
+            holder.bind(childInfo[position], true)
+        }
     }
 
     override fun getItemCount(): Int {
@@ -47,8 +52,11 @@ class MyChildInfoAdapter(private val childInfo: ArrayList<ChildInfo>, private va
 
     class MyChildInfoViewHolder(private val binding: MyChildrenInfoItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(myChildInfo: ChildInfo) {
+        fun bind(myChildInfo: ChildInfo, type: Boolean) {
             binding.apply {
+                if (type) {
+                    modifyButton.visibility = View.GONE
+                }
                 name.text = myChildInfo.name
                 sexBirthday.text = "${myChildInfo.sex} · ${myChildInfo.birthDate.substring(0 until 4)}년생"
                 date.text = "등록 일시: ${dateFormat(myChildInfo.lastIdentityDate)}"
