@@ -41,7 +41,7 @@ class MyChildInfoRegisterFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentMyChildInfoRegisterBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -54,6 +54,9 @@ class MyChildInfoRegisterFragment : Fragment() {
 
             val mainActivity = activity as MainActivity
             mainActivity.hideBottomNavigation(true)
+
+            val bundle = arguments
+            val childInfoItem = bundle?.getParcelable<ChildInfo>("child info")
 
             selectManButton.setOnClickListener {
                 manBackground.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#4894FE"))
@@ -96,31 +99,49 @@ class MyChildInfoRegisterFragment : Fragment() {
             }
 
             cameraButton.setOnClickListener {
-                CoroutineScope(Dispatchers.IO).launch {
-                    val db = AppDatabase.getDatabase(requireContext())
-                    val user = db!!.userInfoDao().getUser()
+                if (childInfoItem == null) {
+                    CoroutineScope(Dispatchers.IO).launch {
+                        val db = AppDatabase.getDatabase(requireContext())
+                        val user = db!!.userInfoDao().getUser()
 
-                    val childInfo = ChildInfo(
-                        id = auth.uid+user.children.size,
-                        name = nameArea.text.toString(),
-                        birthDate = "${yearArea.text}${monthArea.text}${dateArea.text}",
-                        sex = sex,
-                        characteristics = characteristicsArea.text.toString(),
-                        photo = "null",
-                        lastIdentityDate = getToday(),
-                        parentPhoneNumber = user.phoneNumber
-                    )
+                        val childInfo = ChildInfo(
+                            id = auth.uid+user.children.size,
+                            name = nameArea.text.toString().replace(" ", ""),
+                            birthDate = "${yearArea.text}${monthArea.text}${dateArea.text}",
+                            sex = sex,
+                            characteristics = characteristicsArea.text.toString(),
+                            photo = "null",
+                            lastIdentityDate = getToday(),
+                            parentPhoneNumber = user.phoneNumber
+                        )
 
-                    withContext(Dispatchers.Main) {
-                        if (validationCheck(childInfo)) {
-                            val bundle = Bundle()
-                            bundle.putParcelable("camera type", CameraType.ChildRegister)
-                            bundle.putParcelable("child info", childInfo)
+                        withContext(Dispatchers.Main) {
+                            if (validationCheck(childInfo)) {
+                                val item = Bundle()
+                                item.putParcelable("camera type", CameraType.ChildRegister)
+                                item.putParcelable("child info", childInfo)
 
-                            view.findNavController().navigate(R.id.action_myChildInfoRegisterFragment_to_cameraFragment, bundle)
+                                view.findNavController().navigate(R.id.action_myChildInfoRegisterFragment_to_cameraFragment, item)
+                            }
                         }
                     }
+                } else {
+                    childInfoItem.name = nameArea.text.toString().replace(" ", "")
+                    childInfoItem.birthDate = "${yearArea.text}${monthArea.text}${dateArea.text}"
+                    childInfoItem.sex = sex
+                    childInfoItem.characteristics = characteristicsArea.text.toString()
+                    childInfoItem.lastIdentityDate = getToday()
+
+                    if (validationCheck(childInfoItem)) {
+                        val item = Bundle()
+                        item.putParcelable("camera type", CameraType.ChildRegister)
+                        item.putParcelable("child info", childInfoItem)
+
+                        view.findNavController().navigate(R.id.action_myChildInfoRegisterFragment_to_cameraFragment, item)
+                    }
+
                 }
+
             }
 
         }
