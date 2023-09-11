@@ -226,7 +226,19 @@ class CameraFragment : Fragment() {
             val db = AppDatabase.getDatabase(requireContext())
             val userDao = db!!.userInfoDao()
             val user = userDao.getUser()
-            user.children.add(childInfo)
+
+            var check = true
+
+            user.children.forEachIndexed { index, it ->
+                if (it.id == childInfo.id) {
+                    check = false
+                    user.children[index] = childInfo
+                }
+            }
+
+            if (check) {
+                user.children.add(childInfo)
+            }
 
             userDao.updateUser(user)
             database.child("users").child("${auth.uid}").setValue(user)
