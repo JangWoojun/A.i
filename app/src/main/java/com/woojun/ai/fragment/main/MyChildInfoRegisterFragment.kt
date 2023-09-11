@@ -107,7 +107,8 @@ class MyChildInfoRegisterFragment : Fragment() {
                         sex = sex,
                         characteristics = characteristicsArea.text.toString(),
                         photo = "null",
-                        lastIdentityDate = getToday()
+                        lastIdentityDate = getToday(),
+                        parentPhoneNumber = user.phoneNumber
                     )
 
                     withContext(Dispatchers.Main) {
