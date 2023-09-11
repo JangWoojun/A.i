@@ -32,6 +32,14 @@ class MyChildInfoAdapter(private val childInfo: ArrayList<ChildInfo>, private va
 
                     parent.findNavController().navigate(R.id.action_childrenInfo_to_myChildrenInfoInternalFragment, bundle)
                 }
+
+                modifyButton.setOnClickListener {
+                    val bundle = Bundle()
+                    val item = childInfo[handler.position]
+                    bundle.putParcelable("child info", item)
+
+                    parent.findNavController().navigate(R.id.action_childrenInfo_to_myChildInfoRegisterFragment, bundle)
+                }
             }
         }
 
