@@ -59,6 +59,8 @@ class FindChildrenListFragment : Fragment() {
                             value?.let { it1 -> list.add(it1) }
                             if (list.size == similarDistanceUid.size) {
                                 loadingDialog.dismiss()
+                                list.reverse()
+
                                 findChildrenList.layoutManager = LinearLayoutManager(requireContext().applicationContext)
                                 findChildrenList.adapter = MyChildInfoAdapter(list, MyChildAdapterType.Find)
                             }
