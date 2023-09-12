@@ -51,7 +51,7 @@ class FindChildrenListFragment : Fragment() {
             loadingDialog.show()
 
             similarDistanceUid.forEach {
-                database.child("children").child(it[0]).addListenerForSingleValueEvent(object :
+                database.child("children").child(it[0].replace("\"", "")).addListenerForSingleValueEvent(object :
                     ValueEventListener {
                     override fun onDataChange(snapshot: DataSnapshot) {
                         if (snapshot.exists()) {
