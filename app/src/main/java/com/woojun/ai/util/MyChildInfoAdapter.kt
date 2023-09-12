@@ -25,12 +25,21 @@ class MyChildInfoAdapter(private val childInfo: ArrayList<ChildInfo>, private va
         return MyChildInfoViewHolder(binding).also { handler ->
             binding.apply {
                 viewDetailsButton.setOnClickListener {
-                    val bundle = Bundle()
-                    val item = childInfo[handler.position]
-                    bundle.putParcelable("child info", item)
-                    bundle.putParcelable("child info type", type)
+                    if (type == MyChildAdapterType.Find) {
+                        val bundle = Bundle()
+                        val item = childInfo[handler.position]
+                        bundle.putParcelable("child info", item)
+                        bundle.putParcelable("child info type", type)
 
-                    parent.findNavController().navigate(R.id.action_childrenInfo_to_myChildrenInfoInternalFragment, bundle)
+                        parent.findNavController().navigate(R.id.action_findChildrenListFragment_to_myChildrenInfoInternalFragment, bundle)
+                    } else {
+                        val bundle = Bundle()
+                        val item = childInfo[handler.position]
+                        bundle.putParcelable("child info", item)
+                        bundle.putParcelable("child info type", type)
+
+                        parent.findNavController().navigate(R.id.action_childrenInfo_to_myChildrenInfoInternalFragment, bundle)
+                    }
                 }
 
                 modifyButton.setOnClickListener {
