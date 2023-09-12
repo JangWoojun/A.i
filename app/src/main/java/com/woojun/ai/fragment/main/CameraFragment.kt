@@ -88,7 +88,7 @@ class CameraFragment : Fragment() {
                                 CoroutineScope(Dispatchers.IO).launch {
                                     val file = File(
                                         context?.filesDir,
-                                        "${childInfo!!.name}.jpg"
+                                        "${childInfo?.name ?: "${System.currentTimeMillis()}"}.jpg"
                                     )
 
                                     try {
