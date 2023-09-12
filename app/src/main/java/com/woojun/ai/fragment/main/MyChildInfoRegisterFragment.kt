@@ -168,12 +168,28 @@ class MyChildInfoRegisterFragment : Fragment() {
                 return false
             }
 
-            if (childInfo.birthDate.length != 8) {
-                Toast.makeText(requireContext(), "생년월일을 정확히 모두 입력해주세요", Toast.LENGTH_SHORT).show()
+            if (isValidDate(childInfo.birthDate)) {
+                Toast.makeText(requireContext(), "생년월일을 올바르게 입력해주세요", Toast.LENGTH_SHORT).show()
                 return false
             }
 
             return true
+        }
+    }
+
+    private fun isValidDate(dateStr: String): Boolean {
+        if (dateStr.length != 8 || !dateStr.all { it.isDigit() }) {
+            return false
+        }
+
+        val dateFormat = SimpleDateFormat("yyyyMMdd")
+        dateFormat.isLenient = false
+
+        return try {
+            val date = dateFormat.parse(dateStr)
+            date != null
+        } catch (e: Exception) {
+            false
         }
     }
 }
