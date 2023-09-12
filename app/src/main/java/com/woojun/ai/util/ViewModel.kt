@@ -1,6 +1,5 @@
 package com.woojun.ai.util
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -20,13 +19,10 @@ class ViewModel : ViewModel() {
             override fun onResponse(call: Call<AiResultList>, response: Response<AiResultList>) {
                 if (response.isSuccessful) {
                     apiData.value = response.body()
-                } else {
-                    Log.d("확인1", "에러")
                 }
             }
 
             override fun onFailure(call: Call<AiResultList>, t: Throwable) {
-                Log.e("확인2", "API call failed: " + t.message);
             }
         })
     }

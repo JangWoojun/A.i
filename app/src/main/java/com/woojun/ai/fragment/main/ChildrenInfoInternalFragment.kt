@@ -7,11 +7,11 @@ import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
 import android.util.Base64
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DecodeFormat
@@ -150,7 +150,7 @@ class ChildrenInfoInternalFragment : Fragment() {
             }
 
             override fun onFailure(call: Call<ResultSearchKeyword>, t: Throwable) {
-                Log.w("확인", "통신 실패: ${t.message}")
+                Toast.makeText(requireContext(), "맵을 불러오는데 실패했습니다", Toast.LENGTH_SHORT).show()
             }
         })
     }
