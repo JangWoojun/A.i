@@ -43,7 +43,7 @@ class FindChildrenListFragment : Fragment() {
 
         binding.apply {
             val bundle = arguments
-            val similarDistanceUid = bundle?.getParcelable<FindChildImageResult>("children info")!!.similar_distance_uid
+            val similarDistanceUid = bundle?.getParcelable<FindChildImageResult>("children info")!!.similar_distance_uid.distinct()
 
             database = Firebase.database.reference
 
