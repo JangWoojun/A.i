@@ -110,6 +110,10 @@ class HomeFragment : Fragment() {
             viewModel = ViewModelProvider(requireActivity())[ViewModel::class.java]
 
             viewModel.getApiData().observe(viewLifecycleOwner) { apiData ->
+
+                animationView.visibility = View.GONE
+                childrenList.visibility = View.VISIBLE
+
                 childrenList.layoutManager = LinearLayoutManager(requireContext().applicationContext)
                 childrenList.adapter = ChildrenInfoAdapter(apiData.subList(0, 3), ChildInfoType.NEW)
             }
