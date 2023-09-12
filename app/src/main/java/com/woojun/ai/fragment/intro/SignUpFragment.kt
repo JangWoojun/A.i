@@ -1,5 +1,6 @@
 package com.woojun.ai.fragment.intro
 
+import android.content.Intent
 import android.graphics.Paint
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -9,16 +10,22 @@ import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.app.ActivityCompat.finishAffinity
 import androidx.navigation.findNavController
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthUserCollisionException
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
-import com.woojun.ai.IntroActivity
+import com.woojun.ai.MainActivity
 import com.woojun.ai.R
 import com.woojun.ai.databinding.FragmentSignUpBinding
+import com.woojun.ai.util.AppDatabase
+import com.woojun.ai.util.ProgressUtil
 import com.woojun.ai.util.UserInfo
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class SignUpFragment : Fragment() {
 
@@ -208,13 +215,32 @@ class SignUpFragment : Fragment() {
 
     private fun signUpUser(userInfo: UserInfo, password: String) {
         binding.signButton.isEnabled = false
-        val auth = FirebaseAuth.getInstance()
         database = Firebase.database.reference
+
+        val auth = FirebaseAuth.getInstance()
+        val loadingDialog = ProgressUtil.createLoadingDialog(requireContext())
+        loadingDialog.show()
 
         auth.createUserWithEmailAndPassword(userInfo.email, password)
             .addOnCompleteListener(requireActivity()) { task ->
+                loadingDialog.dismiss()
                 if (task.isSuccessful) {
-                    (activity as IntroActivity).signupMove(userInfo)
+
+                    Toast.makeText(requireContext(), "회원가입을 성공하셨습니다", Toast.LENGTH_SHORT).show()
+
+                    CoroutineScope(Dispatchers.IO).launch {
+                        val db = AppDatabase.getDatabase(requireContext())
+                        val userDao = db!!.userInfoDao()
+
+                        userDao.insertUser(UserInfo(userInfo.name, userInfo.email, userInfo.phoneNumber, userInfo.check, userInfo.children))
+                    }
+
+                    database.child("users").child("${auth.uid}").setValue(userInfo)
+
+                    loadingDialog.dismiss()
+
+                    startActivity(Intent(requireContext(), MainActivity::class.java))
+                    finishAffinity(requireActivity())
                 } else {
                     try {
                         throw task.exception!!
