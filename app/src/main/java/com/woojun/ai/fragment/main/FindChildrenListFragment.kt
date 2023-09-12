@@ -57,7 +57,7 @@ class FindChildrenListFragment : Fragment() {
                         if (snapshot.exists()) {
                             val value = snapshot.getValue(ChildInfo::class.java)
                             value?.let { it1 -> list.add(it1) }
-                            if (list.size == 5) {
+                            if (list.size == similarDistanceUid.size) {
                                 loadingDialog.dismiss()
                                 findChildrenList.layoutManager = LinearLayoutManager(requireContext().applicationContext)
                                 findChildrenList.adapter = MyChildInfoAdapter(list, MyChildAdapterType.Find)
