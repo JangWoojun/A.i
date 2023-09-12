@@ -87,6 +87,10 @@ class CameraFragment : Fragment() {
                         result.toBitmap { bitmap ->
                             if (bitmap != null) {
 
+                                camera.visibility = View.INVISIBLE
+                                captureBtn.visibility = View.INVISIBLE
+                                image.visibility = View.INVISIBLE
+
                                 val loadingDialog = createLoadingDialog(requireContext())
                                 loadingDialog.show()
 
