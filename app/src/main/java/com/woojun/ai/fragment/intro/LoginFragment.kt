@@ -1,27 +1,34 @@
 package com.woojun.ai.fragment.intro
 
-import android.app.Dialog
+import android.content.Intent
 import android.graphics.Paint
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.WindowManager
 import android.view.inputmethod.EditorInfo
-import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
-import androidx.cardview.widget.CardView
+import androidx.core.app.ActivityCompat.finishAffinity
 import androidx.navigation.findNavController
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseAuthInvalidUserException
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
-import com.woojun.ai.IntroActivity
+import com.woojun.ai.MainActivity
 import com.woojun.ai.R
 import com.woojun.ai.databinding.FragmentLoginBinding
+import com.woojun.ai.util.AppDatabase
+import com.woojun.ai.util.ProgressUtil
+import com.woojun.ai.util.UserInfo
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class LoginFragment : Fragment() {
 
@@ -29,6 +36,8 @@ class LoginFragment : Fragment() {
     private val binding get() = _binding!!
 
     private lateinit var auth: FirebaseAuth
+    private lateinit var database: DatabaseReference
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -165,12 +174,40 @@ class LoginFragment : Fragment() {
 
     private fun loginUser(email: String, password: String) {
         binding.loginButton.isEnabled = false
+        database = Firebase.database.reference
+
         val auth = FirebaseAuth.getInstance()
+        val loadingDialog = ProgressUtil.createLoadingDialog(requireContext())
+        loadingDialog.show()
 
         auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener(requireActivity()) { task ->
                 if (task.isSuccessful) {
-                    (activity as IntroActivity).loginMove()
+                    Toast.makeText(requireContext(), "로그인을 성공하셨습니다", Toast.LENGTH_SHORT).show()
+
+                    database.child("users").child(auth.uid.toString()).addListenerForSingleValueEvent(object :
+                        ValueEventListener {
+                        override fun onDataChange(snapshot: DataSnapshot) {
+                            if (snapshot.exists()) {
+                                val value = snapshot.getValue(UserInfo::class.java)
+
+                                CoroutineScope(Dispatchers.IO).launch {
+                                    val db = AppDatabase.getDatabase(requireContext())
+                                    val user = db!!.userInfoDao()
+
+                                    user.insertUser(value!!)
+
+                                    loadingDialog.dismiss()
+                                    startActivity(Intent(requireContext(), MainActivity::class.java))
+                                    finishAffinity(requireActivity())
+                                }
+                            }
+                        }
+
+                        override fun onCancelled(error: DatabaseError) {
+                            loadingDialog.dismiss()
+                        }
+                    })
                 } else {
                     try {
                         throw task.exception!!
