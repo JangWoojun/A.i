@@ -74,6 +74,11 @@ class CameraFragment : Fragment() {
             val type = bundle?.getParcelable<CameraType>("camera type")
             val childInfo = bundle?.getParcelable<ChildInfo>("child info")
 
+            if (type == CameraType.Find) {
+                val mainActivity = activity as MainActivity
+                mainActivity.hideBottomNavigation(true)
+            }
+
             camera.setLifecycleOwner(this@CameraFragment)
 
             camera.addCameraListener(object : CameraListener() {
