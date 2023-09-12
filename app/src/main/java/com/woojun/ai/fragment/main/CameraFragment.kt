@@ -102,7 +102,7 @@ class CameraFragment : Fragment() {
                                         if (type == CameraType.ChildRegister) {
                                             withContext(Dispatchers.Main) {
                                                 val storageRef = FirebaseStorage.getInstance().reference
-                                                val imageRef = storageRef.child("child_images/${childInfo.name}.jpg")
+                                                val imageRef = storageRef.child("child_images/${childInfo!!.name}.jpg")
 
                                                 imageRef.putBytes(bitmapToByteArray(bitmap))
                                                     .addOnCompleteListener {
@@ -163,7 +163,7 @@ class CameraFragment : Fragment() {
                                                             val item = Bundle()
                                                             item.putParcelable("children info", response.body())
 
-                                                            view.findNavController().navigate(R.id.action_cameraFragment_to_findChildrenListFragment, bundle)
+                                                            view.findNavController().navigate(R.id.action_cameraFragment_to_findChildrenListFragment, item)
                                                         } else {
                                                             showFailDialog(CameraType.Find)
                                                         }
