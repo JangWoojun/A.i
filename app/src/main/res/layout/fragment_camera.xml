@@ -10,23 +10,24 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
-            android:textSize="14sp"
-            android:textColor="@color/white"
-            android:fontFamily="@font/poppins_reqular"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="얼굴을 가이드라인에 맞추고 촬영해주세요"
-            app:layout_constraintBottom_toTopOf="@+id/image"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/camera" />
-
         <com.otaliastudios.cameraview.CameraView
             android:id="@+id/camera"
             android:keepScreenOn="true"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
+
+        <TextView
+            android:gravity="center"
+            android:textSize="14sp"
+            android:textColor="@color/white"
+            android:fontFamily="@font/poppins_reqular"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="얼굴을 가이드라인에 맞추고 촬영해주세요\n얼굴의 그림자가 있으면 안됩니다"
+            app:layout_constraintBottom_toTopOf="@+id/image"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/camera" />
 
         <ImageView
             android:layout_marginBottom="100dp"
