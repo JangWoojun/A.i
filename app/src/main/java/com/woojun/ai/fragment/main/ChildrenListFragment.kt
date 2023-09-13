@@ -51,6 +51,10 @@ class ChildrenListFragment : Fragment() {
             viewModel = ViewModelProvider(requireActivity())[ViewModel::class.java]
 
             viewModel.getApiData().observe(viewLifecycleOwner) { apiData ->
+
+                animationView.visibility = View.GONE
+                childrenList.visibility = View.VISIBLE
+
                 apiList = mutableListOf()
 
                 apiData.chunked(5).forEach {
@@ -85,6 +89,9 @@ class ChildrenListFragment : Fragment() {
                 longChildrenButton.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#FAFAFA"))
 
                 viewModel.getApiData().observe(viewLifecycleOwner) { apiData ->
+
+                    animationView.visibility = View.GONE
+                    childrenList.visibility = View.VISIBLE
 
                     apiList = mutableListOf()
 
@@ -127,6 +134,9 @@ class ChildrenListFragment : Fragment() {
 
                 viewModel.getApiData().observe(viewLifecycleOwner) { apiData ->
 
+                    animationView.visibility = View.GONE
+                    childrenList.visibility = View.VISIBLE
+
                     apiList = mutableListOf()
 
                     apiData.chunked(5).forEach {
@@ -168,6 +178,9 @@ class ChildrenListFragment : Fragment() {
                 longChildrenButton.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#EBF5FF"))
 
                 viewModel.getApiData().observe(viewLifecycleOwner) { apiData ->
+
+                    animationView.visibility = View.GONE
+                    childrenList.visibility = View.VISIBLE
 
                     apiList = mutableListOf()
 
