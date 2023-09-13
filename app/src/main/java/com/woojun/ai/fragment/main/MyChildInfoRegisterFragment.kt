@@ -58,6 +58,43 @@ class MyChildInfoRegisterFragment : Fragment() {
             val bundle = arguments
             val childInfoItem = bundle?.getParcelable<ChildInfo>("child info")
 
+            if (childInfoItem != null) {
+
+                nameArea.setText(childInfoItem.name)
+
+                when (childInfoItem.sex) {
+                    "남성" -> {
+                        manBackground.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#4894FE"))
+                        manIcon.imageTintList = ColorStateList.valueOf(Color.parseColor("#FFFFFF"))
+                        manText.setTextColor(Color.parseColor("#4894FE"))
+
+                        womanBackground.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#FFFFFF"))
+                        womanIcon.imageTintList = ColorStateList.valueOf(Color.parseColor("#000000"))
+                        womanText.setTextColor(Color.parseColor("#000000"))
+
+                        sex = "남성"
+                    }
+                    "여성" -> {
+                        manBackground.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#FFFFFF"))
+                        manIcon.imageTintList = ColorStateList.valueOf(Color.parseColor("#000000"))
+                        manText.setTextColor(Color.parseColor("#000000"))
+
+                        womanBackground.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#4894FE"))
+                        womanIcon.imageTintList = ColorStateList.valueOf(Color.parseColor("#FFFFFF"))
+                        womanText.setTextColor(Color.parseColor("#4894FE"))
+
+                        sex = "여성"
+                    }
+                }
+
+                yearArea.setText(childInfoItem.birthDate.substring(0, 4))
+                monthArea.setText(childInfoItem.birthDate.substring(4, 6))
+                dateArea.setText(childInfoItem.birthDate.substring(6, 8))
+
+                characteristicsArea.setText(childInfoItem.characteristics)
+
+            }
+
             selectManButton.setOnClickListener {
                 manBackground.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#4894FE"))
                 manIcon.imageTintList = ColorStateList.valueOf(Color.parseColor("#FFFFFF"))
