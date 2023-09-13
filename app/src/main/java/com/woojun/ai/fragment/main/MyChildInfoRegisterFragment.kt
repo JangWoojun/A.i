@@ -178,18 +178,40 @@ class MyChildInfoRegisterFragment : Fragment() {
     }
 
     private fun isValidDate(dateStr: String): Boolean {
-        if (dateStr.length != 8 || !dateStr.all { it.isDigit() }) {
+        if (dateStr.length != 8) {
             return false
         }
 
-        val dateFormat = SimpleDateFormat("yyyyMMdd")
-        dateFormat.isLenient = false
+        val year = dateStr.substring(0, 4).toInt()
+        val month = dateStr.substring(4, 6)
+        val date = dateStr.substring(6, 8)
 
-        return try {
-            val date = dateFormat.parse(dateStr)
-            date != null
-        } catch (e: Exception) {
-            false
+        if (year !in 1900 .. getToday().substring(0, 4).toInt()) {
+            return false
         }
+
+        if (month.substring(0, 1).toInt() != 0 || month.substring(0, 1).toInt() != 1) {
+            return false
+        }
+
+        if (month.substring(0, 1).toInt() == 1 && month.substring(1, 2).toInt() > 2) {
+            return false
+        }
+
+        if (date.toInt() > 31) {
+            return false
+        }
+
+        val daysInMonth = when (month.toInt()) {
+            1, 3, 5, 7, 8, 10, 12 -> 31
+            4, 6, 9, 11 -> 30
+            else -> if ((year % 4 == 0 && year % 100 != 0) || (year % 400 == 0)) 29 else 28
+        }
+
+        if (date.toInt() > daysInMonth) {
+            return false
+        }
+
+        return true
     }
 }
