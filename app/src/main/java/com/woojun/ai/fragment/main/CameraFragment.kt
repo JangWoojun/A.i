@@ -68,6 +68,8 @@ class CameraFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         auth = Firebase.auth
+        loadingDialog= createLoadingDialog(requireContext())
+
         binding.apply {
 
             val bundle = arguments // 번들
