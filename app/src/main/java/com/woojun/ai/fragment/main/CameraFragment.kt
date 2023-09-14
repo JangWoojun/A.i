@@ -1,5 +1,6 @@
 package com.woojun.ai.fragment.main
 
+import android.app.Dialog
 import android.graphics.Bitmap
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -50,7 +51,7 @@ class CameraFragment : Fragment() {
     private lateinit var auth: FirebaseAuth
     private lateinit var database: DatabaseReference
 
-    private val loadingDialog = createLoadingDialog(requireContext())
+    private lateinit var loadingDialog: Dialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -280,31 +281,37 @@ class CameraFragment : Fragment() {
     }
 
     fun showFailDialog(type: CameraType) { // 실패시 type에 맞게 실패 Dialog 보여줌
-        if (type == CameraType.ChildRegister) {
-            createDialog(
-                requireContext(),
-                false,
-                "우리 아이 신원등록 실패",
-                "우리 아이의 신원등록을 실패했습니다\n" +
-                        "다시 얼굴을 정확히 가이드라인에 맞춰 시도해주세요\n" +
-                        "만약 계속해서 오류가 발생한다면 제보 부탁드립니다"
-            ) {
-                val mainActivity = activity as MainActivity
-                mainActivity.hideBottomNavigation(false)
-                view?.findNavController()?.navigate(R.id.action_cameraFragment_to_home)
-            }
-        } else {
-            createDialog(
-                requireContext(),
-                false,
-                "실종아동 신원조회 실패",
-                "실종아동 신원조회를 실패했습니다\n" +
-                        "다시 얼굴을 정확히 가이드라인에 맞춰 시도해주세요\n" +
-                        "만약 계속해서 오류가 발생한다면 제보 부탁드립니다"
-            ) {
-                val mainActivity = activity as MainActivity
-                mainActivity.hideBottomNavigation(false)
-                view?.findNavController()?.navigate(R.id.action_cameraFragment_to_home)
+        binding.apply {
+            if (type == CameraType.ChildRegister) {
+                createDialog(
+                    requireContext(),
+                    false,
+                    "우리 아이 신원등록 실패",
+                    "우리 아이의 신원등록을 실패했습니다\n" +
+                            "다시 얼굴을 정확히 가이드라인에 맞춰 시도해주세요\n" +
+                            "만약 계속해서 오류가 발생한다면 제보 부탁드립니다"
+                ) {
+                    camera.visibility = View.VISIBLE // cameraView 보여주기
+                    captureBtn.visibility = View.VISIBLE // 카메라 버튼 보여주기
+                    image.visibility = View.VISIBLE // 가이드 이미지 보여주기
+
+                    loadingDialog.dismiss() // 로딩 Dialog 없애기
+                }
+            } else {
+                createDialog(
+                    requireContext(),
+                    false,
+                    "실종아동 신원조회 실패",
+                    "실종아동 신원조회를 실패했습니다\n" +
+                            "다시 얼굴을 정확히 가이드라인에 맞춰 시도해주세요\n" +
+                            "만약 계속해서 오류가 발생한다면 제보 부탁드립니다"
+                ) {
+                    camera.visibility = View.VISIBLE // cameraView 보여주기
+                    captureBtn.visibility = View.VISIBLE // 카메라 버튼 보여주기
+                    image.visibility = View.VISIBLE // 가이드 이미지 보여주기
+
+                    loadingDialog.dismiss() // 로딩 Dialog 없애기
+                }
             }
         }
     }
