@@ -209,6 +209,7 @@ class LoginFragment : Fragment() {
                         }
                     })
                 } else {
+                    loadingDialog.dismiss()
                     try {
                         throw task.exception!!
                     } catch (e: Exception) {
