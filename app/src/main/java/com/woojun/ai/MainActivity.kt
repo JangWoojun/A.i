@@ -1,6 +1,9 @@
 package com.woojun.ai
 
+import android.content.Context
 import android.graphics.Color
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -9,6 +12,7 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.woojun.ai.databinding.ActivityMainBinding
+import com.woojun.ai.util.ProgressUtil
 import com.woojun.ai.util.ViewModel
 
 
@@ -21,6 +25,23 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        if(!isNetworkAvailable(this)){
+            ProgressUtil.createDialog( // 결과 Dialog 보여주기
+                this,
+                false,
+                "인터넷 연결 실패",
+                "인터넷 연결에 실패하였습니다\n" +
+                        "A·아이를 이용하시려면 인터넷을 필요합니다\n" +
+                        "다시 한번 인터넷 연결이 되었는지 확인해주세요"
+            ) {
+                if (isNetworkAvailable(this)) {
+                    it.dismiss()
+                } else {
+                    Toast.makeText(this, "인터넷을 확인해주세요", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
 
         viewModel = ViewModelProvider(this)[ViewModel::class.java]
         viewModel.loadApiData()
