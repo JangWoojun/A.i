@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
@@ -195,7 +196,7 @@ class HomeFragment : Fragment() {
 
             return outputDateFormat.format(calendar.time)
         } catch (e: Exception) {
-            e.printStackTrace()
+            Toast.makeText(requireContext(), "오류 발생 잠시 후 다시 시도해주세요", Toast.LENGTH_SHORT).show()
             return ""
         }
     }

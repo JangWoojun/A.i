@@ -247,7 +247,7 @@ class SignUpFragment : Fragment() {
                     } catch (e: FirebaseAuthUserCollisionException) {
                         binding.emailInputLayout.error = "이미 등록된 이메일 주소입니다"
                     } catch (e: Exception) {
-                        e.printStackTrace()
+                        Toast.makeText(requireContext(), "오류 발생 앱을 삭제한 후 다시 설치해주세요", Toast.LENGTH_SHORT).show()
                     }
                 }
                 binding.signButton.isEnabled = true

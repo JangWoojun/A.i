@@ -256,7 +256,7 @@ class ChildrenListFragment : Fragment() {
                 return targetDate >= twoDaysAgo.time && targetDate <= currentDate
             }
         } catch (e: Exception) {
-            e.printStackTrace()
+            Toast.makeText(requireContext(), "오류 발생 잠시 후 다시 시도해주세요", Toast.LENGTH_SHORT).show()
         }
 
         return false

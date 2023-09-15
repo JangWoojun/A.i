@@ -102,7 +102,7 @@ class SearchFragment : Fragment(), FragmentInteractionListener {
             resultList.addAll(fileContent.split("\n"))
 
         } catch (e: Exception) {
-            e.printStackTrace()
+            Toast.makeText(requireContext(), "오류 발생 앱을 삭제한 후 다시 설치해주세요", Toast.LENGTH_SHORT).show()
         }
 
         return resultList
