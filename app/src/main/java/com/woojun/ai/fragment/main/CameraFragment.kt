@@ -267,6 +267,7 @@ class CameraFragment : Fragment() {
                     "아이 인적사항에 변경사항이 생겼다면\n" +
                     "수정 탭에서 수정을 눌러주세요"
         ) {
+            it.dismiss()
             val mainActivity = activity as MainActivity
             mainActivity.hideBottomNavigation(false) // 다시 Bottom Navigation을 보여주고
             view?.findNavController()?.navigate(R.id.action_cameraFragment_to_home) // homeFragment로 이동
@@ -291,6 +292,7 @@ class CameraFragment : Fragment() {
                             "다시 얼굴을 정확히 가이드라인에 맞춰 시도해주세요\n" +
                             "만약 계속해서 오류가 발생한다면 제보 부탁드립니다"
                 ) {
+                    it.dismiss()
                     camera.visibility = View.VISIBLE // cameraView 보여주기
                     captureBtn.visibility = View.VISIBLE // 카메라 버튼 보여주기
                     image.visibility = View.VISIBLE // 가이드 이미지 보여주기
@@ -306,6 +308,7 @@ class CameraFragment : Fragment() {
                             "다시 얼굴을 정확히 가이드라인에 맞춰 시도해주세요\n" +
                             "만약 계속해서 오류가 발생한다면 제보 부탁드립니다"
                 ) {
+                    it.dismiss()
                     camera.visibility = View.VISIBLE // cameraView 보여주기
                     captureBtn.visibility = View.VISIBLE // 카메라 버튼 보여주기
                     image.visibility = View.VISIBLE // 가이드 이미지 보여주기
