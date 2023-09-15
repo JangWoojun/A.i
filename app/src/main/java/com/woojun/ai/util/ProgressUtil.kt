@@ -1,10 +1,8 @@
 package com.woojun.ai.util
 
-import android.app.Activity
 import android.app.AlertDialog
 import android.app.Dialog
 import android.content.Context
-import android.content.Intent
 import android.content.res.ColorStateList
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -15,7 +13,6 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import com.woojun.ai.R
-import org.w3c.dom.Text
 
 object ProgressUtil {
 
@@ -30,7 +27,7 @@ object ProgressUtil {
         return dialog
     }
 
-    fun createDialog(context: Context, dialogType: Boolean, mainText: String, subText: String, function: () -> Unit) {
+    fun createDialog(context: Context, dialogType: Boolean, mainText: String, subText: String, function: (dialog: Dialog) -> Unit) {
         val dialogSource: Int = R.layout.success_and_failure_dialog
 
         val dialogView = LayoutInflater.from(context).inflate(dialogSource, null)
@@ -67,8 +64,7 @@ object ProgressUtil {
         dialog.window?.setBackgroundDrawableResource(R.drawable.dialog_background)
 
         dialogOkButton.setOnClickListener {
-            dialog.dismiss()
-            function()
+            function(dialog)
         }
     }
 
