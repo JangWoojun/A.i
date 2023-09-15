@@ -26,8 +26,8 @@ class IntroActivity : AppCompatActivity() {
                         "A·아이를 이용하시려면 인터넷을 필요합니다\n" +
                         "다시 한번 인터넷 연결이 되었는지 확인해주세요"
             ) {
-                if (isNetworkAvailable(this)) {
-                    it.dismiss()
+                if (isNetworkAvailable(this)) { // 인터넷에 연결되었다면
+                    it.dismiss() //
                 } else {
                     Toast.makeText(this, "인터넷을 확인해주세요", Toast.LENGTH_SHORT).show()
                 }
