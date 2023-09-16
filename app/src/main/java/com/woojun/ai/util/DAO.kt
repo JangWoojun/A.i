@@ -16,3 +16,19 @@ interface UserInfoDAO {
     @Delete
     fun deleteUser(user: UserInfo)
 }
+
+@Dao
+
+interface FindChildDAO {
+    @Insert
+    fun insertFindChild(findChild: SimilarDistanceUid)
+
+    @Update
+    fun updateFindChild(findChild: SimilarDistanceUid)
+
+    @Query("SELECT * FROM SimilarDistanceUid")
+    fun getFindChild(): SimilarDistanceUid
+
+    @Delete
+    fun deleteFindChild(findChild: SimilarDistanceUid)
+}
