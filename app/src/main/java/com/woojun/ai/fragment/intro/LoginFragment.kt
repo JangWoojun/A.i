@@ -25,6 +25,7 @@ import com.woojun.ai.R
 import com.woojun.ai.databinding.FragmentLoginBinding
 import com.woojun.ai.util.AppDatabase
 import com.woojun.ai.util.ProgressUtil
+import com.woojun.ai.util.SimilarDistanceUid
 import com.woojun.ai.util.UserInfo
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -193,9 +194,11 @@ class LoginFragment : Fragment() {
 
                                 CoroutineScope(Dispatchers.IO).launch {
                                     val db = AppDatabase.getDatabase(requireContext())
-                                    val user = db!!.userInfoDao()
+                                    val userDao = db!!.userInfoDao()
+                                    val findChildDao = db.findChildDao()
 
-                                    user.insertUser(value!!)
+                                    userDao.insertUser(value!!)
+                                    findChildDao.insertFindChild(SimilarDistanceUid(0, similarDistanceUid = listOf()))
 
                                     loadingDialog.dismiss()
                                     startActivity(Intent(requireContext(), MainActivity::class.java))
