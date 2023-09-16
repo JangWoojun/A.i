@@ -174,11 +174,17 @@ class CameraFragment : Fragment() {
                                                 override fun onResponse(call: Call<FindChildImageResult>, response: Response<FindChildImageResult>) {
                                                     loadingDialog.dismiss() // 로딩 Dialog 없애기
                                                     if (response.isSuccessful) { // 만약 요청이 성공적이라면
-                                                        val item = Bundle()
-                                                        item.putParcelable("children info", response.body()) // 번들에 response body 내용을 담고
+                                                        CoroutineScope(Dispatchers.IO).launch { // db에 uid 저장
+                                                            val db = AppDatabase.getDatabase(requireContext())
+                                                            val findChildDao = db!!.findChildDao()
+                                                            val findChild = findChildDao.getFindChild()
 
+                                                            findChild.similarDistanceUid = response.body()!!.similar_distance_uid.distinct().reversed()
+
+                                                            findChildDao.updateFindChild(findChild)
+                                                        }
                                                         // findListFragment로 이동함
-                                                        view.findNavController().navigate(R.id.action_cameraFragment_to_findChildrenListFragment, item)
+                                                        view.findNavController().navigate(R.id.action_cameraFragment_to_findChildrenListFragment)
                                                     } else { // 실패했다면
                                                         showFailDialog(CameraType.Find) // showFailDialog 함수 실행
                                                     }
