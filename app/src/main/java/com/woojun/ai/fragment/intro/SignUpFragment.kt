@@ -17,6 +17,7 @@ import com.google.firebase.auth.FirebaseAuthUserCollisionException
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+import com.woojun.ai.BuildConfig
 import com.woojun.ai.MainActivity
 import com.woojun.ai.R
 import com.woojun.ai.databinding.FragmentSignUpBinding
@@ -71,7 +72,7 @@ class SignUpFragment : Fragment() {
                     nameArea.text.toString().trim(),
                     emailArea.text.toString().trim(),
                     phoneArea.text.toString().trim(),
-                    checkArea.text.toString() == "jR7pK9",
+                    checkArea.text.toString() == BuildConfig.POLICEMODEKEY,
                     arrayListOf()
                 )
 
