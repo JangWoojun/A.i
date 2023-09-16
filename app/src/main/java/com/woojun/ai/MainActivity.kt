@@ -78,10 +78,10 @@ class MainActivity : AppCompatActivity() {
         val previousDestinationId = navController.previousBackStackEntry?.destination?.id
 
         if (currentDestinationId != R.id.home) { // 만약 현재 destination이 home이 아니라면
-            if (previousDestinationId == R.id.childrenList) { // 만약 전 destination이 childrenList라면
-                navController.popBackStack(R.id.childrenList, false) // 백스택에서 모두 제거하고 childrenList로
-            } else {
-                navController.popBackStack(R.id.home, false) // 백스택에서 모두 제거하고 home으로
+            when (previousDestinationId) {
+                R.id.childrenList -> navController.popBackStack(R.id.childrenList, false)
+                R.id.findChildrenListFragment -> navController.popBackStack(R.id.findChildrenListFragment, false)
+                else -> navController.popBackStack(R.id.home, false)
             }
         } else { // 만약 home 화면이라면
             if (System.currentTimeMillis() - backPressedTime >= 2000) {  // 만약 뒤로가기 누른지 2초가 넘는다면
