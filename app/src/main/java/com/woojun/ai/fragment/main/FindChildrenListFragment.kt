@@ -13,11 +13,15 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.woojun.ai.databinding.FragmentFindChildrenListBinding
+import com.woojun.ai.util.AppDatabase
 import com.woojun.ai.util.ChildInfo
-import com.woojun.ai.util.FindChildImageResult
 import com.woojun.ai.util.MyChildAdapterType
 import com.woojun.ai.util.MyChildInfoAdapter
 import com.woojun.ai.util.ProgressUtil
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class FindChildrenListFragment : Fragment() {
 
@@ -40,37 +44,50 @@ class FindChildrenListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        database = Firebase.database.reference
 
         binding.apply {
-            val bundle = arguments
-            val similarDistanceUid = bundle?.getParcelable<FindChildImageResult>("children info")!!.similar_distance_uid.distinct()
-
-            database = Firebase.database.reference
 
             val loadingDialog = ProgressUtil.createLoadingDialog(requireContext())
             loadingDialog.show()
 
-            similarDistanceUid.forEach {
-                database.child("children").child(it[0].replace("\"", "")).addListenerForSingleValueEvent(object :
-                    ValueEventListener {
-                    override fun onDataChange(snapshot: DataSnapshot) {
-                        if (snapshot.exists()) {
-                            val value = snapshot.getValue(ChildInfo::class.java)
-                            value?.let { it1 -> list.add(it1) }
-                            if (list.size == similarDistanceUid.size) {
-                                loadingDialog.dismiss()
-                                list.reverse()
+            CoroutineScope(Dispatchers.IO).launch {
 
-                                findChildrenList.layoutManager = LinearLayoutManager(requireContext().applicationContext)
-                                findChildrenList.adapter = MyChildInfoAdapter(list, MyChildAdapterType.Find)
+                val db = AppDatabase.getDatabase(requireContext())
+                val findChildDao = db!!.findChildDao()
+
+                val similarDistanceUid = findChildDao.getFindChild().similarDistanceUid
+
+                withContext(Dispatchers.Main) {
+                    similarDistanceUid.forEach {
+                        database.child("children").child(it[0].replace("\"", "")).addListenerForSingleValueEvent(object :
+                            ValueEventListener {
+                            override fun onDataChange(snapshot: DataSnapshot) {
+                                if (snapshot.exists()) {
+                                    val value = snapshot.getValue(ChildInfo::class.java)
+                                    if (list.size == similarDistanceUid.size) {
+                                        loadingDialog.dismiss()
+
+                                        findChildrenList.layoutManager = LinearLayoutManager(requireContext().applicationContext)
+                                        findChildrenList.adapter = MyChildInfoAdapter(list, MyChildAdapterType.Find)
+                                    } else {
+                                        value?.let { it1 -> list.add(it1) }
+                                        if (list.size == similarDistanceUid.size) {
+                                            loadingDialog.dismiss()
+
+                                            findChildrenList.layoutManager = LinearLayoutManager(requireContext().applicationContext)
+                                            findChildrenList.adapter = MyChildInfoAdapter(list, MyChildAdapterType.Find)
+                                        }
+                                    }
+                                }
                             }
-                        }
-                    }
 
-                    override fun onCancelled(error: DatabaseError) {
-                        loadingDialog.dismiss()
+                            override fun onCancelled(error: DatabaseError) {
+                                loadingDialog.dismiss()
+                            }
+                        })
                     }
-                })
+                }
             }
 
         }
