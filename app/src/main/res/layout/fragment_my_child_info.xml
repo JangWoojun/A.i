@@ -50,13 +50,12 @@
                 android:layout_height="wrap_content">
 
                 <androidx.cardview.widget.CardView
-                    app:cardCornerRadius="5dp"
-                    android:layout_marginEnd="2.5dp"
-                    android:outlineProvider="none"
-                    android:backgroundTint="#4894fe"
-                    android:layout_weight="1"
+                    app:cardCornerRadius="0dp"
                     android:layout_width="wrap_content"
-                    android:layout_height="40dp">
+                    android:layout_height="40dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="#4894fe"
+                    android:outlineProvider="none">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -69,9 +68,8 @@
                 </androidx.cardview.widget.CardView>
 
                 <com.google.android.material.card.MaterialCardView
-                    android:layout_marginStart="2.5dp"
+                    app:cardCornerRadius="0dp"
                     app:strokeColor="#4894fe"
-                    app:cardCornerRadius="5dp"
                     android:id="@+id/children_info_registration_button"
                     android:outlineProvider="none"
                     android:backgroundTint="@color/white"
