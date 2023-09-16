@@ -22,6 +22,7 @@ import com.woojun.ai.R
 import com.woojun.ai.databinding.FragmentSignUpBinding
 import com.woojun.ai.util.AppDatabase
 import com.woojun.ai.util.ProgressUtil
+import com.woojun.ai.util.SimilarDistanceUid
 import com.woojun.ai.util.UserInfo
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -231,8 +232,10 @@ class SignUpFragment : Fragment() {
                     CoroutineScope(Dispatchers.IO).launch {
                         val db = AppDatabase.getDatabase(requireContext())
                         val userDao = db!!.userInfoDao()
+                        val findChildDao = db.findChildDao()
 
                         userDao.insertUser(UserInfo(userInfo.name, userInfo.email, userInfo.phoneNumber, userInfo.check, userInfo.children))
+                        findChildDao.insertFindChild(SimilarDistanceUid(0, similarDistanceUid = listOf()))
                     }
 
                     database.child("users").child("${auth.uid}").setValue(userInfo)
