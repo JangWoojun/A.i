@@ -18,7 +18,6 @@ interface UserInfoDAO {
 }
 
 @Dao
-
 interface FindChildDAO {
     @Insert
     fun insertFindChild(findChild: SimilarDistanceUid)
