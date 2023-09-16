@@ -72,8 +72,10 @@ class SettingFragment : Fragment() {
                             CoroutineScope(Dispatchers.IO).launch {
                                 val db = AppDatabase.getDatabase(requireContext())
                                 val userDao = db!!.userInfoDao()
+                                val findChildDao = db.findChildDao()
 
                                 userDao.deleteUser(userDao.getUser())
+                                findChildDao.deleteFindChild(findChildDao.getFindChild())
                             }
                             finishAffinity(requireActivity())
                         } else {
