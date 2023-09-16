@@ -19,7 +19,25 @@ class TypeConverter {
         val listType = object : TypeToken<ArrayList<ChildInfo>>() {}.type
         return Gson().fromJson(childInfoListString, listType)
     }
+
+    @TypeConverter
+    fun fromSimilarDistanceUid(similarDistanceUid: List<List<String>>): String {
+        return Gson().toJson(similarDistanceUid)
+    }
+
+    @TypeConverter
+    fun toSimilarDistanceUid(similarDistanceUidString: String): List<List<String>> {
+        val listType = object : TypeToken<List<List<String>>>() {}.type
+        return Gson().fromJson(similarDistanceUidString, listType)
+    }
 }
+
+@Entity
+data class SimilarDistanceUid(
+    @PrimaryKey
+    val id: Int,
+    var similarDistanceUid: List<List<String>> = listOf()
+)
 
 @Parcelize
 data class FindChildImageResult(
