@@ -27,12 +27,15 @@ import com.woojun.ai.util.AppDatabase
 import com.woojun.ai.util.CameraType
 import com.woojun.ai.util.ChildInfoType
 import com.woojun.ai.util.ChildrenInfoAdapter
+import com.woojun.ai.util.ProgressUtil
 import com.woojun.ai.util.ViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 import java.util.Calendar
 import java.util.Date
 import java.util.Locale
@@ -104,6 +107,20 @@ class HomeFragment : Fragment() {
                         childSexAndBirthText.text = "${user.children[0].sex} · ${user.children[0].birthDate.substring(0 until 4)}년생"
                         lastIdentityDate.text = formatDate(user.children[0].lastIdentityDate)
                         nextIdentityDate.text = nextIdentityDateFormat(user.children[0].lastIdentityDate)
+
+                        if (hasDatePassed(nextIdentityDateFormat(user.children[0].lastIdentityDate))) {
+                            ProgressUtil.createDialog(
+                                requireContext(),
+                                false,
+                                "아이 신원 업데이트 필요",
+                                "6개월 이상 아이 신원 업데이트가\n" +
+                                        "되지 않았습니다 아이 정보를 정확히\n" +
+                                        "반영하기 위해서 신원 업데이트가 필요합니다"
+                            ) {
+                                it.dismiss()
+                                (activity as MainActivity).moveBottomNavigation(R.id.childrenInfo)
+                            }
+                        }
                     }
                 }
             }
@@ -199,5 +216,20 @@ class HomeFragment : Fragment() {
             Toast.makeText(requireContext(), "오류 발생 잠시 후 다시 시도해주세요", Toast.LENGTH_SHORT).show()
             return ""
         }
+    }
+
+    private fun hasDatePassed(dateString: String): Boolean {
+        val format = SimpleDateFormat("yyyy. MM. dd", Locale.getDefault())
+        val providedDate: Date?
+
+        try {
+            providedDate = format.parse(dateString)
+        } catch (e: Exception) {
+            return false
+        }
+
+        val currentDate = Calendar.getInstance().time
+
+        return !providedDate.after(currentDate)
     }
 }
