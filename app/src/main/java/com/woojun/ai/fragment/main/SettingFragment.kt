@@ -9,6 +9,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
+import android.view.inputmethod.EditorInfo
+import android.widget.TextView
 import android.widget.Toast
 import androidx.cardview.widget.CardView
 import androidx.core.app.ActivityCompat.finishAffinity
@@ -168,6 +170,7 @@ class SettingFragment : Fragment() {
         window?.attributes = layoutParams
 
         dialog.window?.setBackgroundDrawableResource(R.drawable.dialog_background)
+        passwordEditText.setOnEditorActionListener(getEditorActionListener(submitButton))
 
         submitButton.setOnClickListener {
             val password = passwordEditText.text.toString()
@@ -179,6 +182,15 @@ class SettingFragment : Fragment() {
             }
         }
 
+    }
+
+    private fun getEditorActionListener(view: View): TextView.OnEditorActionListener {
+        return TextView.OnEditorActionListener { textView, actionId, keyEvent ->
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                view.callOnClick()
+            }
+            false
+        }
     }
 
 }
