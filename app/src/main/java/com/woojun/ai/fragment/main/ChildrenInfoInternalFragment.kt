@@ -93,20 +93,26 @@ class ChildrenInfoInternalFragment : Fragment() {
                     .into(profile)
 
                 searchKeyword(location.text.toString()) {
-                    val mapPoint = MapPoint.mapPointWithGeoCoord(it.documents[0].y.toDouble(), it.documents[0].x.toDouble())
 
-                    mapView.setMapCenterPoint(mapPoint, true)
-                    mapView.setZoomLevel(1, true)
+                    if (it.documents.isNotEmpty()) {
+                        val mapPoint = MapPoint.mapPointWithGeoCoord(it.documents[0].y.toDouble(), it.documents[0].x.toDouble())
 
-                    val marker = MapPOIItem()
-                    marker.itemName = it.documents[0].address_name
-                    marker.mapPoint = mapPoint
-                    marker.markerType = MapPOIItem.MarkerType.CustomImage
-                    marker.customImageResourceId = R.drawable.marker
-                    marker.selectedMarkerType = MapPOIItem.MarkerType.CustomImage
-                    marker.customSelectedImageResourceId = R.drawable.marker
+                        mapView.setMapCenterPoint(mapPoint, true)
+                        mapView.setZoomLevel(1, true)
 
-                    mapView.addPOIItem(marker)
+                        val marker = MapPOIItem()
+                        marker.itemName = it.documents[0].address_name
+                        marker.mapPoint = mapPoint
+                        marker.markerType = MapPOIItem.MarkerType.CustomImage
+                        marker.customImageResourceId = R.drawable.marker
+                        marker.selectedMarkerType = MapPOIItem.MarkerType.CustomImage
+                        marker.customSelectedImageResourceId = R.drawable.marker
+
+                        mapView.addPOIItem(marker)
+                    } else {
+                        mapView.visibility = View.GONE
+                    }
+
                 }
 
             }
