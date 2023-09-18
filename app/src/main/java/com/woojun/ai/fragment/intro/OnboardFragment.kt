@@ -17,7 +17,7 @@ class OnboardFragment : Fragment() {
     private var _binding: FragmentOnboardBinding? = null
     private val binding get() = _binding!!
 
-    private var pagerItemList = arrayListOf(PagerItem(R.drawable.onboard1, "집에서 간편하게!" , "장소에 구애받지 않고 간편하게\n우리 아이신원 등록할 수 있어요"), PagerItem(R.drawable.onboard2, "얼굴 사진 한장만으로!", "아이의 신원을 정확하고\n빠르게 파악할 수 있어요"), PagerItem(R.drawable.onboard3, "실종아동 예방 서비스", "혹시 모를 상황에 대비할 수 있는\n아동 신원 등록/확인 서비스"))
+    private var pagerItemList = arrayListOf(PagerItem(R.drawable.onboard1, "집에서 간편하게!" , "장소에 구애받지 않고 간편하게\n우리 아이신원 등록할 수 있어요"), PagerItem(R.drawable.onboard2, "얼굴 사진 한장만으로!", "아이의 신원을 정확하고\n빠르게 파악할 수 있어요"), PagerItem(R.drawable.onboard3, "실종아동 전문 서비스", "혹시 모를 상황에 대비할 수 있는\n아동 신원 등록/확인 서비스"))
     private lateinit var introPagerRecyclerAdapter: IntroPagerRecyclerAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
