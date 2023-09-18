@@ -40,7 +40,6 @@
                     android:id="@+id/hello_user_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="반갑습니다 장우준님"
                     android:fontFamily="@font/poppins_bold"
                     android:textColor="#0d1b34"
                     android:textSize="24sp" />
