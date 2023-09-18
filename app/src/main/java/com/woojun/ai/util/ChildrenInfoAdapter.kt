@@ -14,6 +14,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.woojun.ai.R
 import com.woojun.ai.databinding.ChildrenInfoItemBinding
 import com.woojun.ai.databinding.NewChildrenInfoItemBinding
+import com.woojun.ai.util.DpToPxUtil.dpToPx
 import java.util.Calendar
 
 class ChildrenInfoAdapter(private val children: MutableList<AiResult>, private val type: ChildInfoType): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -116,6 +117,7 @@ class ChildrenInfoAdapter(private val children: MutableList<AiResult>, private v
                     .apply(RequestOptions.circleCropTransform())
                     .apply(RequestOptions.formatOf(DecodeFormat.PREFER_ARGB_8888))
                     .format(DecodeFormat.PREFER_RGB_565)
+                    .override(dpToPx(binding.root.context, 52f))
                     .thumbnail(0.5f)
                     .into(profile)
             }
@@ -140,6 +142,7 @@ class ChildrenInfoAdapter(private val children: MutableList<AiResult>, private v
                     .apply(RequestOptions.formatOf(DecodeFormat.PREFER_ARGB_8888))
                     .format(DecodeFormat.PREFER_RGB_565)
                     .thumbnail(0.5f)
+                    .override(dpToPx(binding.root.context, 52f))
                     .into(profile)
             }
         }

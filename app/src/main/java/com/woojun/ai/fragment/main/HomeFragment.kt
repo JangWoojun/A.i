@@ -27,6 +27,7 @@ import com.woojun.ai.util.AppDatabase
 import com.woojun.ai.util.CameraType
 import com.woojun.ai.util.ChildInfoType
 import com.woojun.ai.util.ChildrenInfoAdapter
+import com.woojun.ai.util.DpToPxUtil
 import com.woojun.ai.util.ProgressUtil
 import com.woojun.ai.util.ViewModel
 import kotlinx.coroutines.CoroutineScope
@@ -34,8 +35,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.text.SimpleDateFormat
-import java.time.LocalDate
-import java.time.format.DateTimeFormatter
 import java.util.Calendar
 import java.util.Date
 import java.util.Locale
@@ -101,6 +100,7 @@ class HomeFragment : Fragment() {
                             .apply(RequestOptions.formatOf(DecodeFormat.PREFER_ARGB_8888))
                             .format(DecodeFormat.PREFER_RGB_565)
                             .thumbnail(0.5f)
+                            .override(DpToPxUtil.dpToPx(binding.root.context, 52f))
                             .into(childProfile)
 
                         childNameText.text = user.children[0].name
