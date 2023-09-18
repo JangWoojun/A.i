@@ -73,7 +73,7 @@ class AgreementFragment : Fragment() {
                 val x = dialog.findViewById<CheckBox>(R.id.no_button)
                 val webView = dialog.findViewById<WebView>(R.id.webview)
 
-                webView.loadUrl("https://sch10719.neocities.org/codingvoca2")
+                webView.loadUrl("https://yummy-slime-07b.notion.site/A-26ed5c57a88e44dc9cbb91ff78643bb8?pvs=4")
 
                 ok.setOnClickListener {
                     dialog.dismiss()
@@ -101,7 +101,7 @@ class AgreementFragment : Fragment() {
                 val x = dialog.findViewById<CheckBox>(R.id.no_button)
                 val webView = dialog.findViewById<WebView>(R.id.webview)
 
-                webView.loadUrl("https://sch10719.neocities.org/codingvocaprivacypolicy")
+                webView.loadUrl("https://yummy-slime-07b.notion.site/A-2a68a3b16e824ea3b91821695b611150?pvs=4")
 
                 ok.setOnClickListener {
                     dialog.dismiss()
