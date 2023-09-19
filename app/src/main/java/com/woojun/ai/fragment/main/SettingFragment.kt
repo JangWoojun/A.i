@@ -174,7 +174,7 @@ class SettingFragment : Fragment() {
             }
 
             privacyPolicyButton.setOnClickListener {
-                val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://yummy-slime-07b.notion.site/A-2a68a3b16e824ea3b91821695b611150?pvs=4"))
+                val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://sch10719.neocities.org/%E1%84%87%E1%85%A1%E1%86%BC%E1%84%8E%E1%85%B5%E1%86%B7"))
                 startActivity(intent)
             }
         }
