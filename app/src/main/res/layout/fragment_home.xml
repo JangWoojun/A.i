@@ -528,17 +528,24 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:textSize="14sp"
-                android:id="@+id/see_all_button"
-                android:textColor="#4894FE"
-                android:fontFamily="@font/poppins_medium"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="See All"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/option_button"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_width="50dp"
+                android:layout_height="50dp">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="38dp"
+                    android:src="@drawable/option_icon"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:tint="#8696BB" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
