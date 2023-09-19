@@ -70,8 +70,9 @@ data class UserInfo(
     var name: String = "",
     var email: String = "",
     var phoneNumber: String = "",
-    var check: Boolean = false,
-    var children: ArrayList<ChildInfo> = arrayListOf()
+    var policeCheck: Boolean = false,
+    var children: ArrayList<ChildInfo> = arrayListOf(),
+    var registrationCheck: Boolean = false
 )
 
 @Parcelize
