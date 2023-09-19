@@ -6,10 +6,11 @@
     android:layout_height="match_parent"
     android:scrollbars="none"
     android:overScrollMode="never"
-    android:backgroundTint="@color/white"
+    android:background="@color/white"
     tools:context="com.woojun.ai.fragment.main.HomeFragment">
 
     <LinearLayout
+        android:background="@color/white"
         android:layout_marginTop="20dp"
         android:orientation="vertical"
         android:layout_width="match_parent"
