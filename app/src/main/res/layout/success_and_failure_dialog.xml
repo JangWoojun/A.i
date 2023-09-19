@@ -23,7 +23,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
         android:fontFamily="@font/poppins_bold"
-        android:text="Phone Number Verified"
         android:textColor="@color/black"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -37,7 +36,6 @@
         android:gravity="center"
         android:layout_width="350dp"
         android:layout_height="wrap_content"
-        android:text="Congradulations, your phone number has been verified. You can start using the app"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/main_text" />
