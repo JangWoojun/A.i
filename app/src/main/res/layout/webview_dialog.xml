@@ -24,11 +24,10 @@
         <TextView
             android:textSize="16sp"
             android:layout_gravity="center"
-            android:id="@+id/textView5"
+            android:id="@+id/context_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="* 동의를 거부할 권리가 있습니다만\n필수 동의 거부 시 서비스 이용이 제한됩니다"
             android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -51,9 +50,11 @@
                     android:layout_height="wrap_content" />
 
                 <TextView
+                    android:fontFamily="@font/poppins_semibold"
+                    android:id="@+id/yes_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Yes"
+                    android:text="동의"
                     android:textColor="@color/black"
                     android:textSize="20sp" />
 
@@ -71,9 +72,11 @@
                     android:layout_height="wrap_content" />
 
                 <TextView
+                    android:fontFamily="@font/poppins_semibold"
+                    android:id="@+id/no_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="No"
+                    android:text="거부"
                     android:textColor="@color/black"
                     android:textSize="20sp" />
 
