@@ -37,6 +37,8 @@ class OnboardFragment : Fragment() {
 
         binding.apply {
 
+            val registrationCheck = arguments?.getBoolean("registrationCheck")!!
+
             introPagerRecyclerAdapter = IntroPagerRecyclerAdapter(pagerItemList)
 
             binding.introViewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
@@ -56,7 +58,9 @@ class OnboardFragment : Fragment() {
             }
 
             binding.signUpButton.setOnClickListener {
-                view.findNavController().navigate(R.id.action_onboardFragment_to_signUpFragment)
+                val bundle = Bundle()
+                bundle.putBoolean("registrationCheck", registrationCheck)
+                view.findNavController().navigate(R.id.action_onboardFragment_to_signUpFragment, bundle)
             }
 
             binding.loginButton.setOnClickListener {
