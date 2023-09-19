@@ -78,17 +78,21 @@ class ChildrenListFragment : Fragment() {
                     }
                 }
 
-                filteredList.chunked(5).forEach {
-                    apiList.add(it)
+                if (filteredList.size != 0) {
+                    filteredList.chunked(5).forEach {
+                        apiList.add(it)
+                    }
+
+                    pageEndIndex = apiList.size - 1
+                    pageIndex = 0
+
+                    pageNumberText.text = "${pageIndex+1}/${pageEndIndex+1} 페이지"
+
+                    if (apiList.size != 0) {
+                        childrenList.layoutManager = LinearLayoutManager(requireContext().applicationContext)
+                        childrenList.adapter = ChildrenInfoAdapter(apiList[pageIndex].toMutableList(), ChildInfoType.DEFAULT)
+                    }
                 }
-
-                pageEndIndex = apiList.size - 1
-                pageIndex = 0
-
-                pageNumberText.text = "${pageIndex+1}/${pageEndIndex+1} 페이지"
-
-                childrenList.layoutManager = LinearLayoutManager(requireContext().applicationContext)
-                childrenList.adapter = ChildrenInfoAdapter(apiList[pageIndex].toMutableList(), ChildInfoType.DEFAULT)
             }
 
             optionButton.setOnClickListener {
@@ -139,17 +143,21 @@ class ChildrenListFragment : Fragment() {
                         }
                     }
 
-                    filteredList.filter {
-                        isWithinTwoDaysFromNow(it.occrde!!)
-                    }.chunked(5).forEach {
-                        apiList.add(it)
+                    if (filteredList.size != 0) {
+                        filteredList.filter {
+                            isWithinTwoDaysFromNow(it.occrde!!)
+                        }.chunked(5).forEach {
+                            apiList.add(it)
+                        }
+
+                        pageEndIndex = apiList.size - 1
+                        pageIndex = 0
+
+                        if (apiList.size != 0) {
+                            pageNumberText.text = "${pageIndex+1}/${pageEndIndex+1} 페이지"
+                            childrenList.adapter = ChildrenInfoAdapter(apiList[pageIndex].toMutableList(), ChildInfoType.DEFAULT)
+                        }
                     }
-
-                    pageEndIndex = apiList.size - 1
-                    pageIndex = 0
-
-                    pageNumberText.text = "${pageIndex+1}/${pageEndIndex+1} 페이지"
-                    childrenList.adapter = ChildrenInfoAdapter(apiList[pageIndex].toMutableList(), ChildInfoType.DEFAULT)
                 }
 
                 buttonScrollView.post {
@@ -200,15 +208,19 @@ class ChildrenListFragment : Fragment() {
                         }
                     }
 
-                    filteredList.chunked(5).forEach {
-                        apiList.add(it)
+                    if (filteredList.size != 0) {
+                        filteredList.chunked(5).forEach {
+                            apiList.add(it)
+                        }
+
+                        pageEndIndex = apiList.size - 1
+                        pageIndex = 0
+
+                        if (apiList.size != 0) {
+                            pageNumberText.text = "${pageIndex+1}/${pageEndIndex+1} 페이지"
+                            childrenList.adapter = ChildrenInfoAdapter(apiList[pageIndex].toMutableList(), ChildInfoType.DEFAULT)
+                        }
                     }
-
-                    pageEndIndex = apiList.size - 1
-                    pageIndex = 0
-
-                    pageNumberText.text = "${pageIndex+1}/${pageEndIndex+1} 페이지"
-                    childrenList.adapter = ChildrenInfoAdapter(apiList[pageIndex].toMutableList(), ChildInfoType.DEFAULT)
                 }
 
                 val scrollWidth = buttonScrollView.getChildAt(0).width
@@ -262,17 +274,21 @@ class ChildrenListFragment : Fragment() {
                         }
                     }
 
-                    filteredList.filter {
-                        isDate365DaysAgo(it.occrde!!)
-                    }.chunked(5).forEach {
-                        apiList.add(it)
+                    if (filteredList.size != 0) {
+                        filteredList.filter {
+                            isDate365DaysAgo(it.occrde!!)
+                        }.chunked(5).forEach {
+                            apiList.add(it)
+                        }
+
+                        pageEndIndex = apiList.size - 1
+                        pageIndex = 0
+
+                        if (apiList.size != 0) {
+                            pageNumberText.text = "${pageIndex+1}/${pageEndIndex+1} 페이지"
+                            childrenList.adapter = ChildrenInfoAdapter(apiList[pageIndex].toMutableList(), ChildInfoType.DEFAULT)
+                        }
                     }
-
-                    pageEndIndex = apiList.size - 1
-                    pageIndex = 0
-
-                    pageNumberText.text = "${pageIndex+1}/${pageEndIndex+1} 페이지"
-                    childrenList.adapter = ChildrenInfoAdapter(apiList[pageIndex].toMutableList(), ChildInfoType.DEFAULT)
                 }
 
                 buttonScrollView.post {
@@ -359,20 +375,24 @@ class ChildrenListFragment : Fragment() {
                             }
                         }
 
-                        filteredList.filter {
-                            isWithinTwoDaysFromNow(it.occrde!!)
-                        }.chunked(5).forEach {
-                            apiList.add(it)
+                        if (filteredList.size != 0) {
+                            filteredList.filter {
+                                isWithinTwoDaysFromNow(it.occrde!!)
+                            }.chunked(5).forEach {
+                                apiList.add(it)
+                            }
+
+                            pageEndIndex = apiList.size - 1
+                            pageIndex = 0
+
+                            if (apiList.size != 0) {
+                                pageNumberText.text = "${pageIndex + 1}/${pageEndIndex + 1} 페이지"
+                                childrenList.adapter = ChildrenInfoAdapter(
+                                    apiList[pageIndex].toMutableList(),
+                                    ChildInfoType.DEFAULT
+                                )
+                            }
                         }
-
-                        pageEndIndex = apiList.size - 1
-                        pageIndex = 0
-
-                        pageNumberText.text = "${pageIndex + 1}/${pageEndIndex + 1} 페이지"
-                        childrenList.adapter = ChildrenInfoAdapter(
-                            apiList[pageIndex].toMutableList(),
-                            ChildInfoType.DEFAULT
-                        )
                     }
 
                     buttonScrollView.post {
@@ -425,18 +445,22 @@ class ChildrenListFragment : Fragment() {
                             }
                         }
 
-                        filteredList.chunked(5).forEach {
-                            apiList.add(it)
+                        if (filteredList.size != 0) {
+                            filteredList.chunked(5).forEach {
+                                apiList.add(it)
+                            }
+
+                            pageEndIndex = apiList.size - 1
+                            pageIndex = 0
+
+                            if (apiList.size != 0) {
+                                pageNumberText.text = "${pageIndex + 1}/${pageEndIndex + 1} 페이지"
+                                childrenList.adapter = ChildrenInfoAdapter(
+                                    apiList[pageIndex].toMutableList(),
+                                    ChildInfoType.DEFAULT
+                                )
+                            }
                         }
-
-                        pageEndIndex = apiList.size - 1
-                        pageIndex = 0
-
-                        pageNumberText.text = "${pageIndex + 1}/${pageEndIndex + 1} 페이지"
-                        childrenList.adapter = ChildrenInfoAdapter(
-                            apiList[pageIndex].toMutableList(),
-                            ChildInfoType.DEFAULT
-                        )
                     }
                 }
                 2 -> {
@@ -471,17 +495,21 @@ class ChildrenListFragment : Fragment() {
                             }
                         }
 
-                        filteredList.filter {
-                            isDate365DaysAgo(it.occrde!!)
-                        }.chunked(5).forEach {
-                            apiList.add(it)
+                        if (filteredList.size != 0) {
+                            filteredList.filter {
+                                isDate365DaysAgo(it.occrde!!)
+                            }.chunked(5).forEach {
+                                apiList.add(it)
+                            }
+
+                            pageEndIndex = apiList.size - 1
+                            pageIndex = 0
+
+                            if (apiList.size != 0) {
+                                pageNumberText.text = "${pageIndex+1}/${pageEndIndex+1} 페이지"
+                                childrenList.adapter = ChildrenInfoAdapter(apiList[pageIndex].toMutableList(), ChildInfoType.DEFAULT)
+                            }
                         }
-
-                        pageEndIndex = apiList.size - 1
-                        pageIndex = 0
-
-                        pageNumberText.text = "${pageIndex+1}/${pageEndIndex+1} 페이지"
-                        childrenList.adapter = ChildrenInfoAdapter(apiList[pageIndex].toMutableList(), ChildInfoType.DEFAULT)
                     }
 
                     buttonScrollView.post {
