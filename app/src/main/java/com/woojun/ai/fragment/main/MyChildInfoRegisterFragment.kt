@@ -203,6 +203,9 @@ class MyChildInfoRegisterFragment : Fragment() {
             if (childInfo.name.isEmpty()) {
                 Toast.makeText(requireContext(), "이름을 입력해주세요", Toast.LENGTH_SHORT).show()
                 return false
+            } else if (containsEnglishOrSpecialChars(childInfo.name)) {
+                Toast.makeText(requireContext(), "특수문자 및 영어는 제외해주세요", Toast.LENGTH_SHORT).show()
+                return false
             }
 
             if (isValidDate(childInfo.birthDate)) {
@@ -250,5 +253,9 @@ class MyChildInfoRegisterFragment : Fragment() {
         }
 
         return true
+    }
+
+    fun containsEnglishOrSpecialChars(input: String): Boolean {
+        return input.matches(".*[a-zA-Z\\p{Punct}].*".toRegex())
     }
 }
