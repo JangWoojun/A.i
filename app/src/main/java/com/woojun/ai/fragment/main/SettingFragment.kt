@@ -4,6 +4,7 @@ import android.app.AlertDialog
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.os.Handler
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -27,10 +28,16 @@ import com.woojun.ai.IntroActivity
 import com.woojun.ai.R
 import com.woojun.ai.databinding.FragmentSettingBinding
 import com.woojun.ai.util.AppDatabase
+import com.woojun.ai.util.ProgressUtil
+import com.woojun.ai.util.RetrofitAPI
+import com.woojun.ai.util.RetrofitClient
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class SettingFragment : Fragment() {
 
@@ -80,6 +87,11 @@ class SettingFragment : Fragment() {
 
                     user.reauthenticate(credential).addOnCompleteListener { task ->
                         if (task.isSuccessful) {
+                            val (loadingDialog, setDialogText) = ProgressUtil.createLoadingDialog(
+                                requireContext()
+                            )
+                            loadingDialog.show()
+                            setDialogText("유저 삭제중")
                             user.delete()
                                 .addOnCompleteListener { task ->
                                     if (task.isSuccessful) {
@@ -93,21 +105,60 @@ class SettingFragment : Fragment() {
                                             userDao.deleteUser(userDao.getUser())
                                             findChildDao.deleteFindChild(findChildDao.getFindChild())
 
+                                            setDialogText("유저 데이터 삭제중")
+
                                             withContext(Dispatchers.Main) {
                                                 database.child("users").child(user.uid).setValue(null)
+                                                setDialogText("아이 데이터 삭제중")
+
                                                 userChildrenList.forEach {
-                                                    database.child("children").child(it.id).setValue(null)
-                                                    if (!deleteImageFromFirebaseStorage(it.photo)){
-                                                        Toast.makeText(requireContext(), "오류 발생 개발자에게 문의해주세요", Toast.LENGTH_SHORT).show()
-                                                    }
+
+                                                    val retrofit = RetrofitClient.getInstance()
+                                                    val apiService = retrofit.create(RetrofitAPI::class.java)
+
+                                                    val call = apiService.deleteChildImage(it.id)
+
+                                                    call.enqueue(object : Callback<String> {
+                                                        override fun onResponse(call: Call<String>, response: Response<String>) {
+                                                            if (response.isSuccessful && response.body() == "success") {
+                                                                database.child("children").child(it.id).setValue(null)
+                                                                if (!deleteImageFromFirebaseStorage(it.photo)){
+                                                                    setDialogText("아이 데이터 삭제 실패")
+                                                                    Handler().postDelayed({
+                                                                        loadingDialog.dismiss()
+                                                                        Toast.makeText(requireContext(), "오류 발생 개발자에게 문의해주세요", Toast.LENGTH_SHORT).show()
+                                                                    }, 500)                                                                }
+                                                            } else {
+                                                                setDialogText("아이 데이터 삭제 실패")
+                                                                Handler().postDelayed({
+                                                                    loadingDialog.dismiss()
+                                                                    Toast.makeText(requireContext(), "오류 발생 개발자에게 문의해주세요", Toast.LENGTH_SHORT).show()
+                                                                }, 500)
+                                                            }
+                                                        }
+
+                                                        override fun onFailure(call: Call<String>, t: Throwable) {
+                                                            setDialogText("아이 데이터 삭제 실패")
+                                                            Handler().postDelayed({
+                                                                loadingDialog.dismiss()
+                                                                Toast.makeText(requireContext(), "오류 발생 개발자에게 문의해주세요", Toast.LENGTH_SHORT).show()
+                                                            }, 500)                                                        }
+                                                    })
                                                 }
-                                                Toast.makeText(requireContext(), "회원탈퇴 완료", Toast.LENGTH_SHORT).show()
-                                                startActivity(Intent(requireContext(), IntroActivity::class.java))
-                                                finishAffinity(requireActivity())
+                                                setDialogText("회원 탈퇴 성공")
+
+                                                Handler().postDelayed({
+                                                    loadingDialog.dismiss()
+                                                    startActivity(Intent(requireContext(), IntroActivity::class.java))
+                                                    finishAffinity(requireActivity())
+                                                }, 500)
                                             }
                                         }
                                     } else {
-                                        Toast.makeText(requireContext(), "회원탈퇴를 실패하였습니다", Toast.LENGTH_SHORT).show()
+                                        setDialogText("유저 삭제 실패")
+                                        Handler().postDelayed({
+                                            Toast.makeText(requireContext(), "오류 발생 개발자에게 문의해주세요", Toast.LENGTH_SHORT).show()
+                                        }, 500)
                                     }
                                 }
                         } else {
