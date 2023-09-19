@@ -41,4 +41,9 @@ interface RetrofitAPI {
         @Part FixImage: MultipartBody.Part,
     ): Call<FindChildImageResult>
 
+    @POST(BuildConfig.POSTURL3)
+    fun deleteChildImage(
+        @Part("id") id: String
+    ): Call<String>
+
 }
