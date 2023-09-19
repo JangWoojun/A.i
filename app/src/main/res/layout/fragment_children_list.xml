@@ -6,6 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.woojun.ai.fragment.main.ChildrenListFragment"
     android:scrollbars="none"
+    android:background="@color/white"
     android:orientation="vertical">
 
     <LinearLayout

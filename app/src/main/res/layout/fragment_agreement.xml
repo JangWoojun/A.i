@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white"
     tools:context=".fragment.intro.AgreementFragment">
 
     <ImageView
@@ -47,6 +48,7 @@
             app:cardCornerRadius="8dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:background="@color/white"
                 android:layout_width="match_parent"
                 android:layout_height="60dp">
 
@@ -77,6 +79,7 @@
         </com.google.android.material.card.MaterialCardView>
 
         <com.google.android.material.card.MaterialCardView
+            android:backgroundTint="@color/white"
             app:strokeColor="#c8c8c8"
             android:id="@+id/consent_check1"
             android:layout_width="match_parent"
