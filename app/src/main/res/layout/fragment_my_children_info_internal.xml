@@ -57,11 +57,12 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <TextView
+                    android:ellipsize="end"
+                    android:maxLines="1"
                     android:id="@+id/name"
-                    android:layout_width="wrap_content"
+                    android:layout_width="200dp"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins_bold"
-                    android:text="김옥순"
                     android:textColor="@color/black"
                     android:textSize="28sp" />
 
@@ -161,7 +162,6 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:fontFamily="@font/poppins_semibold"
-                        android:text="82세"
                         android:textColor="@color/black"
                         android:textSize="18sp" />
 
@@ -204,7 +204,6 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:fontFamily="@font/poppins_semibold"
-                        android:text="82.01.30"
                         android:textColor="@color/black"
                         android:textSize="18sp" />
 
@@ -246,7 +245,6 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:fontFamily="@font/poppins_semibold"
-                        android:text="82.01.30"
                         android:textColor="@color/black"
                         android:textSize="18sp" />
 
@@ -280,7 +278,6 @@
                 android:fontFamily="@font/poppins_medium"
                 android:textSize="16sp"
                 android:textColor="#393943"
-                android:text="해당 실종아동은 다리에 큰 상처가 있음"
                 android:layout_width="340dp"
                 android:layout_height="wrap_content"/>
 

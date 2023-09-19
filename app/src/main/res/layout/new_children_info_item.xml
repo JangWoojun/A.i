@@ -50,11 +50,12 @@
                 app:layout_constraintStart_toEndOf="@+id/cardView">
 
                 <TextView
+                    android:maxLines="1"
+                    android:ellipsize="end"
                     android:id="@+id/name"
-                    android:layout_width="wrap_content"
+                    android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins_bold"
-                    android:text="이정범"
                     android:textColor="#0d1b34"
                     android:textSize="20sp" />
 
@@ -62,7 +63,6 @@
                     android:id="@+id/sex_birthday"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="남성 · 2006년"
                     android:textColor="#8696BB"
                     android:textSize="16sp" />
 
@@ -88,7 +88,6 @@
                     android:id="@+id/location"
                     android:layout_marginStart="8dp"
                     android:textSize="16sp"
-                    android:text="은평구"
                     android:textColor="#8696bb"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
@@ -139,7 +138,6 @@
                         android:id="@+id/date"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="일시 : 2023. 06. 22"
                         android:textColor="#FF8080"
                         android:textSize="12sp" />
 
@@ -175,7 +173,6 @@
                         android:id="@+id/age"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="나이 : 17세 (19세)"
                         android:textColor="#4894fe"
                         android:textSize="12sp" />
 
