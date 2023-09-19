@@ -104,7 +104,7 @@ class ChildrenInfoAdapter(private val children: MutableList<AiResult>, private v
         RecyclerView.ViewHolder(binding.root) {
         fun bind(childrenInfo: AiResult) {
             binding.apply {
-                name.text = childrenInfo.nm
+                name.text = removeEnglishAndBrackets(childrenInfo.nm!!)
                 sexBirthday.text = "${childrenInfo.sexdstnDscd} · ${(Calendar.getInstance().get(
                     Calendar.YEAR)) - childrenInfo.ageNow!!
                 }년생"
@@ -128,7 +128,7 @@ class ChildrenInfoAdapter(private val children: MutableList<AiResult>, private v
         RecyclerView.ViewHolder(binding.root) {
         fun bind(childrenInfo: AiResult) {
             binding.apply {
-                name.text = childrenInfo.nm
+                name.text = removeEnglishAndBrackets(childrenInfo.nm!!)
                 sexBirthday.text = "${childrenInfo.sexdstnDscd} · ${(Calendar.getInstance().get(
                     Calendar.YEAR)) - childrenInfo.ageNow!!
                 }년생"
@@ -167,4 +167,8 @@ private fun decodeBase64AndSetImage(base64String: String): Bitmap {
     val byteArray = Base64.decode(base64String, Base64.DEFAULT)
 
     return BitmapFactory.decodeByteArray(byteArray, 0, byteArray.size)
+}
+
+private fun removeEnglishAndBrackets(input: String): String {
+    return input.replace("[a-zA-Z()]".toRegex(), "")
 }

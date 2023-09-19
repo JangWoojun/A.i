@@ -75,7 +75,7 @@ class ChildrenInfoInternalFragment : Fragment() {
             val item = bundle?.getParcelable<AiResult>("child info")
 
             if (item != null) {
-                name.text = "${item.nm}"
+                name.text = "${removeEnglishAndBrackets(item.nm!!)}"
                 age1.text = "${item.age}세"
                 age2.text = "${item.ageNow}세"
                 sex.text = "${item.sexdstnDscd}"
@@ -187,6 +187,10 @@ class ChildrenInfoInternalFragment : Fragment() {
         val byteArray = Base64.decode(base64String, Base64.DEFAULT)
 
         return BitmapFactory.decodeByteArray(byteArray, 0, byteArray.size)
+    }
+
+    private fun removeEnglishAndBrackets(input: String): String {
+        return input.replace("[a-zA-Z()]".toRegex(), "")
     }
 
 }
