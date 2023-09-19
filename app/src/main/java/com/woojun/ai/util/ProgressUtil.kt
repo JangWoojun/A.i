@@ -6,17 +6,21 @@ import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.Window
 import android.view.WindowManager
+import android.view.animation.AnimationUtils
 import android.widget.ImageView
+import android.widget.TextSwitcher
 import android.widget.TextView
 import androidx.cardview.widget.CardView
+import androidx.core.content.res.ResourcesCompat
 import com.woojun.ai.R
 
 object ProgressUtil {
 
-    fun createLoadingDialog(context: Context): Dialog {
+    fun createLoadingDialog(context: Context): Pair<Dialog, (String) -> Unit> {
         val dialog = Dialog(context)
 
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
@@ -24,7 +28,27 @@ object ProgressUtil {
         dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         dialog.setContentView(R.layout.loading_dialog)
 
-        return dialog
+        val textSwitcher = dialog.findViewById<TextSwitcher>(R.id.text_switcher)
+        textSwitcher.setFactory {
+            val textView = TextView(context)
+            textView.gravity = Gravity.CENTER
+            textView.setTextColor(Color.WHITE)
+            textView.textSize = 16f
+            textView.typeface = ResourcesCompat.getFont(context, R.font.poppins_semibold)
+            textView
+        }
+
+        val inAnim = AnimationUtils.loadAnimation(context, android.R.anim.slide_in_left)
+        val outAnim = AnimationUtils.loadAnimation(context, android.R.anim.slide_out_right)
+
+        textSwitcher.inAnimation = inAnim
+        textSwitcher.outAnimation = outAnim
+
+        val setText: (String) -> Unit = { newText ->
+            textSwitcher.setText(newText)
+        }
+
+        return Pair(dialog, setText)
     }
 
     fun createDialog(context: Context, dialogType: Boolean, mainText: String, subText: String, function: (dialog: Dialog) -> Unit) {
