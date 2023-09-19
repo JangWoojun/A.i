@@ -102,6 +102,9 @@
         <action
             android:id="@+id/action_findChildrenListFragment_to_myChildrenInfoInternalFragment"
             app:destination="@id/myChildrenInfoInternalFragment" />
+        <action
+            android:id="@+id/action_findChildrenListFragment_to_home2"
+            app:destination="@id/home" />
     </fragment>
     <fragment
         android:id="@+id/myChildrenInfoInternalFragment"
