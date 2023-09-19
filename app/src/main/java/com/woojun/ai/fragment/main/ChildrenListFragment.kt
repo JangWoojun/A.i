@@ -11,10 +11,15 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.woojun.ai.R
 import com.woojun.ai.databinding.FragmentChildrenListBinding
 import com.woojun.ai.util.AiResult
 import com.woojun.ai.util.ChildInfoType
 import com.woojun.ai.util.ChildrenInfoAdapter
+import com.woojun.ai.util.FilterOptionUtil
+import com.woojun.ai.util.FilterOptionUtil.filterAdults
+import com.woojun.ai.util.FilterOptionUtil.filterChildren
+import com.woojun.ai.util.FilterOptionUtil.getSelectedItem
 import com.woojun.ai.util.ViewModel
 import java.text.SimpleDateFormat
 import java.util.Calendar
@@ -30,6 +35,7 @@ class ChildrenListFragment : Fragment() {
     private var pageIndex = 0
     private var pageEndIndex = 0
     private lateinit var apiList: MutableList<List<AiResult>>
+    private var selectButtonNumber = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,7 +63,22 @@ class ChildrenListFragment : Fragment() {
 
                 apiList = mutableListOf()
 
-                apiData.chunked(5).forEach {
+                val filteredList = when (getSelectedItem(requireContext())) {
+                    R.id.children -> {
+                        apiData.filterChildren()
+                    }
+                    R.id.adult -> {
+                        apiData.filterAdults()
+                    }
+                    R.id.all -> {
+                        apiData
+                    }
+                    else -> {
+                        apiData.filterChildren()
+                    }
+                }
+
+                filteredList.chunked(5).forEach {
                     apiList.add(it)
                 }
 
@@ -70,6 +91,12 @@ class ChildrenListFragment : Fragment() {
                 childrenList.adapter = ChildrenInfoAdapter(apiList[pageIndex].toMutableList(), ChildInfoType.DEFAULT)
             }
 
+            optionButton.setOnClickListener {
+                FilterOptionUtil.showPopupMenu(requireContext(), it) {
+                    selectButton(selectButtonNumber)
+                }
+            }
+
             buttonScrollView.post {
                 val scrollWidth = buttonScrollView.getChildAt(0).width
                 val viewWidth = buttonScrollView.width
@@ -78,6 +105,8 @@ class ChildrenListFragment : Fragment() {
             }
 
             newChildrenButton.setOnClickListener {
+
+                selectButtonNumber = 0
 
                 newChildrenText.setTextColor(Color.parseColor("#4894fe"))
                 newChildrenButton.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#EBF5FF"))
@@ -95,7 +124,22 @@ class ChildrenListFragment : Fragment() {
 
                     apiList = mutableListOf()
 
-                    apiData.filter {
+                    val filteredList = when (getSelectedItem(requireContext())) {
+                        R.id.children -> {
+                            apiData.filterChildren()
+                        }
+                        R.id.adult -> {
+                            apiData.filterAdults()
+                        }
+                        R.id.all -> {
+                            apiData
+                        }
+                        else -> {
+                            apiData.filterChildren()
+                        }
+                    }
+
+                    filteredList.filter {
                         isWithinTwoDaysFromNow(it.occrde!!)
                     }.chunked(5).forEach {
                         apiList.add(it)
@@ -123,6 +167,8 @@ class ChildrenListFragment : Fragment() {
 
             allChildrenButton.setOnClickListener {
 
+                selectButtonNumber = 1
+
                 newChildrenText.setTextColor(Color.parseColor("#8696BB"))
                 newChildrenButton.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#FAFAFA"))
 
@@ -139,7 +185,22 @@ class ChildrenListFragment : Fragment() {
 
                     apiList = mutableListOf()
 
-                    apiData.chunked(5).forEach {
+                    val filteredList = when (getSelectedItem(requireContext())) {
+                        R.id.children -> {
+                            apiData.filterChildren()
+                        }
+                        R.id.adult -> {
+                            apiData.filterAdults()
+                        }
+                        R.id.all -> {
+                            apiData
+                        }
+                        else -> {
+                            apiData.filterChildren()
+                        }
+                    }
+
+                    filteredList.chunked(5).forEach {
                         apiList.add(it)
                     }
 
@@ -168,6 +229,8 @@ class ChildrenListFragment : Fragment() {
 
             longChildrenButton.setOnClickListener {
 
+                selectButtonNumber = 2
+
                 newChildrenText.setTextColor(Color.parseColor("#8696BB"))
                 newChildrenButton.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#FAFAFA"))
 
@@ -184,7 +247,22 @@ class ChildrenListFragment : Fragment() {
 
                     apiList = mutableListOf()
 
-                    apiData.filter {
+                    val filteredList = when (getSelectedItem(requireContext())) {
+                        R.id.children -> {
+                            apiData.filterChildren()
+                        }
+                        R.id.adult -> {
+                            apiData.filterAdults()
+                        }
+                        R.id.all -> {
+                            apiData
+                        }
+                        else -> {
+                            apiData.filterChildren()
+                        }
+                    }
+
+                    filteredList.filter {
                         isDate365DaysAgo(it.occrde!!)
                     }.chunked(5).forEach {
                         apiList.add(it)
@@ -240,6 +318,189 @@ class ChildrenListFragment : Fragment() {
         _binding = null
     }
 
+    private fun selectButton(type: Int) {
+        binding.apply {
+            when (type) {
+                0 -> {
+                    newChildrenText.setTextColor(Color.parseColor("#4894fe"))
+                    newChildrenButton.backgroundTintList =
+                        ColorStateList.valueOf(Color.parseColor("#EBF5FF"))
+
+                    allChildrenText.setTextColor(Color.parseColor("#8696BB"))
+                    allChildrenButton.backgroundTintList =
+                        ColorStateList.valueOf(Color.parseColor("#FAFAFA"))
+
+                    longChildrenText.setTextColor(Color.parseColor("#8696BB"))
+                    longChildrenButton.backgroundTintList =
+                        ColorStateList.valueOf(Color.parseColor("#FAFAFA"))
+
+                    viewModel.getApiData().observe(viewLifecycleOwner) { apiData ->
+
+                        animationView.visibility = View.GONE
+                        childrenList.visibility = View.VISIBLE
+
+                        apiList = mutableListOf()
+
+                        val filteredList = when (getSelectedItem(requireContext())) {
+                            R.id.children -> {
+                                apiData.filterChildren()
+                            }
+
+                            R.id.adult -> {
+                                apiData.filterAdults()
+                            }
+
+                            R.id.all -> {
+                                apiData
+                            }
+
+                            else -> {
+                                apiData.filterChildren()
+                            }
+                        }
+
+                        filteredList.filter {
+                            isWithinTwoDaysFromNow(it.occrde!!)
+                        }.chunked(5).forEach {
+                            apiList.add(it)
+                        }
+
+                        pageEndIndex = apiList.size - 1
+                        pageIndex = 0
+
+                        pageNumberText.text = "${pageIndex + 1}/${pageEndIndex + 1} 페이지"
+                        childrenList.adapter = ChildrenInfoAdapter(
+                            apiList[pageIndex].toMutableList(),
+                            ChildInfoType.DEFAULT
+                        )
+                    }
+
+                    buttonScrollView.post {
+                        val animator = ValueAnimator.ofInt(buttonScrollView.scrollX, 0)
+                        animator.duration = 500
+
+                        animator.addUpdateListener { animation ->
+                            val animatedValue = animation.animatedValue as Int
+                            buttonScrollView.scrollTo(animatedValue, 0)
+                        }
+
+                        animator.start()
+                    }
+                }
+                1 -> {
+                    newChildrenText.setTextColor(Color.parseColor("#8696BB"))
+                    newChildrenButton.backgroundTintList =
+                        ColorStateList.valueOf(Color.parseColor("#FAFAFA"))
+
+                    allChildrenText.setTextColor(Color.parseColor("#4894fe"))
+                    allChildrenButton.backgroundTintList =
+                        ColorStateList.valueOf(Color.parseColor("#EBF5FF"))
+
+                    longChildrenText.setTextColor(Color.parseColor("#8696BB"))
+                    longChildrenButton.backgroundTintList =
+                        ColorStateList.valueOf(Color.parseColor("#FAFAFA"))
+
+                    viewModel.getApiData().observe(viewLifecycleOwner) { apiData ->
+
+                        animationView.visibility = View.GONE
+                        childrenList.visibility = View.VISIBLE
+
+                        apiList = mutableListOf()
+
+                        val filteredList = when (getSelectedItem(requireContext())) {
+                            R.id.children -> {
+                                apiData.filterChildren()
+                            }
+
+                            R.id.adult -> {
+                                apiData.filterAdults()
+                            }
+
+                            R.id.all -> {
+                                apiData
+                            }
+
+                            else -> {
+                                apiData.filterChildren()
+                            }
+                        }
+
+                        filteredList.chunked(5).forEach {
+                            apiList.add(it)
+                        }
+
+                        pageEndIndex = apiList.size - 1
+                        pageIndex = 0
+
+                        pageNumberText.text = "${pageIndex + 1}/${pageEndIndex + 1} 페이지"
+                        childrenList.adapter = ChildrenInfoAdapter(
+                            apiList[pageIndex].toMutableList(),
+                            ChildInfoType.DEFAULT
+                        )
+                    }
+                }
+                2 -> {
+                    newChildrenText.setTextColor(Color.parseColor("#8696BB"))
+                    newChildrenButton.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#FAFAFA"))
+
+                    allChildrenText.setTextColor(Color.parseColor("#8696BB"))
+                    allChildrenButton.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#FAFAFA"))
+
+                    longChildrenText.setTextColor(Color.parseColor("#4894fe"))
+                    longChildrenButton.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#EBF5FF"))
+
+                    viewModel.getApiData().observe(viewLifecycleOwner) { apiData ->
+
+                        animationView.visibility = View.GONE
+                        childrenList.visibility = View.VISIBLE
+
+                        apiList = mutableListOf()
+
+                        val filteredList = when (getSelectedItem(requireContext())) {
+                            R.id.children -> {
+                                apiData.filterChildren()
+                            }
+                            R.id.adult -> {
+                                apiData.filterAdults()
+                            }
+                            R.id.all -> {
+                                apiData
+                            }
+                            else -> {
+                                apiData.filterChildren()
+                            }
+                        }
+
+                        filteredList.filter {
+                            isDate365DaysAgo(it.occrde!!)
+                        }.chunked(5).forEach {
+                            apiList.add(it)
+                        }
+
+                        pageEndIndex = apiList.size - 1
+                        pageIndex = 0
+
+                        pageNumberText.text = "${pageIndex+1}/${pageEndIndex+1} 페이지"
+                        childrenList.adapter = ChildrenInfoAdapter(apiList[pageIndex].toMutableList(), ChildInfoType.DEFAULT)
+                    }
+
+                    buttonScrollView.post {
+                        val maxScrollAmount = buttonScrollView.getChildAt(0).width - buttonScrollView.width
+                        val animator = ValueAnimator.ofInt(buttonScrollView.scrollX, maxScrollAmount)
+                        animator.duration = 500
+
+                        animator.addUpdateListener { animation ->
+                            val animatedValue = animation.animatedValue as Int
+                            buttonScrollView.scrollTo(animatedValue, 0)
+                        }
+
+                        animator.start()
+                    }
+                }
+            }
+        }
+
+    }
 
     private fun isWithinTwoDaysFromNow(targetDateString: String): Boolean {
         val dateFormat = SimpleDateFormat("yyyyMMdd", Locale.getDefault())

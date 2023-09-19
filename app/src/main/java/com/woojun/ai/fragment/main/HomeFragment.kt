@@ -28,6 +28,10 @@ import com.woojun.ai.util.CameraType
 import com.woojun.ai.util.ChildInfoType
 import com.woojun.ai.util.ChildrenInfoAdapter
 import com.woojun.ai.util.DpToPxUtil
+import com.woojun.ai.util.FilterOptionUtil.filterAdults
+import com.woojun.ai.util.FilterOptionUtil.filterChildren
+import com.woojun.ai.util.FilterOptionUtil.getSelectedItem
+import com.woojun.ai.util.FilterOptionUtil.showPopupMenu
 import com.woojun.ai.util.ProgressUtil
 import com.woojun.ai.util.ViewModel
 import kotlinx.coroutines.CoroutineScope
@@ -133,7 +137,18 @@ class HomeFragment : Fragment() {
                 childrenList.visibility = View.VISIBLE
 
                 childrenList.layoutManager = LinearLayoutManager(requireContext().applicationContext)
-                childrenList.adapter = ChildrenInfoAdapter(apiData.subList(0, 3), ChildInfoType.NEW)
+
+                when (getSelectedItem(requireContext())) {
+                    R.id.children -> {
+                        childrenList.adapter = ChildrenInfoAdapter(apiData.filterChildren().subList(0, 3), ChildInfoType.NEW)
+                    }
+                    R.id.adult -> {
+                        childrenList.adapter = ChildrenInfoAdapter(apiData.filterAdults().subList(0, 3), ChildInfoType.NEW)
+                    }
+                    R.id.all -> {
+                        childrenList.adapter = ChildrenInfoAdapter(apiData.subList(0, 3), ChildInfoType.NEW)
+                    }
+                }
             }
 
             mainChildrenInfoRegistrationButton.setOnClickListener {
@@ -164,8 +179,25 @@ class HomeFragment : Fragment() {
                 (activity as MainActivity).moveBottomNavigation(R.id.setting)
             }
 
-            seeAllButton.setOnClickListener {
-                (activity as MainActivity).moveBottomNavigation(R.id.childrenList)
+            optionButton.setOnClickListener {
+                showPopupMenu(requireContext(), it) {
+                    viewModel.getApiData().observe(viewLifecycleOwner) { apiData ->
+
+                        childrenList.layoutManager = LinearLayoutManager(requireContext().applicationContext)
+
+                        when (it) {
+                            R.id.children -> {
+                                childrenList.adapter = ChildrenInfoAdapter(apiData.filterChildren().subList(0, 3), ChildInfoType.NEW)
+                            }
+                            R.id.adult -> {
+                                childrenList.adapter = ChildrenInfoAdapter(apiData.filterAdults().subList(0, 3), ChildInfoType.NEW)
+                            }
+                            R.id.all -> {
+                                childrenList.adapter = ChildrenInfoAdapter(apiData.subList(0, 3), ChildInfoType.NEW)
+                            }
+                        }
+                    }
+                }
             }
 
             Glide.with(requireContext())
