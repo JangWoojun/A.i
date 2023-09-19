@@ -75,7 +75,7 @@ class HomeFragment : Fragment() {
                 val user = db!!.userInfoDao().getUser()
 
                 withContext(Dispatchers.Main) {
-                    if (user.check) {
+                    if (user.policeCheck) {
                         childrenIdentificationButton.visibility = View.VISIBLE
                     } else {
                         childrenIdentificationButton.visibility = View.GONE

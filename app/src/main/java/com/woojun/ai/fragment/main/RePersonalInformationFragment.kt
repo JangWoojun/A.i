@@ -57,7 +57,7 @@ class RePersonalInformationFragment : Fragment() {
                             val userDao = db!!.userInfoDao()
                             val user = userDao.getUser()
 
-                            userDao.updateUser(UserInfo(inputArea.text.toString(), user.email, user.phoneNumber, user.check, user.children))
+                            userDao.updateUser(UserInfo(inputArea.text.toString(), user.email, user.phoneNumber, user.policeCheck, user.children, user.registrationCheck))
                         }
                         Toast.makeText(requireContext(), "이름 변경이 완료되었습니다", Toast.LENGTH_SHORT).show()
                     }
@@ -69,7 +69,7 @@ class RePersonalInformationFragment : Fragment() {
                             val userDao = db!!.userInfoDao()
                             val user = userDao.getUser()
 
-                            userDao.updateUser(UserInfo(user.name, inputArea.text.toString(), user.phoneNumber, user.check, user.children))
+                            userDao.updateUser(UserInfo(user.name, inputArea.text.toString(), user.phoneNumber, user.policeCheck, user.children, user.registrationCheck))
                         }
                         Toast.makeText(requireContext(), "이메일 변경이 완료되었습니다", Toast.LENGTH_SHORT).show()
                     }
@@ -81,7 +81,7 @@ class RePersonalInformationFragment : Fragment() {
                             val userDao = db!!.userInfoDao()
                             val user = userDao.getUser()
 
-                            userDao.updateUser(UserInfo(user.name, user.email, inputArea.text.toString(), user.check, user.children))
+                            userDao.updateUser(UserInfo(user.name, user.email, inputArea.text.toString(), user.policeCheck, user.children, user.registrationCheck))
                         }
                         Toast.makeText(requireContext(), "전화번호 변경이 완료되었습니다", Toast.LENGTH_SHORT).show()
                     }
