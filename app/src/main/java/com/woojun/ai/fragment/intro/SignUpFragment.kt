@@ -54,6 +54,8 @@ class SignUpFragment : Fragment() {
 
         binding.apply {
 
+            val registrationCheck = arguments?.getBoolean("registrationCheck")
+
             textInputLayoutPaddingSetting()
 
             passwordArea.setOnEditorActionListener(getEditorActionListener(signButton))
@@ -75,7 +77,8 @@ class SignUpFragment : Fragment() {
                     emailArea.text.toString().trim(),
                     phoneArea.text.toString().trim(),
                     checkArea.text.toString() == BuildConfig.POLICEMODEKEY,
-                    arrayListOf()
+                    arrayListOf(),
+                    registrationCheck!!
                 )
 
                 val signCheck = validationCheck(userInfo, passwordArea.text.toString().trim())
@@ -238,7 +241,7 @@ class SignUpFragment : Fragment() {
                         val userDao = db!!.userInfoDao()
                         val findChildDao = db.findChildDao()
 
-                        userDao.insertUser(UserInfo(userInfo.name, userInfo.email, userInfo.phoneNumber, userInfo.check, userInfo.children))
+                        userDao.insertUser(UserInfo(userInfo.name, userInfo.email, userInfo.phoneNumber, userInfo.policeCheck, userInfo.children, userInfo.registrationCheck))
                         findChildDao.insertFindChild(SimilarDistanceUid(0, similarDistanceUid = listOf()))
                     }
 
