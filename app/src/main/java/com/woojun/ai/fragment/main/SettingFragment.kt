@@ -105,7 +105,9 @@ class SettingFragment : Fragment() {
                                             userDao.deleteUser(userDao.getUser())
                                             findChildDao.deleteFindChild(findChildDao.getFindChild())
 
-                                            setDialogText("유저 데이터 삭제중")
+                                            withContext(Dispatchers.Main) {
+                                                setDialogText("유저 데이터 삭제중")
+                                            }
 
                                             withContext(Dispatchers.Main) {
                                                 database.child("users").child(user.uid).setValue(null)
@@ -146,8 +148,8 @@ class SettingFragment : Fragment() {
                                                     })
                                                 }
                                                 setDialogText("회원 탈퇴 성공")
-
                                                 Handler().postDelayed({
+                                                    auth.signOut()
                                                     loadingDialog.dismiss()
                                                     startActivity(Intent(requireContext(), IntroActivity::class.java))
                                                     finishAffinity(requireActivity())
