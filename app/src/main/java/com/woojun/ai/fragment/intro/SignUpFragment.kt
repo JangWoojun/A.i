@@ -211,7 +211,7 @@ class SignUpFragment : Fragment() {
     }
 
     private fun isPasswordValid(password: String): Boolean {
-        val passwordRegex = Regex("^(?=.*[a-zA-Z])(?=.*\\d)(?=.*[@#$%^&+=!])(?=\\S+\$).{8,}\$")
+        val passwordRegex = Regex("^(?=.*[a-zA-Z])(?=.*\\d)(?=.*[!-~])(?=\\S+$).{8,}$")
         return passwordRegex.matches(password)
     }
 
