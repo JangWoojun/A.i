@@ -76,6 +76,7 @@ class FindChildrenListFragment : Fragment() {
                                         setDialogText("검색 완료!")
                                         Handler().postDelayed({
                                             loadingDialog.dismiss()
+                                            list.reverse()
 
                                             findChildrenList.layoutManager = LinearLayoutManager(requireContext().applicationContext)
                                             findChildrenList.adapter = MyChildInfoAdapter(list, MyChildAdapterType.Find)
@@ -86,6 +87,7 @@ class FindChildrenListFragment : Fragment() {
                                             setDialogText("검색 완료!")
                                             Handler().postDelayed({
                                                 loadingDialog.dismiss()
+                                                list.reverse()
 
                                                 findChildrenList.layoutManager = LinearLayoutManager(requireContext().applicationContext)
                                                 findChildrenList.adapter = MyChildInfoAdapter(list, MyChildAdapterType.Find)
