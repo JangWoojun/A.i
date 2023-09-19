@@ -20,7 +20,7 @@ object FilterOptionUtil {
     }
 
     fun showPopupMenu(context: Context, view: View, function: (Int) -> Unit) {
-        val popupMenu = PopupMenu(context, view)
+        val popupMenu = PopupMenu(context, view, 0, 0, R.style.CustomPopupMenu)
         popupMenu.inflate(R.menu.filter_menu)
 
         val selectedItemId = getSelectedItem(context)
