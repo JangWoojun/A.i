@@ -3,6 +3,7 @@ package com.woojun.ai.fragment.main
 import android.app.Dialog
 import android.graphics.Bitmap
 import android.os.Bundle
+import android.os.Handler
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -69,7 +70,7 @@ class CameraFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         auth = Firebase.auth
-        loadingDialog= createLoadingDialog(requireContext())
+        val (loadingDialog, setDialogText) = createLoadingDialog(requireContext())
 
         binding.apply {
 
@@ -91,6 +92,7 @@ class CameraFragment : Fragment() {
                     image.visibility = View.INVISIBLE // 가이드 이미지 숨기기
 
                     loadingDialog.show() // 로딩 Dialog 보여주기
+                    setDialogText("사진 저장중")
 
                     result.toBitmap { bitmap -> // 사진 결과 값을 bitmap으로 바꾸고
                         if (bitmap != null) { // 만약 bitmap이 null이 아니라면
@@ -111,6 +113,7 @@ class CameraFragment : Fragment() {
                                         if (type == CameraType.ChildRegister) { // 만약 type이 ChildRegister라면 (아이 등록)
                                             val storageRef = FirebaseStorage.getInstance().reference // FirebaseStorage 세팅
                                             val imageRef = storageRef.child("child_images/${childInfo!!.name}.jpg") // Storage 경로
+                                            setDialogText("이미지 업로드 중")
 
                                             imageRef.putBytes(bitmapToByteArray(bitmap)) // imageRef에 ByteArray 형태로 이미지를 저장함
                                                 .addOnCompleteListener {
@@ -128,7 +131,7 @@ class CameraFragment : Fragment() {
                                                             val multipartBody = MultipartBody.Part.createFormData("FixImage", file.name, requestFile)
 
                                                             val call = apiService.setChildImage(multipartBody, childInfo.id)
-
+                                                            setDialogText("아이 정보 등록중")
                                                             // POST 요청 보내기
                                                             call.enqueue(object : Callback<String> {
                                                                 override fun onResponse(call: Call<String>, response: Response<String>) {
@@ -141,23 +144,34 @@ class CameraFragment : Fragment() {
                                                                 }
 
                                                                 override fun onFailure(call: Call<String>, t: Throwable) { // 요청 보내기에 실패했다면
-                                                                    loadingDialog.dismiss() // 로딩 Dialog 없애기
-                                                                    showFailDialog(CameraType.ChildRegister) // showFailDialog 함수 실행
+                                                                    setDialogText("아이 등록 실패")
+                                                                    Handler().postDelayed({
+                                                                        loadingDialog.dismiss() // 로딩 Dialog 없애기
+                                                                        showFailDialog(CameraType.ChildRegister) // showFailDialog 함수 실행
+                                                                    }, 500)
                                                                 }
                                                             })
 
                                                         }.addOnFailureListener { // 이미지 주소를 가져오지 못했다면
-                                                            loadingDialog.dismiss() // 로딩 Dialog 없애기
-                                                            showFailDialog(CameraType.ChildRegister) // showFailDialog 함수 실행
+                                                            setDialogText("이미지 가져오기 실패")
+                                                            Handler().postDelayed({
+                                                                loadingDialog.dismiss() // 로딩 Dialog 없애기
+                                                                showFailDialog(CameraType.ChildRegister) // showFailDialog 함수 실행
+                                                            }, 500)
                                                         }
                                                     } else { // Storage에 이미지를 저장하지 못했다면
-                                                        loadingDialog.dismiss() // 로딩 Dialog 없애기
-                                                        showFailDialog(CameraType.ChildRegister) // showFailDialog 함수 실행
+                                                        setDialogText("이미지 업로드 실패")
+                                                        Handler().postDelayed({
+                                                            loadingDialog.dismiss() // 로딩 Dialog 없애기
+                                                            showFailDialog(CameraType.ChildRegister) // showFailDialog 함수 실행
+                                                        }, 500)
                                                     }
                                                 }
 
                                         }
                                         else { // 만약 type이 Find라면 (아이 조회)
+
+                                            setDialogText("아이 조회중")
 
                                             // 레트로핏 기본 세팅
                                             val retrofit = RetrofitClient.getInstance()
@@ -179,36 +193,51 @@ class CameraFragment : Fragment() {
                                                             val findChildDao = db!!.findChildDao()
                                                             val findChild = findChildDao.getFindChild()
 
-                                                            findChild.similarDistanceUid = response.body()!!.similar_distance_uid.distinct().reversed()
+                                                            findChild.similarDistanceUid = response.body()!!.similar_distance_uid.distinct()
 
                                                             findChildDao.updateFindChild(findChild)
                                                         }
                                                         // findListFragment로 이동함
                                                         view.findNavController().navigate(R.id.action_cameraFragment_to_findChildrenListFragment)
                                                     } else { // 실패했다면
-                                                        showFailDialog(CameraType.Find) // showFailDialog 함수 실행
+                                                        setDialogText("아이 조회 실패")
+                                                        Handler().postDelayed({
+                                                            showFailDialog(CameraType.Find) // showFailDialog 함수 실행
+                                                        }, 500)
                                                     }
                                                 }
 
                                                 override fun onFailure(call: Call<FindChildImageResult>, t: Throwable) {
-                                                    loadingDialog.dismiss() // 로딩 Dialog 없애기
-                                                    showFailDialog(CameraType.Find) // showFailDialog 함수 실행
+                                                    setDialogText("아이 조회 실패")
+                                                    Handler().postDelayed({
+                                                        loadingDialog.dismiss()
+                                                        showFailDialog(CameraType.Find) // showFailDialog 함수 실행
+                                                    }, 500)
                                                 }
                                             })
                                         }
                                     }
                                 }
                                 catch (e: IOException) { // try 문에서 발생한 오류 처리
-                                    withContext(Dispatchers.Main) { // 메인 스레드에서 실행
-                                        loadingDialog.dismiss() // 로딩 Dialog 없애기
-                                        if (type == CameraType.ChildRegister) { // 만약 type이 ChildRegister라면 (아이 등록)
-                                            showFailDialog(CameraType.ChildRegister) // showFailDialog 실행
-                                        } else { // 만약 type이 Find라면 (아이 조회)
-                                            showFailDialog(CameraType.Find) // showFailDialog 실행
-                                        }
+                                    withContext(Dispatchers.Main) {
+                                        // 메인 스레드에서 실행
+                                        setDialogText("사진 실패")
+                                        Handler().postDelayed({
+                                            loadingDialog.dismiss() // 로딩 Dialog 없애기
+                                            if (type == CameraType.ChildRegister) { // 만약 type이 ChildRegister라면 (아이 등록)
+                                                showFailDialog(CameraType.ChildRegister) // showFailDialog 실행
+                                            } else { // 만약 type이 Find라면 (아이 조회)
+                                                showFailDialog(CameraType.Find) // showFailDialog 실행
+                                            }
+                                        }, 500)
                                     }
                                 }
                             }
+                        } else {
+                            setDialogText("사진 저장 실패")
+                            Handler().postDelayed({
+                                loadingDialog.dismiss()
+                            },500)
                         }
                     }
                 }

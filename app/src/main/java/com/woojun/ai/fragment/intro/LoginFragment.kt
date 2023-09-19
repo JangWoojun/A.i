@@ -3,13 +3,13 @@ package com.woojun.ai.fragment.intro
 import android.content.Intent
 import android.graphics.Paint
 import android.os.Bundle
+import android.os.Handler
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.widget.TextView
-import android.widget.Toast
 import androidx.core.app.ActivityCompat.finishAffinity
 import androidx.navigation.findNavController
 import com.google.firebase.auth.FirebaseAuth
@@ -24,12 +24,13 @@ import com.woojun.ai.MainActivity
 import com.woojun.ai.R
 import com.woojun.ai.databinding.FragmentLoginBinding
 import com.woojun.ai.util.AppDatabase
-import com.woojun.ai.util.ProgressUtil
+import com.woojun.ai.util.ProgressUtil.createLoadingDialog
 import com.woojun.ai.util.SimilarDistanceUid
 import com.woojun.ai.util.UserInfo
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class LoginFragment : Fragment() {
 
@@ -178,13 +179,14 @@ class LoginFragment : Fragment() {
         database = Firebase.database.reference
 
         val auth = FirebaseAuth.getInstance()
-        val loadingDialog = ProgressUtil.createLoadingDialog(requireContext())
+        val (loadingDialog, setDialogText) = createLoadingDialog(requireContext())
         loadingDialog.show()
+        setDialogText("로그인 시도중")
 
         auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener(requireActivity()) { task ->
                 if (task.isSuccessful) {
-                    Toast.makeText(requireContext(), "로그인을 성공하셨습니다", Toast.LENGTH_SHORT).show()
+                    setDialogText("데이터베이스 조회중")
 
                     database.child("users").child(auth.uid.toString()).addListenerForSingleValueEvent(object :
                         ValueEventListener {
@@ -200,24 +202,35 @@ class LoginFragment : Fragment() {
                                     userDao.insertUser(value!!)
                                     findChildDao.insertFindChild(SimilarDistanceUid(0, similarDistanceUid = listOf()))
 
-                                    loadingDialog.dismiss()
-                                    startActivity(Intent(requireContext(), MainActivity::class.java))
-                                    finishAffinity(requireActivity())
+                                    withContext(Dispatchers.Main) {
+                                        setDialogText("로그인 성공")
+                                        Handler().postDelayed({
+                                            loadingDialog.dismiss()
+                                            startActivity(Intent(requireContext(), MainActivity::class.java))
+                                            finishAffinity(requireActivity())
+                                        }, 500)
+                                    }
                                 }
                             }
                         }
 
                         override fun onCancelled(error: DatabaseError) {
-                            loadingDialog.dismiss()
+                            setDialogText("로그인 실패")
+                            Handler().postDelayed({
+                                loadingDialog.dismiss()
+                            }, 500)
                         }
                     })
                 } else {
-                    loadingDialog.dismiss()
-                    try {
-                        throw task.exception!!
-                    } catch (e: Exception) {
-                        binding.emailInputLayout.error = "해당 이메일 또는 비밀번호가 유효하지 않습니다"
-                    }
+                    setDialogText("로그인 실패")
+                    Handler().postDelayed({
+                        loadingDialog.dismiss()
+                        try {
+                            throw task.exception!!
+                        } catch (e: Exception) {
+                            binding.emailInputLayout.error = "해당 이메일 또는 비밀번호가 유효하지 않습니다"
+                        }
+                    }, 500)
                 }
                 binding.loginButton.isEnabled = true
             }

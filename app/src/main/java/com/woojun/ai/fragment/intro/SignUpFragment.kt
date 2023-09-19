@@ -3,6 +3,7 @@ package com.woojun.ai.fragment.intro
 import android.content.Intent
 import android.graphics.Paint
 import android.os.Bundle
+import android.os.Handler
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -22,12 +23,13 @@ import com.woojun.ai.MainActivity
 import com.woojun.ai.R
 import com.woojun.ai.databinding.FragmentSignUpBinding
 import com.woojun.ai.util.AppDatabase
-import com.woojun.ai.util.ProgressUtil
+import com.woojun.ai.util.ProgressUtil.createLoadingDialog
 import com.woojun.ai.util.SimilarDistanceUid
 import com.woojun.ai.util.UserInfo
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class SignUpFragment : Fragment() {
 
@@ -220,17 +222,18 @@ class SignUpFragment : Fragment() {
         database = Firebase.database.reference
 
         val auth = FirebaseAuth.getInstance()
-        val loadingDialog = ProgressUtil.createLoadingDialog(requireContext())
+        val (loadingDialog, setDialogText) = createLoadingDialog(requireContext())
         loadingDialog.show()
+        setDialogText("회원가입 시도중")
 
         auth.createUserWithEmailAndPassword(userInfo.email, password)
             .addOnCompleteListener(requireActivity()) { task ->
                 loadingDialog.dismiss()
                 if (task.isSuccessful) {
-
-                    Toast.makeText(requireContext(), "회원가입을 성공하셨습니다", Toast.LENGTH_SHORT).show()
-
                     CoroutineScope(Dispatchers.IO).launch {
+                        withContext(Dispatchers.Main) {
+                            setDialogText("유저 정보 등록중")
+                        }
                         val db = AppDatabase.getDatabase(requireContext())
                         val userDao = db!!.userInfoDao()
                         val findChildDao = db.findChildDao()
@@ -241,18 +244,24 @@ class SignUpFragment : Fragment() {
 
                     database.child("users").child("${auth.uid}").setValue(userInfo)
 
-                    loadingDialog.dismiss()
+                    setDialogText("회원가입 성공")
+                    Handler().postDelayed({
+                        loadingDialog.dismiss()
 
-                    startActivity(Intent(requireContext(), MainActivity::class.java))
-                    finishAffinity(requireActivity())
+                        startActivity(Intent(requireContext(), MainActivity::class.java))
+                        finishAffinity(requireActivity())
+                    }, 500)
                 } else {
-                    try {
-                        throw task.exception!!
-                    } catch (e: FirebaseAuthUserCollisionException) {
-                        binding.emailInputLayout.error = "이미 등록된 이메일 주소입니다"
-                    } catch (e: Exception) {
-                        Toast.makeText(requireContext(), "오류 발생 앱을 삭제한 후 다시 설치해주세요", Toast.LENGTH_SHORT).show()
-                    }
+                    setDialogText("회원가입 실패")
+                    Handler().postDelayed({
+                        try {
+                            throw task.exception!!
+                        } catch (e: FirebaseAuthUserCollisionException) {
+                            binding.emailInputLayout.error = "이미 등록된 이메일 주소입니다"
+                        } catch (e: Exception) {
+                            Toast.makeText(requireContext(), "오류 발생 앱을 삭제한 후 다시 설치해주세요", Toast.LENGTH_SHORT).show()
+                        }
+                    }, 500)
                 }
                 binding.signButton.isEnabled = true
             }
