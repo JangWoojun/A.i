@@ -193,7 +193,7 @@ class CameraFragment : Fragment() {
                                                             val findChildDao = db!!.findChildDao()
                                                             val findChild = findChildDao.getFindChild()
 
-                                                            findChild.similarDistanceUid = response.body()!!.similar_distance_uid.distinct()
+                                                            findChild.similarDistanceUid = response.body()!!.similar_distance_uid.distinct().reversed()
 
                                                             findChildDao.updateFindChild(findChild)
                                                         }
