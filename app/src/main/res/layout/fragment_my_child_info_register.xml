@@ -277,6 +277,8 @@
 
 
                     <com.google.android.material.card.MaterialCardView
+                        app:strokeWidth="0.9dp"
+                        android:backgroundTint="@color/white"
                         android:layout_width="80dp"
                         android:layout_height="36dp"
                         android:layout_marginTop="8dp">
@@ -316,6 +318,8 @@
 
 
                     <com.google.android.material.card.MaterialCardView
+                        app:strokeWidth="0.9dp"
+                        android:backgroundTint="@color/white"
                         android:layout_width="80dp"
                         android:layout_height="36dp"
                         android:layout_marginTop="8dp">
@@ -355,6 +359,8 @@
 
 
                     <com.google.android.material.card.MaterialCardView
+                        android:backgroundTint="@color/white"
+                        app:strokeWidth="0.9dp"
                         android:layout_width="80dp"
                         android:layout_height="36dp"
                         android:layout_marginTop="8dp">
@@ -401,7 +407,9 @@
                 android:textColor="@color/black"
                 android:textSize="18sp" />
 
-            <androidx.cardview.widget.CardView
+            <com.google.android.material.card.MaterialCardView
+                app:strokeWidth="0.9dp"
+                android:backgroundTint="@color/white"
                 android:outlineProvider="none"
                 android:id="@+id/characteristics_area_field"
                 android:layout_width="match_parent"
@@ -416,14 +424,14 @@
                     android:id="@+id/characteristics_area"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:layout_marginHorizontal="10dp"
+                    android:layout_marginHorizontal="15dp"
                     android:fontFamily="@font/poppins_reqular"
                     android:inputType="text"
                     android:textColor="@color/black"
                     android:textSize="16sp" />
 
 
-            </androidx.cardview.widget.CardView>
+            </com.google.android.material.card.MaterialCardView>
 
         </LinearLayout>
 
