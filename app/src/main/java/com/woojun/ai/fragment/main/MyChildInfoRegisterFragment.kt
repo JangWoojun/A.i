@@ -230,7 +230,7 @@ class MyChildInfoRegisterFragment : Fragment() {
             return false
         }
 
-        if (month.substring(0, 1).toInt() != 0 || month.substring(0, 1).toInt() != 1) {
+        if (month.substring(0, 1).toInt() != 0 && month.substring(0, 1).toInt() != 1) {
             return false
         }
 
