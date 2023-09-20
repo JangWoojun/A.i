@@ -336,7 +336,6 @@ class CameraFragment : Fragment() {
                     captureBtn.visibility = View.VISIBLE // 카메라 버튼 보여주기
                     image.visibility = View.VISIBLE // 가이드 이미지 보여주기
 
-                    loadingDialog.dismiss() // 로딩 Dialog 없애기
                 }
             } else {
                 createDialog(
@@ -352,7 +351,6 @@ class CameraFragment : Fragment() {
                     captureBtn.visibility = View.VISIBLE // 카메라 버튼 보여주기
                     image.visibility = View.VISIBLE // 가이드 이미지 보여주기
 
-                    loadingDialog.dismiss() // 로딩 Dialog 없애기
                 }
             }
         }
