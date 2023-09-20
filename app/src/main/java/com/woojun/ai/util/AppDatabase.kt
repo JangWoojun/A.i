@@ -10,7 +10,7 @@ import androidx.room.TypeConverters
     TypeConverter::class
 )
 
-@Database(entities = [UserInfo::class, SimilarDistanceUid::class], version = 5)
+@Database(entities = [UserInfo::class, SimilarDistanceUid::class], version = 6)
 abstract class AppDatabase: RoomDatabase() {
     abstract fun userInfoDao(): UserInfoDAO
     abstract fun findChildDao(): FindChildDAO
