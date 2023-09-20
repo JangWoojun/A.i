@@ -208,7 +208,7 @@ class MyChildInfoRegisterFragment : Fragment() {
                 return false
             }
 
-            if (isValidDate(childInfo.birthDate)) {
+            if (!isValidDate(childInfo.birthDate)) {
                 Toast.makeText(requireContext(), "생년월일을 올바르게 입력해주세요", Toast.LENGTH_SHORT).show()
                 return false
             }
@@ -255,7 +255,7 @@ class MyChildInfoRegisterFragment : Fragment() {
         return true
     }
 
-    fun containsEnglishOrSpecialChars(input: String): Boolean {
+    private fun containsEnglishOrSpecialChars(input: String): Boolean {
         return input.matches(".*[a-zA-Z\\p{Punct}].*".toRegex())
     }
 }
