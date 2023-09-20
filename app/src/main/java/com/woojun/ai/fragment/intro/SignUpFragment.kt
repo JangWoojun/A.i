@@ -59,6 +59,13 @@ class SignUpFragment : Fragment() {
             textInputLayoutPaddingSetting()
 
             passwordArea.setOnEditorActionListener(getEditorActionListener(signButton))
+            passwordInputLayout.editText?.setOnFocusChangeListener { _, hasFocus ->
+                if (hasFocus) {
+                    passwordInputLayout.hint = "영문, 특수문자 포함 숫자 8자리"
+                } else {
+                    passwordInputLayout.hint = "비밀번호"
+                }
+            }
 
             moveLoginText.paintFlags = Paint.UNDERLINE_TEXT_FLAG
             moveLoginInButton.setOnClickListener {

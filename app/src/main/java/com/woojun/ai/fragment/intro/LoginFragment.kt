@@ -63,6 +63,13 @@ class LoginFragment : Fragment() {
             textInputLayoutPaddingSetting()
 
             passwordArea.setOnEditorActionListener(getEditorActionListener(loginButton))
+            passwordInputLayout.editText?.setOnFocusChangeListener { _, hasFocus ->
+                if (hasFocus) {
+                    passwordInputLayout.hint = "영문, 특수문자 포함 숫자 8자리"
+                } else {
+                    passwordInputLayout.hint = "비밀번호"
+                }
+            }
 
             forgotPasswordButton.setOnClickListener {
                 view.findNavController().navigate(R.id.action_loginFragment_to_resetPasswordFragment)
