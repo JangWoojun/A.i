@@ -259,6 +259,10 @@ class CameraFragment : Fragment() {
                 camera.takePicture() // 촬영
             }
 
+            changeButton.setOnClickListener {
+                camera.toggleFacing() // 전면 후면 카메라 촬영
+            }
+
         }
     }
 
